@@ -9,14 +9,28 @@ const samples = new Tone.ToneAudioBuffers({
 }, ()=>{
   console.log('Samples loaded!')
 });
-const player = new Tone.Player().toDestination();
-player.loop = false;
+const players = [
+  new Tone.Player().toDestination(),
+  new Tone.Player().toDestination(),
+  new Tone.Player().toDestination(),
+  new Tone.Player().toDestination(),
+  new Tone.Player().toDestination(),
+  new Tone.Player().toDestination(),
+  new Tone.Player().toDestination(),
+  new Tone.Player().toDestination(),
+  new Tone.Player().toDestination(),
+  new Tone.Player().toDestination(),
+  new Tone.Player().toDestination()
+];
+players.forEach( (player)=> player.loop = false)
 
+let playerNum = 0;
 const playDrum = (which: string)=> {
-  player.buffer = samples.get(which);
-  player.start()
+  players[playerNum].buffer = samples.get(which)
+  players[playerNum].start();
 }
-const handleKeyboard = (key: string, currentPlayer: string) => {
+const handleKeyboard = (key: string, currentPlayer: number) => {
+  playerNum = currentPlayer;
   switch(key){
     case ' ': {
       playDrum('kick');

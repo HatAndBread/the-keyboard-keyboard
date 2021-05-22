@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import * as Tone from 'tone';
-import handleKeyboard from './app/keyboard-handler/keyboard-handler';
+import {setCurrentKeys, musicLoop} from './app/keyboard-handler/keyboard-handler';
 import { useAppSelector, useAppDispatch } from './app/hooks';
 import { setStarted, isStarted } from './features/startedSlice';
 
@@ -17,19 +17,19 @@ function App() {
   const appIsStarted = useAppSelector(isStarted);
   useEffect(() => {
     console.log(currentPlayer)
+    setCurrentKeys(keysCurrentlyDown);
     if (appIsStarted) {
       const handleKeyDown = (e: KeyboardEvent) => {
         if (!keyIsDuplicated(e.key, keysCurrentlyDown)){
           const newKeys = [...keysCurrentlyDown, e.key];
           setKeysCurrentlyDown(newKeys);
-          handleKeyboard(e.key, currentPlayer);
+          //handleKeyboard(e.key, currentPlayer);
           currentPlayer <= 9 ? (setCurrentPlayer(currentPlayer + 1)) : setCurrentPlayer(0);
         }
       };
       const handleKeyUp = (e: KeyboardEvent) => {
-        console.log('KEY IS UP')
-        setKeysCurrentlyDown([...keysCurrentlyDown].filter((key)=> key !== e.key))
-      }
+        setKeysCurrentlyDown([...keysCurrentlyDown].filter((key)=> key !== e.key));
+      };
       document.addEventListener('keydown', handleKeyDown);
       document.addEventListener('keyup', handleKeyUp);
       return () => {
@@ -37,11 +37,13 @@ function App() {
         document.removeEventListener('keyup', handleKeyUp)};
     }
   }, [appIsStarted, currentPlayer, keysCurrentlyDown]);
+
   useEffect(()=>{console.log(keysCurrentlyDown, '🎻')}, [keysCurrentlyDown]);
   const initialStartUp = async () => {
     await Tone.start();
     dispatch(setStarted());
   };
+  useEffect(()=>{musicLoop()}, []);
   return (
     <div className='App'>
       <button onClick={initialStartUp}>START</button>

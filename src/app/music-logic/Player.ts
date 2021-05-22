@@ -9,7 +9,7 @@ export default class Player {
   constructor(keyAssignment: string, playType: 'LOOP' | 'SINGLE' | 'RAPID', url: string) {
     this.player = new TonePlayer().toDestination();
     this.playing = false;
-    this.playType = 'LOOP';
+    this.playType = playType;
     this.keyAssignment = keyAssignment;
     this.url = url;
   }

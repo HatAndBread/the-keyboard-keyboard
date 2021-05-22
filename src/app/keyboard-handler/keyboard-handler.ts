@@ -86,53 +86,38 @@ const samples = new Tone.ToneAudioBuffers(sampleUrls, () => {
 const players: Player[] = [];
 const sampleUrlsKeys = Object.keys(sampleUrls);
 for (let i = 0; i < sampleUrlsKeys.length; i++) {
-  players.push(new Player(sampleUrlsKeys[i], 'SINGLE', sampleUrls[sampleUrlsKeys[i]]));
+  const playTypes:['SINGLE', 'LOOP', 'RAPID'] = ['SINGLE', 'LOOP', 'RAPID'];
+  players.push(new Player(sampleUrlsKeys[i], playTypes[Math.floor(Math.random()*playTypes.length)], sampleUrls[sampleUrlsKeys[i]]));
 }
 players.forEach(player => {
   player.player.buffer = samples.get(player.keyAssignment);
-  player.player.loop = false;
-  //player.playType === 'LOOP' ? (player.player.loop = true) : (player.player.loop = false);
+  player.playType === 'LOOP' ? (player.player.loop = true) : (player.player.loop = false);
 });
 
 let currentKeys: null | string[] = null;
-
-// interface KeySoundAssignments {
-//   [key: string]: string | null;
-// }
-// const keySoundAssignments: KeySoundAssignments = {};
-// keys.forEach(key => {
-//   keySoundAssignments[key] = null;
-// });
+const resetPlayersNotCurrentlyPlaying = () => {
+  players.forEach((player)=>{
+    if (!currentKeys?.includes(player.keyAssignment) && player.playing){
+      player.playing = false;
+      if (player.playType === 'LOOP')player.player.stop();
+    };
+  });
+}
 export const musicLoop = () => {
   if (currentKeys) {
+    resetPlayersNotCurrentlyPlaying();
     currentKeys.forEach(key => {
       const currPlayer = players.find((player) => player.keyAssignment === key);
-      currPlayer && currPlayer.player.start();
+      if (currPlayer?.playType === 'RAPID'){
+        currPlayer.player.start();
+      }else if (currPlayer && !currPlayer.playing){
+        currPlayer.playing = true;
+        currPlayer.player.start()
+      }
     });
   }
   requestAnimationFrame(musicLoop);
 };
 
 export const setCurrentKeys = (cK: string[]) => (currentKeys = cK);
-// const playDrum = (which: string) => {
-//   players[playerNum].player.buffer = samples.get(which);
-//   players[playerNum].player.start();
-// };
-// const handleKeyboard = (key: string, currentPlayer: number) => {
-//   playerNum = currentPlayer;
-//   switch (key) {
-//     case ' ': {
-//       playDrum('kick');
-//       console.log(players);
-//       break;
-//     }
-//     case 'a': {
-//       playDrum('bugara1');
-//       break;
-//     }
-//     default:
-//       break;
-//   }
-// };
 
-//export default handleKeyboard;

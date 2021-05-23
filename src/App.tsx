@@ -7,7 +7,7 @@ import {
   setSamples,
 } from "./app/keyboard-handler/keyboard-handler";
 import { useAppSelector, useAppDispatch } from "./app/hooks";
-import { setStarted, isStarted } from "./features/startedSlice";
+import { setStarted, isStarted, openModal } from "./features/startedSlice";
 import KeyboardEditor from "./app/components/keyboard-editor/KeyboardEditor";
 import ModalController from "./app/components/modal/ModalController";
 const keyIsDuplicated = (
@@ -20,9 +20,9 @@ const keyIsDuplicated = (
 function App() {
   const [keysCurrentlyDown, setKeysCurrentlyDown] = useState<string[]>([]);
   const [attemptingToLoad, setAttemptingToLoad] = useState(false);
-  const [currentModal, setCurrentModal] = useState<null | string>(null);
   const dispatch = useAppDispatch();
   const appIsStarted = useAppSelector(isStarted);
+  const currentModal = useAppSelector(openModal);
   useEffect(() => {
     setCurrentKeys(keysCurrentlyDown);
     if (appIsStarted) {

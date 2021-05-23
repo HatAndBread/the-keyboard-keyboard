@@ -1,26 +1,43 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {RootState} from '../app/store';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../app/store";
 
-export interface StartedState{
-  started: boolean
+export interface StartedState {
+  started: boolean;
+  openModal: string | null;
+  keyBeingEdited: string | null;
 }
 
 const initialState: StartedState = {
-  started: false
-}
+  started: false,
+  openModal: null,
+  keyBeingEdited: null,
+};
 
 export const startedSlice = createSlice({
-  name: 'started',
+  name: "started",
   initialState,
   reducers: {
-    setStarted: (state)=>{
+    setStarted: (state) => {
       state.started = true;
-    }
-  }
-})
+    },
+    setOpenModal: (state, action: PayloadAction<string | null>) => {
+      state.openModal = action.payload;
+    },
+    setKeyBeingEdited: (state, action: PayloadAction<string | null>) => {
+      state.keyBeingEdited = action.payload;
+    },
+  },
+});
 
-export const {setStarted} = startedSlice.actions;
+export const {
+  setStarted,
+  setOpenModal,
+  setKeyBeingEdited,
+} = startedSlice.actions;
 
-export const isStarted = (state: RootState) => state.started.started
+export const isStarted = (state: RootState) => state.started.started;
+export const openModal = (state: RootState) => state.started.openModal;
+export const keyBeingEdited = (state: RootState) =>
+  state.started.keyBeingEdited;
 
 export default startedSlice.reducer;

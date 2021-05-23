@@ -7,4 +7,10 @@
   background-color: pink;
   border-radius: 6px;
   font-size: x-large;
+  cursor: pointer;
+  margin: 2px;
+}
+
+.space-button {
+  width: 200px;
 }

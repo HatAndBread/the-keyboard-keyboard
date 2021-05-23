@@ -20,36 +20,39 @@ const KeyboardEditor = () => {
         <KeyboardKey key={"0"} myKey={"0"} />
       </div>
       <div className="keyboard-row qwer">
-        <KeyboardKey key={"Q"} myKey={"Q"} />
-        <KeyboardKey key={"W"} myKey={"W"} />
-        <KeyboardKey key={"E"} myKey={"E"} />
-        <KeyboardKey key={"R"} myKey={"R"} />
-        <KeyboardKey key={"T"} myKey={"T"} />
-        <KeyboardKey key={"Y"} myKey={"Y"} />
-        <KeyboardKey key={"U"} myKey={"U"} />
-        <KeyboardKey key={"I"} myKey={"I"} />
-        <KeyboardKey key={"O"} myKey={"O"} />
-        <KeyboardKey key={"P"} myKey={"P"} />
+        <KeyboardKey key={"Q"} myKey={"q"} />
+        <KeyboardKey key={"W"} myKey={"w"} />
+        <KeyboardKey key={"E"} myKey={"e"} />
+        <KeyboardKey key={"R"} myKey={"r"} />
+        <KeyboardKey key={"T"} myKey={"t"} />
+        <KeyboardKey key={"Y"} myKey={"y"} />
+        <KeyboardKey key={"U"} myKey={"u"} />
+        <KeyboardKey key={"I"} myKey={"i"} />
+        <KeyboardKey key={"O"} myKey={"o"} />
+        <KeyboardKey key={"P"} myKey={"p"} />
       </div>
       <div className="keyboard-row asdf">
-        <KeyboardKey key={"A"} myKey={"A"} />
-        <KeyboardKey key={"S"} myKey={"S"} />
-        <KeyboardKey key={"D"} myKey={"D"} />
-        <KeyboardKey key={"F"} myKey={"F"} />
-        <KeyboardKey key={"G"} myKey={"G"} />
-        <KeyboardKey key={"H"} myKey={"H"} />
-        <KeyboardKey key={"J"} myKey={"J"} />
-        <KeyboardKey key={"K"} myKey={"K"} />
-        <KeyboardKey key={"L"} myKey={"L"} />
+        <KeyboardKey key={"A"} myKey={"a"} />
+        <KeyboardKey key={"S"} myKey={"s"} />
+        <KeyboardKey key={"D"} myKey={"d"} />
+        <KeyboardKey key={"F"} myKey={"f"} />
+        <KeyboardKey key={"G"} myKey={"g"} />
+        <KeyboardKey key={"H"} myKey={"h"} />
+        <KeyboardKey key={"J"} myKey={"j"} />
+        <KeyboardKey key={"K"} myKey={"k"} />
+        <KeyboardKey key={"L"} myKey={"l"} />
       </div>
-      <div className="keyboard-row zxcva">
-        <KeyboardKey key={"Z"} myKey={"Z"} />
-        <KeyboardKey key={"X"} myKey={"X"} />
-        <KeyboardKey key={"C"} myKey={"C"} />
-        <KeyboardKey key={"V"} myKey={"V"} />
-        <KeyboardKey key={"B"} myKey={"B"} />
-        <KeyboardKey key={"N"} myKey={"N"} />
-        <KeyboardKey key={"M"} myKey={"M"} />
+      <div className="keyboard-row zxcv">
+        <KeyboardKey key={"Z"} myKey={"z"} />
+        <KeyboardKey key={"X"} myKey={"x"} />
+        <KeyboardKey key={"C"} myKey={"c"} />
+        <KeyboardKey key={"V"} myKey={"v"} />
+        <KeyboardKey key={"B"} myKey={"b"} />
+        <KeyboardKey key={"N"} myKey={"n"} />
+        <KeyboardKey key={"M"} myKey={"m"} />
+      </div>
+      <div className="keyboard-row space-row">
+        <KeyboardKey key={" "} myKey={" "} extraClassName={"space-button"} />
       </div>
     </div>
   );

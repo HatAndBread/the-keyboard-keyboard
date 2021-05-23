@@ -1,4 +1,6 @@
+import React from "react";
 import * as Tone from "tone";
+import { ActionCreatorWithoutPayload, Dispatch } from "@reduxjs/toolkit";
 import kick from "../../assets/drums/kick.mp3";
 import bugara1 from "../../assets/drums/bugara1.mp3";
 import bugara2 from "../../assets/drums/bugara2.mp3";
@@ -41,7 +43,7 @@ interface SampleUrls {
   [key: string]: string;
 }
 
-const sampleUrls: SampleUrls = {
+export const sampleUrls: SampleUrls = {
   " ": kick,
   a: kick,
   b: bugara1,
@@ -82,7 +84,11 @@ const sampleUrls: SampleUrls = {
 };
 const players: Player[] = [];
 const playTypes: ["SINGLE", "LOOP", "RAPID"] = ["SINGLE", "LOOP", "RAPID"];
-export const setSamples = () => {
+export const setSamples = (
+  dispatch: Dispatch,
+  setStarted: ActionCreatorWithoutPayload<string>,
+  setAttemptingToLoad: React.Dispatch<React.SetStateAction<boolean>>
+) => {
   let sampleBuffers: { [key: string]: Tone.ToneAudioBuffer } = {};
   const sampleUrlsKeys = Object.keys(sampleUrls);
   for (let i = 0; i < sampleUrlsKeys.length; i++) {
@@ -90,7 +96,6 @@ export const setSamples = () => {
       sampleUrls[sampleUrlsKeys[i]],
       () => {
         sampleBuffers[sampleUrlsKeys[i]] = sampleBuffer;
-        console.log(sampleBuffers, "👈sample buffers");
         const player = new Player(
           sampleUrlsKeys[i],
           playTypes[Math.floor(Math.random() * playTypes.length)],
@@ -101,6 +106,8 @@ export const setSamples = () => {
           ? (player.player.loop = true)
           : (player.player.loop = false);
         players.push(player);
+        dispatch(setStarted());
+        setAttemptingToLoad(false);
       }
     );
   }

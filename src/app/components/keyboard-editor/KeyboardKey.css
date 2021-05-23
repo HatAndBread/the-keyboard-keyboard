@@ -1,0 +1,10 @@
+.KeyboardKey {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: pink;
+  border-radius: 6px;
+  font-size: x-large;
+}

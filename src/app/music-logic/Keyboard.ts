@@ -117,6 +117,7 @@ export default class Keyboard {
       this["7"],
       this["8"],
       this["9"],
+      this["0"],
     ];
   };
 }

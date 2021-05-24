@@ -68,13 +68,10 @@ function App() {
   }, [buffers]);
   useEffect(() => {
     console.log(keyboards, "Here are the keyboards");
-    keyboards && currentKeyboard && setBoard(keyboards[currentKeyboard]);
-    //dispatch(setStarted());
+    keyboards && setBoard(keyboards[currentKeyboard]);
     setAttemptingToLoad(false);
   }, [keyboards, currentKeyboard, dispatch]);
-  useEffect(() => {
-    console.log(appIsStarted);
-  }, [appIsStarted]);
+
   return (
     <div className="App">
       {attemptingToLoad && <p>Loading...</p>}

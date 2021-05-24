@@ -19,6 +19,7 @@ export const musicLoop = () => {
     resetPlayersNotCurrentlyPlaying(players);
     currentKeys.forEach((key) => {
       const currPlayer = players.find((player) => player.keyAssignment === key);
+      console.log(players, "asdf");
       if (currPlayer?.playType === "RAPID") {
         currPlayer.player.start();
       } else if (currPlayer && !currPlayer.playing) {
@@ -30,5 +31,7 @@ export const musicLoop = () => {
   requestAnimationFrame(musicLoop);
 };
 
-export const setBoard = (newBoard: Keyboard) => (board = newBoard);
+export const setBoard = (newBoard: Keyboard) => {
+  board = newBoard;
+};
 export const setCurrentKeys = (cK: string[]) => (currentKeys = cK);

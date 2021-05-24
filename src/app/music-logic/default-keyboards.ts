@@ -43,7 +43,7 @@ export const mainKeyboard: keyboard = {
 };
 
 export const percussionKeyboard: keyboard = {
-  name: { name: "main", playType: null },
+  name: { name: "percussion", playType: null },
   " ": { name: "kick", playType: "SINGLE" },
   a: { name: "kick", playType: "SINGLE" },
   b: { name: "bugara1", playType: "SINGLE" },

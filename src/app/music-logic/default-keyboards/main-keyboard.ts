@@ -261,6 +261,34 @@ const mainKeyboard: keyboard = {
     volume: 0,
     randomize: false,
   },
+  ",": {
+    name: "voice",
+    playType: "LOOP",
+    playbackRate: 1,
+    volume: 0,
+    randomize: false,
+  },
+  ".": {
+    name: "voice",
+    playType: "LOOP",
+    playbackRate: 1,
+    volume: 0,
+    randomize: false,
+  },
+  "?": {
+    name: "voice",
+    playType: "LOOP",
+    playbackRate: 1,
+    volume: 0,
+    randomize: false,
+  },
+  ";": {
+    name: "voice",
+    playType: "LOOP",
+    playbackRate: 1,
+    volume: 0,
+    randomize: false,
+  },
 };
 
 export default mainKeyboard;

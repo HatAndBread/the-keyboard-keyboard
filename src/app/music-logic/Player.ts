@@ -7,6 +7,7 @@ export default class Player {
   keyAssignment: string;
   buffer: Buff;
   randomize: boolean;
+  playbackRate: number | undefined;
   constructor(
     keyAssignment: string,
     playType: "LOOP" | "SINGLE" | "RAPID" | undefined,
@@ -21,6 +22,7 @@ export default class Player {
     this.keyAssignment = keyAssignment;
     this.buffer = buffer;
     this.player.buffer = buffer;
+    this.playbackRate = playbackRate;
     if (randomize) {
       this.randomize = randomize;
     } else {

@@ -41,6 +41,7 @@ const KeyboardEditor = () => {
         <KeyboardKey key={"J"} myKey={"j"} />
         <KeyboardKey key={"K"} myKey={"k"} />
         <KeyboardKey key={"L"} myKey={"l"} />
+        <KeyboardKey key={";"} myKey={";"} />
       </div>
       <div className="keyboard-row zxcv">
         <KeyboardKey key={"Z"} myKey={"z"} />
@@ -50,6 +51,9 @@ const KeyboardEditor = () => {
         <KeyboardKey key={"B"} myKey={"b"} />
         <KeyboardKey key={"N"} myKey={"n"} />
         <KeyboardKey key={"M"} myKey={"m"} />
+        <KeyboardKey key={","} myKey={","} />
+        <KeyboardKey key={"."} myKey={"."} />
+        <KeyboardKey key={"?"} myKey={"?"} />
       </div>
       <div className="keyboard-row space-row">
         <KeyboardKey key={" "} myKey={" "} extraClassName={"space-button"} />

@@ -59,12 +59,4 @@ function App() {
   );
 }
 
-const keyIsDuplicated = (
-  newKey: string,
-  keysCurrentlyDown: string[]
-): boolean => {
-  if (keysCurrentlyDown.includes(newKey)) return true;
-  return false;
-};
-
 export default App;

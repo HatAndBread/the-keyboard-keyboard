@@ -5,8 +5,12 @@ const resetPlayersNotCurrentlyPlaying = (
   currentKeys: string[] = []
 ) => {
   players.forEach((player) => {
-    if (!currentKeys?.includes(player.keyAssignment) && player.playing) {
+    const lowered = currentKeys.map((key) => key.toLowerCase());
+    if (!lowered?.includes(player.keyAssignment) && player.playing) {
       player.playing = false;
+      if (player.playbackRate) {
+        player.player.playbackRate = player.playbackRate;
+      }
       if (player.playType === "LOOP") player.player.stop();
     }
   });

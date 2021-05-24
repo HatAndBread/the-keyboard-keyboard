@@ -13,6 +13,10 @@ export default class Keyboard {
   "8": Player;
   "9": Player;
   "0": Player;
+  ",": Player;
+  ".": Player;
+  "?": Player;
+  ";": Player;
   a: Player;
   b: Player;
   c: Player;
@@ -78,6 +82,10 @@ export default class Keyboard {
     this["7"] = assignments["7"];
     this["8"] = assignments["8"];
     this["9"] = assignments["9"];
+    this[","] = assignments[","];
+    this["."] = assignments["."];
+    this["?"] = assignments["?"];
+    this[";"] = assignments[";"];
   }
   getAsArray = () => {
     return [
@@ -118,6 +126,10 @@ export default class Keyboard {
       this["8"],
       this["9"],
       this["0"],
+      this[","],
+      this["."],
+      this["?"],
+      this[";"],
     ];
   };
 }

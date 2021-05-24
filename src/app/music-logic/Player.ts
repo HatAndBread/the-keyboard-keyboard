@@ -17,5 +17,8 @@ export default class Player {
     this.keyAssignment = keyAssignment;
     this.buffer = buffer;
     this.player.buffer = buffer;
+    if (playType === "LOOP") {
+      this.player.loop = true;
+    }
   }
 }

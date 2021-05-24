@@ -17,6 +17,7 @@ import ModalController from "./app/components/modal/ModalController";
 function App() {
   const [keysCurrentlyDown, setKeysCurrentlyDown] = useState<string[]>([]);
   const [attemptingToLoad, setAttemptingToLoad] = useState(false);
+  const [appIsStarted, setAppIsStarted] = useState(false);
   const [buffers, setBuffers] = useState<{
     [key: string]: Tone.ToneAudioBuffer;
   }>({});
@@ -25,7 +26,6 @@ function App() {
   }>(null);
   const [currentKeyboard, setCurrentKeyboard] = useState<string>("main");
   const dispatch = useAppDispatch();
-  const appIsStarted = useAppSelector(isStarted);
   const currentModal = useAppSelector(openModal);
   useEffect(() => {
     setCurrentKeys(keysCurrentlyDown);
@@ -54,6 +54,7 @@ function App() {
     setAttemptingToLoad(true);
     await Tone.start();
     createBuffers(setBuffers);
+    setAppIsStarted(true);
   };
 
   useEffect(() => {
@@ -68,13 +69,16 @@ function App() {
   useEffect(() => {
     console.log(keyboards, "Here are the keyboards");
     keyboards && currentKeyboard && setBoard(keyboards[currentKeyboard]);
-    dispatch(setStarted());
+    //dispatch(setStarted());
     setAttemptingToLoad(false);
   }, [keyboards, currentKeyboard, dispatch]);
+  useEffect(() => {
+    console.log(appIsStarted);
+  }, [appIsStarted]);
   return (
     <div className="App">
       {attemptingToLoad && <p>Loading...</p>}
-      <button onClick={initialStartUp}>START</button>
+      {!appIsStarted && <button onClick={initialStartUp}>START</button>}
       <KeyboardEditor />
       <ModalController currentModal={currentModal} />
     </div>

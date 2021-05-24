@@ -1,5 +1,6 @@
 import mainKeyboard from "./default-keyboards/main-keyboard";
 import percussionKeyboard from "./default-keyboards/percussion-keyboard";
+import harmoniousKeyboard from "./default-keyboards/harmonious-keyboard";
 
 export type keyboard = {
   [key: string]: {
@@ -11,4 +12,4 @@ export type keyboard = {
   };
 };
 
-export default [mainKeyboard, percussionKeyboard];
+export default [mainKeyboard, percussionKeyboard, harmoniousKeyboard];

@@ -1,30 +1,16 @@
-import { createNamedExports } from "typescript";
 import Keyboard from "./Keyboard";
 import Player from "./Player";
+import getRandoNum from "./music-loop-helpers/getRandoNum";
+import resetPlayersNotCurrentlyPlaying from "./music-loop-helpers/reset-players-not-currently-playing";
 
-let currentKeys: null | string[] = null;
+let currentKeys: string[] = [];
 let board: null | Keyboard = null;
 let randomize = false;
-
-const resetPlayersNotCurrentlyPlaying = (players: Player[]) => {
-  players.forEach((player) => {
-    if (!currentKeys?.includes(player.keyAssignment) && player.playing) {
-      player.playing = false;
-      if (player.playType === "LOOP") player.player.stop();
-    }
-  });
-};
-
-const getRandoNum = () => {
-  const ranNum = Math.floor(Math.random() * 2);
-  if (ranNum) return Math.random() * 0.8 + 0.2;
-  return Math.random() * 3;
-};
 
 export const musicLoop = () => {
   if (currentKeys && board) {
     const players = board.getAsArray();
-    resetPlayersNotCurrentlyPlaying(players);
+    resetPlayersNotCurrentlyPlaying(players, currentKeys);
     currentKeys.forEach((key) => {
       const currPlayer = players.find((player) => player.keyAssignment === key);
       if (currPlayer?.playType === "RAPID") {
@@ -44,9 +30,28 @@ export const musicLoop = () => {
   requestAnimationFrame(musicLoop);
 };
 
+const keyIsDuplicated = (newKey: string) => {
+  if (currentKeys?.includes(newKey)) return true;
+};
+
+const handleKeyUp = (e: KeyboardEvent) => {
+  e.preventDefault();
+  currentKeys = currentKeys.filter((key) => key !== e.key);
+  console.log(currentKeys);
+};
+const handleKeyDown = (e: KeyboardEvent) => {
+  e.preventDefault();
+  if (!keyIsDuplicated(e.key)) {
+    currentKeys?.push(e.key);
+    console.log(currentKeys);
+  }
+};
+
+document.addEventListener("keyup", handleKeyUp);
+document.addEventListener("keydown", handleKeyDown);
+
 export const setBoard = (newBoard: Keyboard) => {
   board = newBoard;
 };
-export const setCurrentKeys = (cK: string[]) => (currentKeys = cK);
 
 export const randomizer = (yesOrNo: boolean) => (randomize = yesOrNo);

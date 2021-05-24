@@ -27,7 +27,10 @@ const createPlayers = (
   keyboardLayout: {
     [key: string]: {
       name: string;
-      playType: null | "LOOP" | "SINGLE" | "RAPID";
+      playType?: "SINGLE" | "RAPID" | "LOOP" | undefined;
+      playbackRate?: number;
+      volume?: number;
+      randomize?: boolean;
     };
   },
   buffers: { [key: string]: ToneAudioBuffer }
@@ -39,7 +42,10 @@ const createPlayers = (
       players[key] = new Player(
         key,
         keyboardLayout[key].playType,
-        buffers[keyboardLayout[key].name]
+        buffers[keyboardLayout[key].name],
+        keyboardLayout[key].playbackRate,
+        keyboardLayout[key].volume,
+        keyboardLayout[key].randomize
       );
     }
   });

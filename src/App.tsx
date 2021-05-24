@@ -6,6 +6,7 @@ import {
   setCurrentKeys,
   musicLoop,
   setBoard,
+  randomizer,
 } from "./app/music-logic/music-loop";
 import { createBuffers } from "./app/music-logic/sample-buffers";
 import { useAppSelector, useAppDispatch } from "./app/hooks";
@@ -25,6 +26,7 @@ function App() {
     [key: string]: Keyboard;
   }>(null);
   const [currentKeyboard, setCurrentKeyboard] = useState<string>("main");
+  const [randomizePlaybackRate, setRandomizePlaybackRate] = useState(false);
   const dispatch = useAppDispatch();
   const currentModal = useAppSelector(openModal);
   useEffect(() => {
@@ -71,6 +73,9 @@ function App() {
     keyboards && setBoard(keyboards[currentKeyboard]);
     setAttemptingToLoad(false);
   }, [keyboards, currentKeyboard, dispatch]);
+  useEffect(() => {
+    randomizer(randomizePlaybackRate);
+  }, [randomizePlaybackRate]);
 
   return (
     <div className="App">

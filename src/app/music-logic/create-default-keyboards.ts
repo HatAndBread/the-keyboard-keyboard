@@ -1,7 +1,7 @@
 import Keyboard from "./Keyboard";
 import Player from "./Player";
 import { ToneAudioBuffer } from "tone";
-import { mainKeyboard, percussionKeyboard } from "./default-keyboards";
+import defaultKeyboards from "./default-keyboards";
 
 export default function createDefaultKeyboards(
   buffers: { [key: string]: ToneAudioBuffer },
@@ -11,7 +11,6 @@ export default function createDefaultKeyboards(
     } | null>
   >
 ) {
-  const defaultKeyboards = [mainKeyboard, percussionKeyboard];
   const keyboardObjects: { [key: string]: Keyboard } = {};
   for (let i = 0; i < defaultKeyboards.length; i++) {
     const players = createPlayers(defaultKeyboards[i], buffers);

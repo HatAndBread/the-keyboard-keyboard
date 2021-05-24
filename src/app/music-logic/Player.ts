@@ -1,16 +1,21 @@
-import { Player as TonePlayer } from 'tone';
+import { Player as TonePlayer, ToneAudioBuffer as Buff } from "tone";
 
 export default class Player {
   player: TonePlayer;
   playing: boolean;
-  playType: 'LOOP' | 'SINGLE' | 'RAPID';
+  playType: "LOOP" | "SINGLE" | "RAPID" | null;
   keyAssignment: string;
-  url: string;
-  constructor(keyAssignment: string, playType: 'LOOP' | 'SINGLE' | 'RAPID', url: string) {
+  buffer: Buff;
+  constructor(
+    keyAssignment: string,
+    playType: "LOOP" | "SINGLE" | "RAPID" | null,
+    buffer: Buff
+  ) {
     this.player = new TonePlayer().toDestination();
     this.playing = false;
     this.playType = playType;
     this.keyAssignment = keyAssignment;
-    this.url = url;
+    this.buffer = buffer;
+    this.player.buffer = buffer;
   }
 }

@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import * as Tone from "tone";
+import Keyboard from "./app/music-logic/Keyboard";
 import {
   setCurrentKeys,
   musicLoop,
-  setSamples,
-} from "./app/keyboard-handler/keyboard-handler";
+  setBoard,
+} from "./app/music-logic/music-loop";
+import { createBuffers } from "./app/music-logic/sample-buffers";
 import { useAppSelector, useAppDispatch } from "./app/hooks";
 import { setStarted, isStarted, openModal } from "./features/startedSlice";
+import createDefaultKeyboards from "./app/music-logic/create-default-keyboards";
 import KeyboardEditor from "./app/components/keyboard-editor/KeyboardEditor";
 import ModalController from "./app/components/modal/ModalController";
-const keyIsDuplicated = (
-  newKey: string,
-  keysCurrentlyDown: string[]
-): boolean => {
-  if (keysCurrentlyDown.includes(newKey)) return true;
-  return false;
-};
+
 function App() {
   const [keysCurrentlyDown, setKeysCurrentlyDown] = useState<string[]>([]);
   const [attemptingToLoad, setAttemptingToLoad] = useState(false);
+  const [buffers, setBuffers] = useState<{
+    [key: string]: Tone.ToneAudioBuffer;
+  }>({});
+  const [keyboards, setKeyboards] = useState<null | {
+    [key: string]: Keyboard;
+  }>(null);
+  const [currentKeyboard, setCurrentKeyboard] = useState<string>("main");
   const dispatch = useAppDispatch();
   const appIsStarted = useAppSelector(isStarted);
   const currentModal = useAppSelector(openModal);
@@ -49,12 +53,24 @@ function App() {
   const initialStartUp = async () => {
     setAttemptingToLoad(true);
     await Tone.start();
-    setSamples(dispatch, setStarted, setAttemptingToLoad);
+    createBuffers(setBuffers);
   };
 
   useEffect(() => {
     musicLoop();
   }, []);
+  useEffect(() => {
+    if (Object.keys(buffers).length) {
+      console.log(buffers, "Here are the buffers ✨");
+      createDefaultKeyboards(buffers, setKeyboards);
+    }
+  }, [buffers]);
+  useEffect(() => {
+    console.log(keyboards, "Here are the keyboards");
+    keyboards && currentKeyboard && setBoard(keyboards[currentKeyboard]);
+    dispatch(setStarted());
+    setAttemptingToLoad(false);
+  }, [keyboards, currentKeyboard, dispatch]);
   return (
     <div className="App">
       {attemptingToLoad && <p>Loading...</p>}
@@ -64,5 +80,13 @@ function App() {
     </div>
   );
 }
+
+const keyIsDuplicated = (
+  newKey: string,
+  keysCurrentlyDown: string[]
+): boolean => {
+  if (keysCurrentlyDown.includes(newKey)) return true;
+  return false;
+};
 
 export default App;

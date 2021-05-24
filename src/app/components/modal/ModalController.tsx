@@ -5,7 +5,6 @@ import { keyBeingEdited } from "../../../features/startedSlice";
 
 const ModalController = ({ currentModal }: { currentModal: string | null }) => {
   const key = useAppSelector(keyBeingEdited);
-  console.log(currentModal, key, "FADSFDSFF");
   const getModalContent = () => {
     switch (currentModal) {
       case "edit-key":

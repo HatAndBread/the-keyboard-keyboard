@@ -1,6 +1,6 @@
 import React from "react";
 import KeyboardKey from "./KeyboardKey";
-import { sampleUrls } from "../../keyboard-handler/keyboard-handler";
+import { sampleUrls } from "../../music-logic/sample-buffers";
 import "./KeyboardEditor.css";
 
 const KeyboardEditor = () => {

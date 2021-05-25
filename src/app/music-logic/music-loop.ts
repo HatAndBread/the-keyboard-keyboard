@@ -9,19 +9,11 @@ let currentKeys: string[] = [];
 let board: null | Keyboard = null;
 let randomize = false;
 
-// const getPlayer = (players: Player[], key: string, isCap: boolean) => {
-//   if (isCap){
-//     return players.find((player) => player.keyAssignment === key.toLowerCase());
-//   }
-//   return players.find((player) => player.keyAssignment === key);
-// }
-
 export const musicLoop = () => {
   if (currentKeys && board) {
     const players = board.getAsArray();
     resetPlayersNotCurrentlyPlaying(players, currentKeys);
     currentKeys.forEach((key) => {
-      const isCap = keyIsCapital(key);
       const currPlayer = players.find(
         (player) => player.keyAssignment === key.toLowerCase()
       );
@@ -29,15 +21,33 @@ export const musicLoop = () => {
         if (randomize || currPlayer.randomize) {
           currPlayer.player.playbackRate = getRandoNum();
         }
+        currPlayer.playing = true;
         currPlayer.player.start();
       } else if (currPlayer && !currPlayer.playing) {
+        currPlayer.playing = true;
         if (randomize || currPlayer.randomize) {
           currPlayer.player.playbackRate = getRandoNum();
         }
-        console.log(currPlayer);
+        if (currentKeys.includes("arrowup")) {
+          currPlayer.player.playbackRate *= 2;
+        }
+        if (currentKeys.includes("arrowdown")) {
+          currPlayer.player.playbackRate /= 2;
+        }
+        if (currentKeys.includes("shift") && !currPlayer.droning) {
+          currentKeys = currentKeys.filter((key) => key !== "shift");
+          currPlayer.droning = true;
+        }
         currPlayer.playing = true;
-        if (isCap) currPlayer.player.playbackRate += 1;
         currPlayer.player.start();
+      } else if (
+        currPlayer &&
+        currPlayer.droning &&
+        currPlayer.playing &&
+        currentKeys.includes("shift")
+      ) {
+        currentKeys = currentKeys.filter((key) => key !== "shift");
+        currPlayer.stop();
       }
     });
   }
@@ -48,18 +58,39 @@ const keyIsDuplicated = (newKey: string) => {
   if (currentKeys?.includes(newKey)) return true;
 };
 
+let arrowDownPressNum = 0;
+let arrowUpPressNum = 0;
 const handleKeyUp = (e: KeyboardEvent) => {
   e.preventDefault();
-  const currKey = transformKeys(e.key);
-  currentKeys = currentKeys.filter((key) => key !== currKey);
+  const currKey = transformKeys(e.key).toLowerCase();
+  if (currKey === "arrowdown" && arrowDownPressNum % 2) {
+    if (currentKeys.includes("arrowup")) {
+      currentKeys = currentKeys.filter(
+        (key) => key !== "arrowup" && key !== "arrowdown"
+      );
+      arrowUpPressNum = 0;
+      arrowDownPressNum = 0;
+    }
+  } else if (currKey === "arrowup" && arrowUpPressNum % 2) {
+    if (currentKeys.includes("arrowdown")) {
+      currentKeys = currentKeys.filter(
+        (key) => key !== "arrowup" && key !== "arrowdown"
+      );
+      arrowUpPressNum = 0;
+      arrowDownPressNum = 0;
+    }
+  } else {
+    currentKeys = currentKeys.filter((key) => key !== currKey);
+  }
   console.log(currentKeys);
 };
 const handleKeyDown = (e: KeyboardEvent) => {
   e.preventDefault();
-  const currKey = transformKeys(e.key);
+  const currKey = transformKeys(e.key).toLowerCase();
+  if (currKey === "arrowdown") arrowDownPressNum += 1;
+  if (currKey === "arrowup") arrowUpPressNum += 1;
   if (!keyIsDuplicated(currKey)) {
     currentKeys?.push(currKey);
-    console.log(currentKeys);
   }
 };
 

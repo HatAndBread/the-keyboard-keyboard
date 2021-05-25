@@ -6,7 +6,11 @@ const resetPlayersNotCurrentlyPlaying = (
 ) => {
   players.forEach((player) => {
     const lowered = currentKeys.map((key) => key.toLowerCase());
-    if (!lowered?.includes(player.keyAssignment) && player.playing) {
+    if (
+      !lowered?.includes(player.keyAssignment) &&
+      player.playing &&
+      !player.droning
+    ) {
       player.playing = false;
       if (player.playbackRate) {
         player.player.playbackRate = player.playbackRate;

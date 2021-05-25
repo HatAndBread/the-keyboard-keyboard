@@ -8,6 +8,7 @@ export default class Player {
   buffer: Buff;
   randomize: boolean;
   playbackRate: number | undefined;
+  droning: boolean;
   constructor(
     keyAssignment: string,
     playType: "LOOP" | "SINGLE" | "RAPID" | undefined,
@@ -23,6 +24,7 @@ export default class Player {
     this.buffer = buffer;
     this.player.buffer = buffer;
     this.playbackRate = playbackRate;
+    this.droning = false;
     if (randomize) {
       this.randomize = randomize;
     } else {
@@ -38,4 +40,9 @@ export default class Player {
       this.player.loop = true;
     }
   }
+  stop = () => {
+    if (this.playbackRate) this.player.playbackRate = this.playbackRate;
+    if (this.droning) this.droning = false;
+    if (this.playing) this.playing = false;
+  };
 }

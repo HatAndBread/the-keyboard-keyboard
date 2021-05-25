@@ -1,8 +1,16 @@
+import React from "react";
 import Keyboard from "./Keyboard";
 import resetPlayersNotCurrentlyPlaying from "./music-loop-helpers/reset-players-not-currently-playing";
 import transformKeys from "./music-loop-helpers/transform-keys";
 
 let currentKeys: string[] = [];
+let keyboardNames: string[] = [];
+let currentKeyboardName: null | string = null;
+let setKeyboard:
+  | React.Dispatch<React.SetStateAction<string>>
+  | ((s: string) => void) = (s: string) => {
+  console.log("SetKeyboard hasn't been created yet");
+};
 let board: null | Keyboard = null;
 let randomize = false;
 let octave = 1;
@@ -23,6 +31,7 @@ export const musicLoop = () => {
     detuner();
     const players = board.getAsArray();
     resetPlayersNotCurrentlyPlaying(players, currentKeys);
+    randomize = currentKeys.includes("capslock");
     currentKeys.forEach((key) => {
       const currPlayer = players.find(
         (player) => player.keyAssignment === key.toLowerCase()
@@ -76,6 +85,29 @@ export const handleKeyUp = (e: KeyboardEvent) => {
   }
   console.log(currentKeys);
 };
+const handleAdd = (currentBoardIndex: number) => {
+  if (currentBoardIndex + 1 === keyboardNames.length) {
+    setKeyboard(keyboardNames[0]);
+  } else {
+    setKeyboard(keyboardNames[currentBoardIndex + 1]);
+  }
+};
+
+const handleSubtract = (currentBoardIndex: number) => {
+  if (currentBoardIndex - 1 < 0) {
+    setKeyboard(keyboardNames[keyboardNames.length - 1]);
+  } else {
+    setKeyboard(keyboardNames[currentBoardIndex - 1]);
+  }
+};
+const switchToNewKeyboard = (add: boolean) => {
+  if (currentKeyboardName && board) {
+    const currentBoardIndex = keyboardNames.indexOf(currentKeyboardName);
+    if (currentBoardIndex || currentBoardIndex === 0) {
+      add ? handleAdd(currentBoardIndex) : handleSubtract(currentBoardIndex);
+    }
+  }
+};
 export const handleKeyDown = (e: KeyboardEvent) => {
   const currKey = transformKeys(e.key).toLowerCase();
   if (currKey === "arrowdown") {
@@ -92,14 +124,22 @@ export const handleKeyDown = (e: KeyboardEvent) => {
     }
   } else if (currKey === "backspace") {
     octave = 1;
+  } else if (currKey === "+") {
+    switchToNewKeyboard(true);
+  } else if (currKey === "-") {
+    switchToNewKeyboard(false);
   }
   if (!keyIsDuplicated(currKey)) {
     currentKeys?.push(currKey);
   }
 };
 
-export const setBoard = (newBoard: Keyboard) => {
+export const sendKeyboardNames = (kn: string[]) => (keyboardNames = kn);
+export const sendSetKeyboard = (
+  setKeyboardFun: React.Dispatch<React.SetStateAction<string>>
+) => (setKeyboard = setKeyboardFun);
+export const sendCurrentKeyboardName = (ckn: string) =>
+  (currentKeyboardName = ckn);
+export const sendBoard = (newBoard: Keyboard) => {
   board = newBoard;
 };
-
-export const randomizer = (yesOrNo: boolean) => (randomize = yesOrNo);

@@ -49,6 +49,7 @@ export default class Player {
     if (this.playbackRate) this.player.playbackRate = this.playbackRate;
     if (this.droning) this.droning = false;
     if (this.playing) this.playing = false;
+    this.clearTimeout();
   };
   play = (pbr: number, isRandomized?: boolean) => {
     this.handlePBR(pbr, isRandomized);
@@ -64,16 +65,20 @@ export default class Player {
   };
   handleTimeout = () => {
     if (this.playType === "SINGLE") {
-      if (this.timeout) {
-        clearTimeout(this.timeout);
-        this.timeout = undefined;
-      }
+      this.clearTimeout();
       this.timeout = setTimeout(() => {
+        this.clearTimeout();
         if (this.playbackRate) {
           this.playing = false;
           this.player.playbackRate = this.playbackRate;
         }
       }, (this.buffer.duration * 1000) / this.player.playbackRate);
+    }
+  };
+  clearTimeout = () => {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+      this.timeout = undefined;
     }
   };
 }

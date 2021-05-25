@@ -6,8 +6,6 @@ const transformWeirdKeys = (key: string): string => {
       return ";";
     case "*":
       return ";";
-    case "+":
-      return ";";
     case "!":
       return "1";
     default:

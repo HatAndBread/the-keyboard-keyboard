@@ -12,4 +12,5 @@ export type keyboard = {
   };
 };
 
-export default [mainKeyboard, percussionKeyboard, harmoniousKeyboard];
+const defaultKeyboards = [mainKeyboard, percussionKeyboard, harmoniousKeyboard];
+export default defaultKeyboards;

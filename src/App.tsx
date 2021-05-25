@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import * as Tone from "tone";
 import Keyboard from "./app/music-logic/Keyboard";
-import { musicLoop, setBoard, randomizer } from "./app/music-logic/music-loop";
+import {
+  musicLoop,
+  sendBoard,
+  sendKeyboardNames,
+  sendSetKeyboard,
+  sendCurrentKeyboardName,
+} from "./app/music-logic/music-loop";
 import { createBuffers } from "./app/music-logic/sample-buffers";
 import { useAppSelector, useAppDispatch } from "./app/hooks";
 import { setStarted, isStarted, openModal } from "./features/startedSlice";
@@ -20,8 +26,8 @@ function App() {
   const [keyboards, setKeyboards] = useState<null | {
     [key: string]: Keyboard;
   }>(null);
+  const [keyboardNames, setKeyboardNames] = useState<string[]>([]);
   const [currentKeyboard, setCurrentKeyboard] = useState<string>("harmonious");
-  const [randomizePlaybackRate, setRandomizePlaybackRate] = useState(false);
   const dispatch = useAppDispatch();
   const currentModal = useAppSelector(openModal);
 
@@ -44,17 +50,25 @@ function App() {
   }, [buffers]);
   useEffect(() => {
     console.log(keyboards, "Here are the keyboards");
-    keyboards && setBoard(keyboards[currentKeyboard]);
+    if (keyboards) setKeyboardNames(Object.keys(keyboards));
+    keyboards && sendBoard(keyboards[currentKeyboard]);
     setAttemptingToLoad(false);
   }, [keyboards, currentKeyboard, dispatch]);
   useEffect(() => {
-    randomizer(randomizePlaybackRate);
-  }, [randomizePlaybackRate]);
+    sendSetKeyboard(setCurrentKeyboard);
+  }, [setCurrentKeyboard]);
+  useEffect(() => {
+    sendKeyboardNames(keyboardNames);
+  }, [keyboardNames]);
+  useEffect(() => {
+    sendCurrentKeyboardName(currentKeyboard);
+  }, [currentKeyboard]);
 
   return (
     <div className="App">
       {attemptingToLoad && <p>Loading...</p>}
       {!appIsStarted && <button onClick={initialStartUp}>START</button>}
+      <p>Current Keyboard: {currentKeyboard}</p>
       <KeyboardEditor />
       <ModalController currentModal={currentModal} />
     </div>

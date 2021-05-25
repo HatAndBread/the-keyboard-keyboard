@@ -12,7 +12,7 @@ const resetPlayersNotCurrentlyPlaying = (
       !player.droning
     ) {
       player.playing = false;
-      if (player.playbackRate) {
+      if (player.playbackRate && player.playType === "LOOP") {
         player.player.playbackRate = player.playbackRate;
       }
       if (player.playType === "LOOP") player.player.stop();

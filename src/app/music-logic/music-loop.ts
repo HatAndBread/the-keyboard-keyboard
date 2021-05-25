@@ -9,8 +9,18 @@ let currentKeys: string[] = [];
 let board: null | Keyboard = null;
 let randomize = false;
 
+const getPBR = (): number => {
+  if (currentKeys.includes("arrowdown")) {
+    return 0.5;
+  } else if (currentKeys.includes("arrowup")) {
+    return 2;
+  }
+  return 1;
+};
+
 export const musicLoop = () => {
   if (currentKeys && board) {
+    const pbr = getPBR();
     const players = board.getAsArray();
     resetPlayersNotCurrentlyPlaying(players, currentKeys);
     currentKeys.forEach((key) => {
@@ -22,7 +32,7 @@ export const musicLoop = () => {
           currPlayer.player.playbackRate = getRandoNum();
         }
         currPlayer.playing = true;
-        currPlayer.player.start();
+        currPlayer.play(pbr);
       } else if (currPlayer && !currPlayer.playing) {
         currPlayer.playing = true;
         if (randomize || currPlayer.randomize) {
@@ -32,14 +42,14 @@ export const musicLoop = () => {
           currPlayer.player.playbackRate *= 2;
         }
         if (currentKeys.includes("arrowdown")) {
-          currPlayer.player.playbackRate /= 2;
+          currPlayer.player.playbackRate *= 0.5;
         }
         if (currentKeys.includes("shift") && !currPlayer.droning) {
           currentKeys = currentKeys.filter((key) => key !== "shift");
           currPlayer.droning = true;
         }
         currPlayer.playing = true;
-        currPlayer.player.start();
+        currPlayer.play(pbr);
       } else if (
         currPlayer &&
         currPlayer.droning &&

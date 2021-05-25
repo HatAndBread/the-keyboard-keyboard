@@ -9,6 +9,7 @@ export default class Player {
   randomize: boolean;
   playbackRate: number | undefined;
   droning: boolean;
+  timeout: undefined | NodeJS.Timeout;
   constructor(
     keyAssignment: string,
     playType: "LOOP" | "SINGLE" | "RAPID" | undefined,
@@ -39,10 +40,31 @@ export default class Player {
     if (playType === "LOOP") {
       this.player.loop = true;
     }
+    this.player.onstop(this.player);
+    this.timeout = undefined;
   }
+
   stop = () => {
     if (this.playbackRate) this.player.playbackRate = this.playbackRate;
     if (this.droning) this.droning = false;
     if (this.playing) this.playing = false;
+  };
+  play = (pbr?: number) => {
+    this.player.start();
+    if (this.playType === "SINGLE") {
+      if (this.playbackRate && pbr) {
+        this.player.playbackRate = this.playbackRate * pbr;
+      }
+      if (this.timeout) {
+        clearTimeout(this.timeout);
+        this.timeout = undefined;
+      }
+      this.timeout = setTimeout(() => {
+        if (this.playbackRate) {
+          this.playing = false;
+          this.player.playbackRate = this.playbackRate;
+        }
+      }, (this.buffer.duration * 1000) / this.player.playbackRate);
+    }
   };
 }

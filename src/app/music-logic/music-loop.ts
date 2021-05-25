@@ -6,9 +6,21 @@ let currentKeys: string[] = [];
 let board: null | Keyboard = null;
 let randomize = false;
 let octave = 1;
+let detune = 0;
+
+const detuner = () => {
+  if (currentKeys.includes("arrowleft")) {
+    detune -= 0.005;
+  } else if (currentKeys.includes("arrowright")) {
+    detune += 0.005;
+  } else {
+    detune = 0;
+  }
+};
 
 export const musicLoop = () => {
   if (currentKeys && board) {
+    detuner();
     const players = board.getAsArray();
     resetPlayersNotCurrentlyPlaying(players, currentKeys);
     currentKeys.forEach((key) => {
@@ -35,6 +47,13 @@ export const musicLoop = () => {
         currentKeys = currentKeys.filter((key) => key !== "shift");
         currPlayer.stop();
       }
+      if (detune && currPlayer) {
+        let myNum = currPlayer.player.playbackRate + detune;
+        if (myNum > 0.01) {
+          console.log(myNum, octave);
+          currPlayer.player.playbackRate = myNum;
+        }
+      }
     });
   }
   requestAnimationFrame(musicLoop);
@@ -47,12 +66,33 @@ const keyIsDuplicated = (newKey: string) => {
 export const handleKeyUp = (e: KeyboardEvent) => {
   const currKey = transformKeys(e.key).toLowerCase();
   currentKeys = currentKeys.filter((key) => key !== currKey);
+  if (currKey === "arrowleft" || currKey === "arrowright") {
+    if (board) {
+      board.getAsArray().forEach((player) => {
+        if (player.playbackRate)
+          player.player.playbackRate = player.playbackRate;
+      });
+    }
+  }
   console.log(currentKeys);
 };
 export const handleKeyDown = (e: KeyboardEvent) => {
   const currKey = transformKeys(e.key).toLowerCase();
-  if (currKey === "arrowdown") octave > 1 ? (octave -= 1) : (octave *= 0.5);
-  if (currKey === "arrowup") octave >= 1 ? (octave += 1) : (octave *= 2);
+  if (currKey === "arrowdown") {
+    if (octave > 1) {
+      octave -= 1;
+    } else if (octave > 0.1) {
+      octave *= 0.5;
+    }
+  } else if (currKey === "arrowup") {
+    if (octave >= 1 && octave <= 19) {
+      octave += 1;
+    } else if (octave < 1) {
+      octave *= 2;
+    }
+  } else if (currKey === "backspace") {
+    octave = 1;
+  }
   if (!keyIsDuplicated(currKey)) {
     currentKeys?.push(currKey);
   }

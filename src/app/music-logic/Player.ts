@@ -1,3 +1,4 @@
+import getRandoNum from "./music-loop-helpers/getRandoNum";
 import { Player as TonePlayer, ToneAudioBuffer as Buff } from "tone";
 
 export default class Player {
@@ -49,12 +50,20 @@ export default class Player {
     if (this.droning) this.droning = false;
     if (this.playing) this.playing = false;
   };
-  play = (pbr?: number) => {
+  play = (pbr: number, isRandomized?: boolean) => {
+    this.handlePBR(pbr, isRandomized);
+    this.handleTimeout();
     this.player.start();
+  };
+  handlePBR = (pbr: number, isRandomized?: boolean): void => {
+    if (isRandomized || this.randomize) {
+      this.player.playbackRate = getRandoNum();
+    } else if (this.playbackRate) {
+      this.player.playbackRate = this.playbackRate * pbr;
+    }
+  };
+  handleTimeout = () => {
     if (this.playType === "SINGLE") {
-      if (this.playbackRate && pbr) {
-        this.player.playbackRate = this.playbackRate * pbr;
-      }
       if (this.timeout) {
         clearTimeout(this.timeout);
         this.timeout = undefined;

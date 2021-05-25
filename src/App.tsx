@@ -9,6 +9,7 @@ import { setStarted, isStarted, openModal } from "./features/startedSlice";
 import createDefaultKeyboards from "./app/music-logic/create-default-keyboards";
 import KeyboardEditor from "./app/components/keyboard-editor/KeyboardEditor";
 import ModalController from "./app/components/modal/ModalController";
+import createListeners from "./app/music-logic/keyboard-listeners";
 
 function App() {
   const [attemptingToLoad, setAttemptingToLoad] = useState(false);
@@ -32,6 +33,7 @@ function App() {
   };
 
   useEffect(() => {
+    createListeners();
     musicLoop();
   }, []);
   useEffect(() => {

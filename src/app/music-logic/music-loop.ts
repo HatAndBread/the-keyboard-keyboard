@@ -25,29 +25,34 @@ export const musicLoop = () => {
         (player) => player.keyAssignment === key.toLowerCase()
       );
       if (currPlayer?.playType === "RAPID") {
-        currPlayer.playing = true;
         currPlayer.play(octave, randomize);
       } else if (currPlayer && !currPlayer.playing) {
-        currPlayer.playing = true;
-        if (currentKeys.includes("shift") && !currPlayer.droning) {
+        if (
+          currentKeys.includes("shift") &&
+          !currPlayer.droning &&
+          currPlayer.playType === "LOOP"
+        ) {
           currentKeys = currentKeys.filter((key) => key !== "shift");
           currPlayer.droning = true;
         }
-        currPlayer.playing = true;
+        if (currPlayer.playType === "LOOP") {
+          currPlayer.clearReleaseTimeout();
+        }
         currPlayer.play(octave, randomize);
       } else if (
         currPlayer &&
         currPlayer.droning &&
         currPlayer.playing &&
-        currentKeys.includes("shift")
+        currentKeys.includes("shift") &&
+        currPlayer.playType === "LOOP"
       ) {
         currentKeys = currentKeys.filter((key) => key !== "shift");
-        currPlayer.stop();
+        currPlayer.droning = false;
+        currPlayer.stopForPlayTypeLoop();
       }
-      if (detune && currPlayer) {
+      if (currPlayer && detune) {
         let myNum = currPlayer.player.playbackRate + detune;
         if (myNum > 0.01) {
-          console.log(myNum, octave);
           currPlayer.player.playbackRate = myNum;
         }
       }
@@ -66,12 +71,12 @@ export const handleKeyUp = (e: KeyboardEvent) => {
   if (currKey === "arrowleft" || currKey === "arrowright") {
     if (board) {
       board.getAsArray().forEach((player) => {
-        if (player.playbackRate)
+        if (player.playbackRate && !player.droning) {
           player.player.playbackRate = player.playbackRate;
+        }
       });
     }
   }
-  console.log(currentKeys);
 };
 
 export const handleKeyDown = (e: KeyboardEvent) => {

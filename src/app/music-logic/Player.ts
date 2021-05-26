@@ -1,8 +1,14 @@
 import getRandoNum from "./music-loop-helpers/getRandoNum";
-import { Player as TonePlayer, ToneAudioBuffer as Buff } from "tone";
+import {
+  Player as TonePlayer,
+  ToneAudioBuffer as Buff,
+  AmplitudeEnvelope as Envelope,
+  now,
+} from "tone";
 
 export default class Player {
   player: TonePlayer;
+  envelope: Envelope;
   playing: boolean;
   playType: "LOOP" | "SINGLE" | "RAPID" | undefined;
   keyAssignment: string;
@@ -11,6 +17,7 @@ export default class Player {
   playbackRate: number | undefined;
   droning: boolean;
   timeout: undefined | NodeJS.Timeout;
+  releaseTimeout: undefined | NodeJS.Timeout;
   constructor(
     keyAssignment: string,
     playType: "LOOP" | "SINGLE" | "RAPID" | undefined,
@@ -19,7 +26,13 @@ export default class Player {
     volume: number | undefined,
     randomize: boolean | undefined
   ) {
-    this.player = new TonePlayer().toDestination();
+    this.envelope = new Envelope({
+      attack: 0.1,
+      decay: 0.2,
+      sustain: 1.0,
+      release: 0.8,
+    });
+    this.player = new TonePlayer();
     this.playing = false;
     this.playType = playType;
     this.keyAssignment = keyAssignment;
@@ -40,21 +53,31 @@ export default class Player {
     }
     if (playType === "LOOP") {
       this.player.loop = true;
+      this.player.connect(this.envelope);
+      this.envelope.toDestination();
+    } else {
+      this.player.toDestination();
     }
-    this.player.onstop(this.player);
     this.timeout = undefined;
+    this.releaseTimeout = undefined;
   }
 
-  stop = () => {
-    if (this.playbackRate) this.player.playbackRate = this.playbackRate;
-    if (this.droning) this.droning = false;
-    if (this.playing) this.playing = false;
-    this.clearTimeout();
+  stopForPlayTypeLoop = () => {
+    this.playing = false;
+    if (this.playbackRate && this.playType === "LOOP") {
+      this.releaseTimeout = setTimeout(() => {
+        if (this.playbackRate) this.player.playbackRate = this.playbackRate;
+        //@ts-ignore
+      }, this.envelope.release * 1000);
+      this.envelope.triggerRelease();
+    }
   };
   play = (pbr: number, isRandomized?: boolean) => {
     this.handlePBR(pbr, isRandomized);
     this.handleTimeout();
     this.player.start();
+    if (this.playType === "LOOP") this.envelope.triggerAttack(now());
+    this.playing = true;
   };
   handlePBR = (pbr: number, isRandomized?: boolean): void => {
     if (isRandomized || this.randomize) {
@@ -79,6 +102,12 @@ export default class Player {
     if (this.timeout) {
       clearTimeout(this.timeout);
       this.timeout = undefined;
+    }
+  };
+  clearReleaseTimeout = () => {
+    if (this.releaseTimeout) {
+      clearTimeout(this.releaseTimeout);
+      this.releaseTimeout = undefined;
     }
   };
 }

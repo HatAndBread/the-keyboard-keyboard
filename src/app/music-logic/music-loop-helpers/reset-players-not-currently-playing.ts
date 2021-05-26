@@ -11,11 +11,7 @@ const resetPlayersNotCurrentlyPlaying = (
       player.playing &&
       !player.droning
     ) {
-      player.playing = false;
-      if (player.playbackRate && player.playType === "LOOP") {
-        player.player.playbackRate = player.playbackRate;
-      }
-      if (player.playType === "LOOP") player.player.stop();
+      player.stopForPlayTypeLoop();
     }
   });
 };

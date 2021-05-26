@@ -16,7 +16,7 @@ let detune = 0;
 
 export const musicLoop = () => {
   if (currentKeys && board) {
-    detuner(currentKeys, detune);
+    detune = detuner(currentKeys, detune);
     const players = board.getAsArray();
     resetPlayersNotCurrentlyPlaying(players, currentKeys);
     randomize = currentKeys.includes("capslock");

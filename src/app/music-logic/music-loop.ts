@@ -4,7 +4,9 @@ import resetPlayersNotCurrentlyPlaying from "./music-loop-helpers/reset-players-
 import transformKeys from "./music-loop-helpers/transform-keys";
 import switchToNewKeyboard from "./music-loop-helpers/switch-to-new-keyboard";
 import detuner from "./music-loop-helpers/detuner";
+import { record, stopRecord } from "./effects";
 
+let currentlyRecording = false;
 let currentKeys: string[] = [];
 let keyboardNames: string[] = [];
 let currentKeyboardName: null | string = null;
@@ -112,6 +114,14 @@ export const handleKeyDown = (e: KeyboardEvent) => {
         keyboardNames,
         setKeyboard
       );
+    }
+  } else if (currKey === "enter") {
+    if (currentlyRecording) {
+      currentlyRecording = false;
+      stopRecord();
+    } else {
+      currentlyRecording = true;
+      record();
     }
   }
   if (!keyIsDuplicated(currKey)) {

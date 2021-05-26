@@ -1,4 +1,5 @@
 import getRandoNum from "./music-loop-helpers/getRandoNum";
+import gain from "./effects";
 import {
   Player as TonePlayer,
   ToneAudioBuffer as Buff,
@@ -54,9 +55,9 @@ export default class Player {
     if (playType === "LOOP") {
       this.player.loop = true;
       this.player.connect(this.envelope);
-      this.envelope.toDestination();
+      this.envelope.connect(gain);
     } else {
-      this.player.toDestination();
+      this.player.connect(gain);
     }
     this.timeout = undefined;
     this.releaseTimeout = undefined;

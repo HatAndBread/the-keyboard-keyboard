@@ -12,6 +12,7 @@ import {
 import { createBuffers } from "./app/music-logic/sample-buffers";
 import { useAppSelector, useAppDispatch } from "./app/hooks";
 import { setStarted, isStarted, openModal } from "./features/startedSlice";
+import { setEffects } from "./app/music-logic/effects";
 import createDefaultKeyboards from "./app/music-logic/create-default-keyboards";
 import KeyboardEditor from "./app/components/keyboard-editor/KeyboardEditor";
 import ModalController from "./app/components/modal/ModalController";
@@ -36,6 +37,7 @@ function App() {
     await Tone.start();
     createBuffers(setBuffers);
     setAppIsStarted(true);
+    setEffects();
   };
 
   useEffect(() => {

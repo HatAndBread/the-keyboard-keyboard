@@ -72,7 +72,7 @@ export const handleKeyUp = (e: KeyboardEvent) => {
     if (board) {
       board.getAsArray().forEach((player) => {
         if (player.playbackRate && !player.droning) {
-          player.player.playbackRate = player.playbackRate;
+          player.player.playbackRate = player.playbackRate * octave;
         }
       });
     }

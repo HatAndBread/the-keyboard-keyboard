@@ -1,4 +1,4 @@
-import Player from "../Player";
+import Player from '../Player';
 
 const resetPlayersNotCurrentlyPlaying = (
   players: Player[],
@@ -6,11 +6,7 @@ const resetPlayersNotCurrentlyPlaying = (
 ) => {
   players.forEach((player) => {
     const lowered = currentKeys.map((key) => key.toLowerCase());
-    if (
-      !lowered?.includes(player.keyAssignment) &&
-      player.playing &&
-      !player.droning
-    ) {
+    if (!lowered?.includes(player.keyAssignment) && player.playing) {
       player.stopForPlayTypeLoop();
     }
   });

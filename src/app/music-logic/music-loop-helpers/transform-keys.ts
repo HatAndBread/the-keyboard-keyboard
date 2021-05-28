@@ -1,13 +1,11 @@
 const transformWeirdKeys = (key: string): string => {
   switch (key) {
-    case "/":
-      return "?";
-    case ":":
-      return ";";
-    case "*":
-      return ";";
-    case "!":
-      return "1";
+    case '/':
+      return '?';
+    case ':':
+      return ';';
+    case '*':
+      return ';';
     default:
       return key;
   }

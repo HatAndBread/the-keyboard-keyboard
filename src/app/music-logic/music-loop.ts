@@ -1,10 +1,10 @@
-import React from "react";
-import Keyboard from "./Keyboard";
-import resetPlayersNotCurrentlyPlaying from "./music-loop-helpers/reset-players-not-currently-playing";
-import transformKeys from "./music-loop-helpers/transform-keys";
-import switchToNewKeyboard from "./music-loop-helpers/switch-to-new-keyboard";
-import detuner from "./music-loop-helpers/detuner";
-import { record, stopRecord } from "./effects";
+import React from 'react';
+import Keyboard from './Keyboard';
+import resetPlayersNotCurrentlyPlaying from './music-loop-helpers/reset-players-not-currently-playing';
+import transformKeys from './music-loop-helpers/transform-keys';
+import switchToNewKeyboard from './music-loop-helpers/switch-to-new-keyboard';
+import detuner from './music-loop-helpers/detuner';
+import { record, stopRecord, baseLoopPlayer, effectOnOff } from './effects';
 
 let currentlyRecording = false;
 let currentKeys: string[] = [];
@@ -21,40 +21,22 @@ export const musicLoop = () => {
     detune = detuner(currentKeys, detune);
     const players = board.getAsArray();
     resetPlayersNotCurrentlyPlaying(players, currentKeys);
-    randomize = currentKeys.includes("capslock");
+    randomize = currentKeys.includes('capslock');
     currentKeys.forEach((key) => {
       const currPlayer = players.find(
         (player) => player.keyAssignment === key.toLowerCase()
       );
-      if (currPlayer?.playType === "RAPID") {
+      if (currPlayer?.playType === 'RAPID') {
         currPlayer.play(octave, randomize);
       } else if (currPlayer && !currPlayer.playing) {
-        if (
-          currentKeys.includes("shift") &&
-          !currPlayer.droning &&
-          currPlayer.playType === "LOOP"
-        ) {
-          currentKeys = currentKeys.filter((key) => key !== "shift");
-          currPlayer.droning = true;
-        }
-        if (currPlayer.playType === "LOOP") {
+        if (currPlayer.playType === 'LOOP') {
           currPlayer.clearReleaseTimeout();
         }
         currPlayer.play(octave, randomize);
-      } else if (
-        currPlayer &&
-        currPlayer.droning &&
-        currPlayer.playing &&
-        currentKeys.includes("shift") &&
-        currPlayer.playType === "LOOP"
-      ) {
-        currentKeys = currentKeys.filter((key) => key !== "shift");
-        currPlayer.droning = false;
-        currPlayer.stopForPlayTypeLoop();
       }
       if (currPlayer && detune) {
         let myNum = currPlayer.player.playbackRate + detune;
-        if (myNum > 0.01) {
+        if (myNum > 0.1) {
           currPlayer.player.playbackRate = myNum;
         }
       }
@@ -70,10 +52,10 @@ const keyIsDuplicated = (newKey: string) => {
 export const handleKeyUp = (e: KeyboardEvent) => {
   const currKey = transformKeys(e.key).toLowerCase();
   currentKeys = currentKeys.filter((key) => key !== currKey);
-  if (currKey === "arrowleft" || currKey === "arrowright") {
+  if (currKey === 'arrowleft' || currKey === 'arrowright') {
     if (board) {
       board.getAsArray().forEach((player) => {
-        if (player.playbackRate && !player.droning) {
+        if (player.playbackRate) {
           player.player.playbackRate = player.playbackRate * octave;
         }
       });
@@ -83,21 +65,21 @@ export const handleKeyUp = (e: KeyboardEvent) => {
 
 export const handleKeyDown = (e: KeyboardEvent) => {
   const currKey = transformKeys(e.key).toLowerCase();
-  if (currKey === "arrowdown") {
+  if (currKey === 'arrowdown') {
     if (octave > 1) {
       octave -= 1;
     } else if (octave > 0.1) {
       octave *= 0.5;
     }
-  } else if (currKey === "arrowup") {
+  } else if (currKey === 'arrowup') {
     if (octave >= 1 && octave <= 19) {
       octave += 1;
     } else if (octave < 1) {
       octave *= 2;
     }
-  } else if (currKey === "backspace") {
+  } else if (currKey === 'backspace') {
     octave = 1;
-  } else if (currKey === "+") {
+  } else if (currKey === '+') {
     if (currentKeyboardName && board && setKeyboard) {
       switchToNewKeyboard(
         true,
@@ -106,7 +88,7 @@ export const handleKeyDown = (e: KeyboardEvent) => {
         setKeyboard
       );
     }
-  } else if (currKey === "-") {
+  } else if (currKey === '-') {
     if (currentKeyboardName && board && setKeyboard) {
       switchToNewKeyboard(
         false,
@@ -115,7 +97,7 @@ export const handleKeyDown = (e: KeyboardEvent) => {
         setKeyboard
       );
     }
-  } else if (currKey === "enter") {
+  } else if (currKey === 'enter') {
     if (currentlyRecording) {
       currentlyRecording = false;
       stopRecord();
@@ -123,6 +105,14 @@ export const handleKeyDown = (e: KeyboardEvent) => {
       currentlyRecording = true;
       record();
     }
+  } else if (currKey === '#') {
+    baseLoopPlayer.stop();
+  } else if (currKey === '!') {
+    effectOnOff('distortion');
+  } else if (currKey === '&') {
+    effectOnOff('delay');
+  } else if (currKey === '@') {
+    effectOnOff('reverb');
   }
   if (!keyIsDuplicated(currKey)) {
     currentKeys?.push(currKey);

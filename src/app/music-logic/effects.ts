@@ -1,20 +1,14 @@
-import * as Tone from "tone";
+import * as Tone from 'tone';
+
 interface Effects {
   [key: string]: any;
 }
 
-const recordPlayer = new Tone.Player().toDestination();
+export const baseLoopPlayer = new Tone.Player().toDestination();
 let recorder: undefined | Tone.Recorder;
-//@ts-ignore
-if (window.MediaRecorder) {
-  recorder = new Tone.Recorder();
-}
 
-const looper = new Tone.Loop((time) => {
-  if (recordPlayer.loaded) {
-    recordPlayer.start();
-  }
-}, "4n");
+//@ts-ignore
+if (window.MediaRecorder) recorder = new Tone.Recorder();
 
 const effects: Effects = {
   delay: null,
@@ -23,6 +17,9 @@ const effects: Effects = {
 };
 
 const gain = new Tone.Gain(0.4);
+let distortionDefaultWet = 1;
+let delayDefaultWet = 1;
+let reverbDefaultWet = 0.3;
 
 export const record = () => {
   if (recorder) {
@@ -35,37 +32,49 @@ export const stopRecord = async () => {
     const recording = await recorder.stop();
     const url = URL.createObjectURL(recording);
     const buff = new Tone.ToneAudioBuffer(url, () => {
-      console.log(buff.duration, buff.length, "STUFF");
-      recordPlayer.buffer = buff;
-      //recordPlayer.loop = true;
-      Tone.Transport.bpm.value = 60 / buff.duration;
-      Tone.Transport.start();
-      looper.start(0);
-
-      //Tone.Transport.loop = true;
-      // Tone.Transport.loopStart = 0;
-      // Tone.Transport.loopEnd = buff.duration;
-      //recordPlayer.start();
+      baseLoopPlayer.buffer = buff;
+      baseLoopPlayer.loop = true;
+      baseLoopPlayer.start();
     });
-    // recordPlayer.autostart = true;  // automatically start
   }
 };
 
 export const setEffects = () => {
-  effects.delay = new Tone.PingPongDelay(0.05, 0.6).toDestination();
+  effects.delay = new Tone.PingPongDelay(0.1, 0.6).toDestination();
   effects.reverb = new Tone.JCReverb(0.7).connect(effects.delay);
-  effects.distortion = new Tone.Distortion(0).connect(effects.reverb);
+  effects.distortion = new Tone.Distortion(1).connect(effects.reverb);
   if (recorder) {
     gain.connect(recorder);
   }
-  recordPlayer.connect(gain);
+  baseLoopPlayer.connect(gain);
   gain.connect(effects.distortion);
   effects.delay.wet.value = 0;
   effects.distortion.wet.value = 0;
   effects.reverb.wet.value = 0;
 };
 
-export const setEffectWet = (whichEffect: string, value: number) => {
+export const effectOnOff = (whichEffect: 'distortion' | 'delay' | 'reverb') => {
+  if (effects[whichEffect].wet.value) {
+    effects[whichEffect].wet.value = 0;
+  } else {
+    switch (whichEffect) {
+      case 'distortion':
+        effects.distortion.wet.value = distortionDefaultWet;
+        break;
+      case 'delay':
+        effects.delay.wet.value = delayDefaultWet;
+        break;
+      case 'reverb':
+        effects.reverb.wet.value = reverbDefaultWet;
+        break;
+    }
+  }
+};
+
+export const setEffectWet = (
+  whichEffect: 'distortion' | 'delay' | 'reverb',
+  value: number
+) => {
   effects[whichEffect].wet.value = value;
 };
 
@@ -80,6 +89,23 @@ export const setReverb = (value: number) => {
 export const setDelay = (delayTime: number, feedback: number) => {
   effects.delay.delayTime = delayTime;
   effects.delay.feedback = feedback;
+};
+
+export const setDefaultWet = (
+  whichEffect: 'distortion' | 'delay' | 'reverb',
+  value: number
+) => {
+  switch (whichEffect) {
+    case 'distortion':
+      distortionDefaultWet = value;
+      break;
+    case 'delay':
+      delayDefaultWet = value;
+      break;
+    case 'reverb':
+      reverbDefaultWet = value;
+      break;
+  }
 };
 
 export default gain;

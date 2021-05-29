@@ -1,10 +1,11 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../app/store";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../app/store';
+import ValidKeys from '../types/ValidKeys';
 
 export interface StartedState {
   started: boolean;
   openModal: string | null;
-  keyBeingEdited: string | null;
+  keyBeingEdited: ValidKeys | null;
 }
 
 const initialState: StartedState = {
@@ -14,7 +15,7 @@ const initialState: StartedState = {
 };
 
 export const startedSlice = createSlice({
-  name: "started",
+  name: 'started',
   initialState,
   reducers: {
     setStarted: (state) => {
@@ -23,7 +24,7 @@ export const startedSlice = createSlice({
     setOpenModal: (state, action: PayloadAction<string | null>) => {
       state.openModal = action.payload;
     },
-    setKeyBeingEdited: (state, action: PayloadAction<string | null>) => {
+    setKeyBeingEdited: (state, action: PayloadAction<ValidKeys | null>) => {
       state.keyBeingEdited = action.payload;
     },
   },

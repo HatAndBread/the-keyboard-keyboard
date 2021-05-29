@@ -34,7 +34,6 @@ export default class Player {
     });
     this.player = new TonePlayer();
     this.playing = false;
-    this.playType = playType;
     this.keyAssignment = keyAssignment;
     this.buffer = buffer;
     this.player.buffer = buffer;
@@ -50,13 +49,7 @@ export default class Player {
     if (volume) {
       this.player.volume.value = volume;
     }
-    if (playType === 'LOOP') {
-      this.player.loop = true;
-      this.player.connect(this.envelope);
-      this.envelope.connect(gain);
-    } else {
-      this.player.connect(gain);
-    }
+    this._setPlayType(playType);
     this.timeout = undefined;
     this.releaseTimeout = undefined;
   }
@@ -109,4 +102,19 @@ export default class Player {
       this.releaseTimeout = undefined;
     }
   };
+  destroy() {
+    this.envelope.dispose();
+    this.player.dispose();
+  }
+  _setPlayType(newPlayType: 'LOOP' | 'SINGLE' | 'RAPID' | undefined) {
+    this.playType = newPlayType;
+    if (newPlayType === 'LOOP') {
+      this.player.loop = true;
+      this.player.connect(this.envelope);
+      this.envelope.connect(gain);
+    } else {
+      this.player.loop = false;
+      this.player.connect(gain);
+    }
+  }
 }

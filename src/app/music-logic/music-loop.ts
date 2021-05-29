@@ -126,5 +126,6 @@ export const sendSetKeyboard = (
 export const sendCurrentKeyboardName = (ckn: string) =>
   (currentKeyboardName = ckn);
 export const sendBoard = (newBoard: Keyboard) => {
+  console.log('new board received!', board);
   board = newBoard;
 };

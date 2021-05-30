@@ -1,7 +1,8 @@
-import Keyboard from "./Keyboard";
-import Player from "./Player";
-import { ToneAudioBuffer } from "tone";
-import defaultKeyboards from "./default-keyboards";
+import Keyboard from './Keyboard';
+import Player from './Player';
+import { ToneAudioBuffer } from 'tone';
+import defaultKeyboards from './default-keyboards';
+import { keyboard } from './default-keyboards';
 
 export default function createDefaultKeyboards(
   buffers: { [key: string]: ToneAudioBuffer },
@@ -26,10 +27,11 @@ const createPlayers = (
   keyboardLayout: {
     [key: string]: {
       name: string;
-      playType?: "SINGLE" | "RAPID" | "LOOP" | undefined;
+      playType?: 'SINGLE' | 'RAPID' | 'LOOP' | undefined;
       playbackRate?: number;
       volume?: number;
       randomize?: boolean;
+      octave: number;
     };
   },
   buffers: { [key: string]: ToneAudioBuffer }
@@ -37,14 +39,15 @@ const createPlayers = (
   const players: { [key: string]: Player } = {};
   const keys = Object.keys(keyboardLayout);
   keys.forEach((key) => {
-    if (key !== "name" && keyboardLayout[key].playType) {
+    if (key !== 'name' && keyboardLayout[key].playType) {
       players[key] = new Player(
         key,
         keyboardLayout[key].playType,
         buffers[keyboardLayout[key].name],
         keyboardLayout[key].playbackRate,
         keyboardLayout[key].volume,
-        keyboardLayout[key].randomize
+        keyboardLayout[key].randomize,
+        keyboardLayout[key].octave
       );
     }
   });

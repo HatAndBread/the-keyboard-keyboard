@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ToggleSwitch.css';
 
 const ToggleSwitch = ({
@@ -6,13 +6,18 @@ const ToggleSwitch = ({
   id,
   onFalseSet,
   onTrueSet,
+  defaultChecked,
 }: {
   label?: string;
   id?: string;
   onFalseSet?: () => any;
   onTrueSet?: () => any;
+  defaultChecked?: boolean;
 }) => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(defaultChecked);
+  useEffect(() => {
+    setChecked(defaultChecked);
+  }, [defaultChecked]);
   const handleChange = () => {
     if (checked) {
       setChecked(false);
@@ -22,6 +27,7 @@ const ToggleSwitch = ({
       if (onTrueSet) onTrueSet();
     }
   };
+  console.log(defaultChecked, checked);
   return (
     <>
       {label && <label htmlFor={id}>{label}</label>}
@@ -34,9 +40,8 @@ const ToggleSwitch = ({
         type='checkbox'
         id={id}
         name={id}
-        checked={checked}
-        hidden
-        onChange={() => handleChange}></input>
+        defaultChecked={defaultChecked}
+        hidden></input>
     </>
   );
 };

@@ -30,7 +30,10 @@ function App() {
     [key: string]: Keyboard;
   }>(null);
   const [keyboardNames, setKeyboardNames] = useState<string[]>([]);
-  const [currentKeyboard, setCurrentKeyboard] = useState<string>('harmonious');
+  const [currentKeyboardName, setCurrentKeyboardName] = useState<string>(
+    'harmonious'
+  );
+  const [currentKeyboard, setCurrentKeyboard] = useState<null | Keyboard>(null);
   const dispatch = useAppDispatch();
   const currentModal = useAppSelector(openModal);
 
@@ -54,19 +57,22 @@ function App() {
   }, [buffers]);
   useEffect(() => {
     console.log(keyboards, 'Here are the keyboards');
-    if (keyboards) setKeyboardNames(Object.keys(keyboards));
-    keyboards && sendBoard(keyboards[currentKeyboard]);
+    if (keyboards) {
+      setKeyboardNames(Object.keys(keyboards));
+      sendBoard(keyboards[currentKeyboardName]);
+      setCurrentKeyboard(keyboards[currentKeyboardName]);
+    }
     setAttemptingToLoad(false);
-  }, [keyboards, currentKeyboard, dispatch]);
+  }, [keyboards, currentKeyboardName, dispatch]);
   useEffect(() => {
-    sendSetKeyboard(setCurrentKeyboard);
-  }, [setCurrentKeyboard]);
+    sendSetKeyboard(setCurrentKeyboardName);
+  }, [setCurrentKeyboardName]);
   useEffect(() => {
     sendKeyboardNames(keyboardNames);
   }, [keyboardNames]);
   useEffect(() => {
-    sendCurrentKeyboardName(currentKeyboard);
-  }, [currentKeyboard]);
+    sendCurrentKeyboardName(currentKeyboardName);
+  }, [currentKeyboardName]);
 
   return (
     <Context.Provider
@@ -78,12 +84,13 @@ function App() {
         keyboardNames,
         setKeyboardNames,
         currentKeyboard,
-        setCurrentKeyboard,
+        currentKeyboardName,
+        setCurrentKeyboardName,
       }}>
       <div className='App'>
         {attemptingToLoad && <p>Loading...</p>}
         {!appIsStarted && <button onClick={initialStartUp}>START</button>}
-        <p>Current Keyboard: {currentKeyboard}</p>
+        <p>Current Keyboard: {currentKeyboardName}</p>
         <KeyboardEditor />
         <ModalController currentModal={currentModal} />
       </div>

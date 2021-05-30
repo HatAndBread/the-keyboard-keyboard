@@ -5,6 +5,7 @@ import {
   ToneAudioBuffer as Buff,
   AmplitudeEnvelope as Envelope,
   now,
+  ToneAudioBuffer,
 } from 'tone';
 
 export default class Player {
@@ -18,13 +19,15 @@ export default class Player {
   playbackRate: number | undefined;
   timeout: undefined | NodeJS.Timeout;
   releaseTimeout: undefined | NodeJS.Timeout;
+  octave: number;
   constructor(
     keyAssignment: string,
     playType: 'LOOP' | 'SINGLE' | 'RAPID' | undefined,
     buffer: Buff,
     playbackRate: number | undefined,
     volume: number | undefined,
-    randomize: boolean | undefined
+    randomize: boolean | undefined,
+    octave: number
   ) {
     this.envelope = new Envelope({
       attack: 0.1,
@@ -38,11 +41,8 @@ export default class Player {
     this.buffer = buffer;
     this.player.buffer = buffer;
     this.playbackRate = playbackRate;
-    if (randomize) {
-      this.randomize = randomize;
-    } else {
-      this.randomize = false;
-    }
+    this.randomize = randomize ? true : false;
+    this.octave = octave;
     if (playbackRate) {
       this.player.playbackRate = playbackRate;
     }
@@ -105,6 +105,14 @@ export default class Player {
   destroy() {
     this.envelope.dispose();
     this.player.dispose();
+  }
+  setBuffer(buffer: Buff) {
+    this.buffer = buffer;
+    this.player.buffer = buffer;
+  }
+  setPlaybackRate(newPBR: number) {
+    this.playbackRate = newPBR;
+    this.player.playbackRate = newPBR;
   }
   _setPlayType(newPlayType: 'LOOP' | 'SINGLE' | 'RAPID' | undefined) {
     this.playType = newPlayType;

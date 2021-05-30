@@ -12,8 +12,9 @@ type ContextProps = {
       [key: string]: Keyboard;
     } | null>
   >;
-  currentKeyboard: string;
-  setCurrentKeyboard: React.Dispatch<React.SetStateAction<string>>;
+  currentKeyboard: Keyboard | null;
+  currentKeyboardName: string;
+  setCurrentKeyboardName: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export default ContextProps;

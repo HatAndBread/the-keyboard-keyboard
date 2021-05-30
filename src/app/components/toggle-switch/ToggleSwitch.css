@@ -1,0 +1,30 @@
+.switch-background {
+  background-color: lightgray;
+  box-shadow: gray 0px 1px 1px 1px;
+  width: 40px;
+  height: 16px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.switch-ball {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: gray 0px 1px 1px 1px;
+  position: relative;
+  transition: 0.3s;
+  left: -13px;
+  top: -4px;
+}
+
+.on-switch {
+  background-color: lightpink;
+}
+
+.on-ball {
+  background-color: red;
+  box-shadow: rgba(250, 60, 60, 0.2) 0px 0px 10px 10px;
+  left: 24px;
+}

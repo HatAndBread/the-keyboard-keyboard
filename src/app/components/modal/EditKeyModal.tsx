@@ -4,6 +4,8 @@ import Keyboard from '../../music-logic/Keyboard';
 import { Context } from '../../../App';
 import _ from 'lodash';
 import ValidKeys from '../../../types/ValidKeys';
+import ToggleSwitch from '../../components/toggle-switch/ToggleSwitch';
+import './EditKeyModal.css';
 
 const EditKeyModal = ({ myKey }: { myKey: ValidKeys | null }) => {
   const ctx = useContext(Context);
@@ -12,6 +14,7 @@ const EditKeyModal = ({ myKey }: { myKey: ValidKeys | null }) => {
   const [myPlayType, setMyPlayType] = useState<
     undefined | 'LOOP' | 'SINGLE' | 'RAPID'
   >();
+  const [randomize, setRandomize] = useState(false);
 
   useEffect(() => {
     if (ctx.keyboards && ctx.currentKeyboard) {
@@ -19,12 +22,12 @@ const EditKeyModal = ({ myKey }: { myKey: ValidKeys | null }) => {
       const player = ctx.keyboards[ctx.currentKeyboard].getKey(myKey);
       setMyPlayer(player);
       setMyPlayType(player.playType);
+      setRandomize(player.randomize);
     }
   }, [ctx, myKey]);
 
   const handleLoopChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (
-      myPlayer &&
       myKey &&
       (e.target.value === 'RAPID' ||
         e.target.value === 'LOOP' ||
@@ -34,8 +37,14 @@ const EditKeyModal = ({ myKey }: { myKey: ValidKeys | null }) => {
       setMyPlayType(e.target.value);
     }
   };
+  const handleRandomizeChange = (onOrOff: boolean) => {
+    setRandomize(onOrOff);
+    if (myPlayer) {
+      onOrOff ? (myPlayer.randomize = true) : (myPlayer.randomize = false);
+    }
+  };
   return (
-    <div>
+    <div className='EditKeyModal'>
       {myKey}
       <select
         onChange={handleLoopChange}
@@ -44,6 +53,11 @@ const EditKeyModal = ({ myKey }: { myKey: ValidKeys | null }) => {
         <option value='SINGLE'>Single</option>
         <option value='RAPID'>Rapid</option>
       </select>
+      <ToggleSwitch
+        label='Randomize'
+        onTrueSet={() => handleRandomizeChange(true)}
+        onFalseSet={() => handleRandomizeChange(false)}
+      />
     </div>
   );
 };

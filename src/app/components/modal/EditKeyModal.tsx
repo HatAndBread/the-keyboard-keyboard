@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import Player from '../../music-logic/Player';
 import Keyboard from '../../music-logic/Keyboard';
 import { Context } from '../../../App';
@@ -9,6 +9,7 @@ import './EditKeyModal.css';
 import getBufferName from '../../music-logic/music-loop-helpers/get-buffer-name';
 import scales from '../../music-logic/tuning-systems';
 import { getFraction } from '../../music-logic/tuning-systems';
+import OctaveSelect from './editor-components/OctaveSelect';
 
 const EditKeyModal = ({
   myKey,
@@ -33,7 +34,6 @@ const EditKeyModal = ({
   const bufferSelectRef = useRef<HTMLSelectElement>(null);
   const playTypeSelectRef = useRef<HTMLSelectElement>(null);
   const scaleSelectRef = useRef<HTMLSelectElement>(null);
-  const octaveSelectRef = useRef<HTMLSelectElement>(null);
 
   const handlePlayTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     playTypeSelectRef.current?.blur();
@@ -111,29 +111,12 @@ const EditKeyModal = ({
           />
           {!randomize && (
             <>
-              <label htmlFor='octave-select'>Octave</label>
-              <select
-                id='octave-select'
-                name='octave-select'
-                ref={octaveSelectRef}
-                onChange={(e) => {
-                  octaveSelectRef.current?.blur();
-                  console.log(pitchFaderValue, e.target.value);
-                  myPlayer.setPlaybackRate(
-                    pitchFaderValue * parseFloat(e.target.value)
-                  );
-                  myPlayer.octave = parseFloat(e.target.value);
-                  setOctave(parseFloat(e.target.value));
-                }}
-                defaultValue={octave}>
-                <option value='0.125'>-3</option>
-                <option value='0.25'>-2</option>
-                <option value='0.5'>-1</option>
-                <option value='1'>0</option>
-                <option value='2'>1</option>
-                <option value='3'>2</option>
-                <option value='4'>3</option>
-              </select>
+              <OctaveSelect
+                myPlayer={myPlayer}
+                pitchFaderValue={pitchFaderValue}
+                setOctave={setOctave}
+                octave={octave}
+              />
               <select
                 onChange={handleTuningChange}
                 ref={scaleSelectRef}

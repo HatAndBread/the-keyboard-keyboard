@@ -26,10 +26,9 @@ const EditKeyModal = ({
   const [bufferName, setBufferName] = useState<string | undefined>(
     getBufferName(ctx, myPlayer)
   );
-  const [tuningSystem, setTuningSystem] = useState('any');
   const [octave, setOctave] = useState(myPlayer.octave);
   const [pitchFaderValue, setPitchFaderValue] = useState(
-    myPlayer.playbackRate ? myPlayer.playbackRate : 1
+    getNoOctavePBR(myPlayer)
   );
   const bufferSelectRef = useRef<HTMLSelectElement>(null);
   const playTypeSelectRef = useRef<HTMLSelectElement>(null);
@@ -64,7 +63,7 @@ const EditKeyModal = ({
   };
   const handleTuningChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     scaleSelectRef.current?.blur();
-    setTuningSystem(e.target.value);
+    myPlayer.tuning = e.target.value;
   };
   return (
     <>
@@ -96,12 +95,6 @@ const EditKeyModal = ({
             onTrueSet={() => handleRandomizeChange(true)}
             onFalseSet={() => handleRandomizeChange(false)}
           />
-          {myPlayType === 'LOOP' && (
-            <>
-              <input type='range' />
-              <input type='range' />
-            </>
-          )}
           {!randomize && (
             <>
               <label htmlFor='octave-select'>Octave</label>
@@ -111,12 +104,11 @@ const EditKeyModal = ({
                 ref={octaveSelectRef}
                 onChange={(e) => {
                   octaveSelectRef.current?.blur();
-                  console.log(parseFloat(e.target.value));
-                  if (myPlayer.playbackRate) {
-                    myPlayer.setPlaybackRate(
-                      pitchFaderValue * parseFloat(e.target.value)
-                    );
-                  }
+                  console.log(pitchFaderValue, e.target.value);
+                  myPlayer.setPlaybackRate(
+                    pitchFaderValue * parseFloat(e.target.value)
+                  );
+                  myPlayer.octave = parseFloat(e.target.value);
                   setOctave(parseFloat(e.target.value));
                 }}
                 defaultValue={octave}>
@@ -128,7 +120,10 @@ const EditKeyModal = ({
                 <option value='3'>2</option>
                 <option value='4'>3</option>
               </select>
-              <select onChange={handleTuningChange} ref={scaleSelectRef}>
+              <select
+                onChange={handleTuningChange}
+                ref={scaleSelectRef}
+                defaultValue={myPlayer.tuning}>
                 <option value={'any'}>Any</option>
                 {Object.keys(scales).map((scale) => (
                   <option key={scale} value={scale}>
@@ -136,14 +131,14 @@ const EditKeyModal = ({
                   </option>
                 ))}
               </select>
-              {tuningSystem === 'any' ? (
+              {myPlayer.tuning === 'any' ? (
                 <>
                   <input
                     type='range'
                     min='1'
                     max='2'
                     step='0.001'
-                    defaultValue={myPlayer.playbackRate}
+                    defaultValue={getNoOctavePBR(myPlayer)}
                     onChange={(e) => {
                       myPlayer.setPlaybackRate(
                         parseFloat(e.target.value) * octave
@@ -159,23 +154,31 @@ const EditKeyModal = ({
                     min='1'
                     max='2'
                     step='0.001'
-                    defaultValue={myPlayer.playbackRate}
+                    defaultValue={getNoOctavePBR(myPlayer)}
                     onChange={(e) => {
                       myPlayer.setPlaybackRate(
                         findClosestNumber(
-                          scales[tuningSystem],
+                          scales[myPlayer.tuning],
                           parseFloat(e.target.value)
                         ) * octave
                       );
                       setPitchFaderValue(parseFloat(e.target.value));
                     }}></input>
                   {getRatioFromDecimal(
-                    scales[tuningSystem],
+                    scales[myPlayer.tuning],
                     pitchFaderValue,
-                    tuningSystem
+                    myPlayer.tuning
                   )}
                 </>
               )}
+            </>
+          )}
+          {myPlayType === 'LOOP' && (
+            <>
+              <label htmlFor='attack-range'>Attack</label>
+              <input type='range' name='attack-range' id='attack-range' />
+              <label htmlFor='release-range'>Release</label>
+              <input type='range' name='release-range' id='release-range' />
             </>
           )}
         </div>
@@ -186,24 +189,42 @@ const EditKeyModal = ({
 
 export default EditKeyModal;
 
+const getNoOctavePBR = (myPlayer: Player): number => {
+  if (myPlayer.playbackRate) {
+    if (myPlayer.octave === 1) {
+      return myPlayer.playbackRate;
+    } else if (myPlayer.octave > 1) {
+      return myPlayer.playbackRate / myPlayer.octave;
+    } else if (myPlayer.octave < 1) {
+      return myPlayer.playbackRate * (1 / myPlayer.octave);
+    }
+  }
+  return 1;
+};
+
 const findClosestNumber = (arr: number[], num: number) => {
   let closestNum: number = 2;
-  arr.forEach((element) => {
-    if (num - element >= 0 && num - element < closestNum) {
-      closestNum = element;
-    }
-  });
+  if (arr) {
+    arr.forEach((element) => {
+      if (num - element >= 0 && num - element < closestNum) {
+        closestNum = element;
+      }
+    });
+  }
   return closestNum;
 };
 
 const getRatioFromDecimal = (arr: number[], num: number, scale: string) => {
   let closestNum: number = 2;
   let ind = 0;
-  arr.forEach((element, index) => {
-    if (num - element >= 0 && num - element < closestNum) {
-      closestNum = element;
-      ind = index;
-    }
-  });
+  console.log(arr, num, scale);
+  if (arr) {
+    arr.forEach((element, index) => {
+      if (num - element >= 0 && num - element < closestNum) {
+        closestNum = element;
+        ind = index;
+      }
+    });
+  }
   return getFraction(scale, ind);
 };

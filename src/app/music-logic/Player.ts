@@ -20,6 +20,7 @@ export default class Player {
   timeout: undefined | NodeJS.Timeout;
   releaseTimeout: undefined | NodeJS.Timeout;
   octave: number;
+  tuning: string;
   constructor(
     keyAssignment: string,
     playType: 'LOOP' | 'SINGLE' | 'RAPID' | undefined,
@@ -27,7 +28,8 @@ export default class Player {
     playbackRate: number | undefined,
     volume: number | undefined,
     randomize: boolean | undefined,
-    octave: number
+    octave: number,
+    tuning: string
   ) {
     this.envelope = new Envelope({
       attack: 0.1,
@@ -43,6 +45,7 @@ export default class Player {
     this.playbackRate = playbackRate;
     this.randomize = randomize ? true : false;
     this.octave = octave;
+    this.tuning = tuning;
     if (playbackRate) {
       this.player.playbackRate = playbackRate;
     }

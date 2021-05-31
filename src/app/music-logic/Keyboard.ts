@@ -147,7 +147,8 @@ export default class Keyboard {
       this[keyName].playbackRate,
       this[keyName].player.volume.value,
       this[keyName].randomize,
-      this[keyName].octave
+      this[keyName].octave,
+      this[keyName].tuning
     );
     this[keyName].destroy();
     this[keyName] = newPlayer;

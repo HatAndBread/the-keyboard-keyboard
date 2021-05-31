@@ -32,6 +32,7 @@ const createPlayers = (
       volume?: number;
       randomize?: boolean;
       octave: number;
+      tuning: string;
     };
   },
   buffers: { [key: string]: ToneAudioBuffer }
@@ -47,7 +48,8 @@ const createPlayers = (
         keyboardLayout[key].playbackRate,
         keyboardLayout[key].volume,
         keyboardLayout[key].randomize,
-        keyboardLayout[key].octave
+        keyboardLayout[key].octave,
+        keyboardLayout[key].tuning
       );
     }
   });

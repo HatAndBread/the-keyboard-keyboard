@@ -9,6 +9,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   a: {
     name: 'kick',
@@ -17,6 +18,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   b: {
     name: 'bugara1',
@@ -25,6 +27,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   c: {
     name: 'bugara2',
@@ -33,6 +36,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   d: {
     name: 'ceng',
@@ -41,6 +45,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   e: {
     name: 'demung1',
@@ -49,6 +54,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   f: {
     name: 'demung2',
@@ -57,6 +63,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   g: {
     name: 'demung3',
@@ -65,6 +72,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   h: {
     name: 'djembe1',
@@ -73,6 +81,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   i: {
     name: 'djembe2',
@@ -81,6 +90,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   j: {
     name: 'djembe3',
@@ -89,6 +99,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   k: {
     name: 'jegog',
@@ -97,6 +108,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   l: {
     name: 'hat',
@@ -105,6 +117,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   m: {
     name: 'kantilan',
@@ -113,6 +126,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   n: {
     name: 'kalimba',
@@ -121,6 +135,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   o: {
     name: 'kazoo',
@@ -129,6 +144,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   p: {
     name: 'kempur',
@@ -137,6 +153,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   q: {
     name: 'piano',
@@ -145,6 +162,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   r: {
     name: 'singing',
@@ -153,6 +171,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   s: {
     name: 'snare',
@@ -161,6 +180,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   t: {
     name: 'spring',
@@ -169,6 +189,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   u: {
     name: 'tambura',
@@ -177,6 +198,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   v: {
     name: 'tom',
@@ -185,6 +207,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   w: {
     name: 'trumpet',
@@ -193,6 +216,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   x: {
     name: 'gamelan1',
@@ -201,6 +225,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   y: {
     name: 'gamelan2',
@@ -209,6 +234,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   z: {
     name: 'gamelan3',
@@ -217,6 +243,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   '0': {
     name: 'ruler',
@@ -225,6 +252,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   '1': {
     name: 'bowl',
@@ -233,6 +261,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   '2': {
     name: 'harmonium',
@@ -241,6 +270,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   '3': {
     name: 'oboe',
@@ -249,6 +279,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   '4': {
     name: 'organ',
@@ -257,6 +288,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   '5': {
     name: 'oud',
@@ -265,6 +297,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   '6': {
     name: 'rebana',
@@ -273,6 +306,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   '7': {
     name: 'ride',
@@ -281,6 +315,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   '8': {
     name: 'hiss',
@@ -289,6 +324,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   '9': {
     name: 'voice',
@@ -297,6 +333,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   ',': {
     name: 'voice',
@@ -305,6 +342,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   '.': {
     name: 'voice',
@@ -313,6 +351,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   '?': {
     name: 'voice',
@@ -321,6 +360,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
   ';': {
     name: 'voice',
@@ -329,6 +369,7 @@ export const percussionKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'any',
   },
 };
 

@@ -10,6 +10,7 @@ const harmoniousKeyboard: keyboard = {
     volume: -5,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   a: {
     name: 'harmonium',
@@ -18,6 +19,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   b: {
     name: 'gamelan1',
@@ -26,6 +28,7 @@ const harmoniousKeyboard: keyboard = {
     volume: -5,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   c: {
     name: 'gamelan1',
@@ -34,6 +37,7 @@ const harmoniousKeyboard: keyboard = {
     volume: -5,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   d: {
     name: 'harmonium',
@@ -42,6 +46,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   e: {
     name: 'voice',
@@ -50,6 +55,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   f: {
     name: 'harmonium',
@@ -58,6 +64,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   g: {
     name: 'harmonium',
@@ -66,6 +73,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   h: {
     name: 'harmonium',
@@ -74,6 +82,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   i: {
     name: 'voice',
@@ -82,6 +91,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   j: {
     name: 'harmonium',
@@ -90,6 +100,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   k: {
     name: 'harmonium',
@@ -98,6 +109,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   l: {
     name: 'harmonium',
@@ -106,6 +118,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   m: {
     name: 'gamelan1',
@@ -114,6 +127,7 @@ const harmoniousKeyboard: keyboard = {
     volume: -5,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   n: {
     name: 'gamelan1',
@@ -122,6 +136,7 @@ const harmoniousKeyboard: keyboard = {
     volume: -5,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   o: {
     name: 'voice',
@@ -130,6 +145,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   p: {
     name: 'voice',
@@ -138,6 +154,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   q: {
     name: 'voice',
@@ -146,6 +163,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   r: {
     name: 'voice',
@@ -154,6 +172,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   s: {
     name: 'harmonium',
@@ -162,6 +181,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   t: {
     name: 'voice',
@@ -170,6 +190,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   u: {
     name: 'voice',
@@ -178,6 +199,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   v: {
     name: 'gamelan1',
@@ -186,6 +208,7 @@ const harmoniousKeyboard: keyboard = {
     volume: -5,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   w: {
     name: 'voice',
@@ -194,6 +217,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   x: {
     name: 'gamelan1',
@@ -202,6 +226,7 @@ const harmoniousKeyboard: keyboard = {
     volume: -5,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   y: {
     name: 'voice',
@@ -210,6 +235,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   z: {
     name: 'gamelan1',
@@ -218,6 +244,7 @@ const harmoniousKeyboard: keyboard = {
     volume: -5,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   '0': {
     name: 'piano',
@@ -226,6 +253,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   '1': {
     name: 'piano',
@@ -234,6 +262,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   '2': {
     name: 'piano',
@@ -242,6 +271,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   '3': {
     name: 'piano',
@@ -250,6 +280,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   '4': {
     name: 'piano',
@@ -258,6 +289,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   '5': {
     name: 'piano',
@@ -266,6 +298,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   '6': {
     name: 'piano',
@@ -274,6 +307,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   '7': {
     name: 'piano',
@@ -282,6 +316,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   '8': {
     name: 'piano',
@@ -290,6 +325,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   '9': {
     name: 'piano',
@@ -298,6 +334,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   ',': {
     name: 'gamelan1',
@@ -306,6 +343,7 @@ const harmoniousKeyboard: keyboard = {
     volume: -5,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   '.': {
     name: 'gamelan1',
@@ -314,6 +352,7 @@ const harmoniousKeyboard: keyboard = {
     volume: -10,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   '?': {
     name: 'gamelan1',
@@ -322,6 +361,7 @@ const harmoniousKeyboard: keyboard = {
     volume: -10,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
   ';': {
     name: 'harmonium',
@@ -330,6 +370,7 @@ const harmoniousKeyboard: keyboard = {
     volume: 0,
     randomize: false,
     octave: 1,
+    tuning: 'Just intonation',
   },
 };
 

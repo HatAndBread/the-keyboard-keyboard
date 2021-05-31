@@ -140,7 +140,7 @@ const harryPartchAsFrac = [
   '2 / 1',
 ];
 
-export const slendro = [1, 1.142742, 1.312666, 1.507857, 1.732073, 2.005785];
+export const slendro = [1, 8 / 7, 4 / 3, 14 / 9, 16 / 9, 2];
 const slendroAsFrac = ['1/1', '8/7', '4/3', '14/9', '16/9', '2/1'];
 export const indian = [
   1,

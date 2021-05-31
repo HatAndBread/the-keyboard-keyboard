@@ -20,10 +20,11 @@ export default function createDefaultKeyboards(
       players
     );
   }
+
   setKeyboards(keyboardObjects);
 }
 
-const createPlayers = (
+export const createPlayers = (
   keyboardLayout: {
     [key: string]: {
       name: string;

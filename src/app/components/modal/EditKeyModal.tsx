@@ -70,6 +70,20 @@ const EditKeyModal = ({
       {myPlayer && ctx.buffers && (
         <div className='EditKeyModal'>
           {myKey}
+          <label htmlFor='volume-range'>Volume</label>
+          <input
+            type='range'
+            name='volume-range'
+            id='volume-id'
+            min='-20'
+            max='20'
+            step='1'
+            defaultValue={myPlayer.volume}
+            onChange={(e) => {
+              myPlayer.setVolume(parseInt(e.target.value));
+              console.log(myPlayer.player.volume.value);
+            }}
+          />
           <select
             onChange={handleBufferChange}
             value={bufferName}
@@ -176,9 +190,29 @@ const EditKeyModal = ({
           {myPlayType === 'LOOP' && (
             <>
               <label htmlFor='attack-range'>Attack</label>
-              <input type='range' name='attack-range' id='attack-range' />
+              <input
+                type='range'
+                name='attack-range'
+                id='attack-range'
+                min='0.01'
+                max='1'
+                step='0.01'
+                defaultValue={myPlayer.attack}
+                onChange={(e) => myPlayer.setAttack(parseFloat(e.target.value))}
+              />
               <label htmlFor='release-range'>Release</label>
-              <input type='range' name='release-range' id='release-range' />
+              <input
+                type='range'
+                name='release-range'
+                id='release-range'
+                min='0.01'
+                max='1'
+                step='0.01'
+                defaultValue={myPlayer.release}
+                onChange={(e) => {
+                  myPlayer.setRelease(parseFloat(e.target.value));
+                }}
+              />
             </>
           )}
         </div>

@@ -16,26 +16,31 @@ export default class Player {
   keyAssignment: string;
   buffer: Buff;
   randomize: boolean;
-  playbackRate: number | undefined;
+  playbackRate: number;
   timeout: undefined | NodeJS.Timeout;
   releaseTimeout: undefined | NodeJS.Timeout;
   octave: number;
   tuning: string;
+  volume: number;
+  attack: number;
+  release: number;
   constructor(
     keyAssignment: string,
     playType: 'LOOP' | 'SINGLE' | 'RAPID' | undefined,
     buffer: Buff,
-    playbackRate: number | undefined,
+    playbackRate: number,
     volume: number | undefined,
     randomize: boolean | undefined,
     octave: number,
-    tuning: string
+    tuning: string,
+    attack: number,
+    release: number
   ) {
     this.envelope = new Envelope({
-      attack: 0.1,
+      attack: attack,
       decay: 0.2,
       sustain: 1.0,
-      release: 0.8,
+      release: release,
     });
     this.player = new TonePlayer();
     this.playing = false;
@@ -46,12 +51,15 @@ export default class Player {
     this.randomize = randomize ? true : false;
     this.octave = octave;
     this.tuning = tuning;
+    this.attack = attack;
+    this.release = release;
     if (playbackRate) {
       this.player.playbackRate = playbackRate;
     }
     if (volume) {
       this.player.volume.value = volume;
     }
+    this.volume = volume ? volume : 0;
     this._setPlayType(playType);
     this.timeout = undefined;
     this.releaseTimeout = undefined;
@@ -116,6 +124,18 @@ export default class Player {
   setPlaybackRate(newPBR: number) {
     this.playbackRate = newPBR;
     this.player.playbackRate = newPBR;
+  }
+  setVolume(newVolume: number) {
+    this.volume = newVolume;
+    this.player.volume.value = newVolume;
+  }
+  setAttack(newAttack: number) {
+    this.attack = newAttack;
+    this.envelope.attack = newAttack;
+  }
+  setRelease(newRelease: number) {
+    this.release = newRelease;
+    this.envelope.release = newRelease;
   }
   _setPlayType(newPlayType: 'LOOP' | 'SINGLE' | 'RAPID' | undefined) {
     this.playType = newPlayType;

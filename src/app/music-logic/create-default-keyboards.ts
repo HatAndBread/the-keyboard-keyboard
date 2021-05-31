@@ -27,12 +27,14 @@ const createPlayers = (
   keyboardLayout: {
     [key: string]: {
       name: string;
-      playType?: 'SINGLE' | 'RAPID' | 'LOOP' | undefined;
-      playbackRate?: number;
-      volume?: number;
-      randomize?: boolean;
+      playType: 'SINGLE' | 'RAPID' | 'LOOP' | undefined;
+      playbackRate: number;
+      volume: number;
+      randomize: boolean;
       octave: number;
       tuning: string;
+      attack: number;
+      release: number;
     };
   },
   buffers: { [key: string]: ToneAudioBuffer }
@@ -45,11 +47,13 @@ const createPlayers = (
         key,
         keyboardLayout[key].playType,
         buffers[keyboardLayout[key].name],
-        keyboardLayout[key].playbackRate,
+        keyboardLayout[key].playbackRate * keyboardLayout[key].octave,
         keyboardLayout[key].volume,
         keyboardLayout[key].randomize,
         keyboardLayout[key].octave,
-        keyboardLayout[key].tuning
+        keyboardLayout[key].tuning,
+        keyboardLayout[key].attack,
+        keyboardLayout[key].release
       );
     }
   });

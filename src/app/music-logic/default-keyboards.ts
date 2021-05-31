@@ -12,6 +12,8 @@ export type keyboard = {
         randomize: boolean;
         octave: number;
         tuning: string;
+        attack: number;
+        release: number;
       }
     | { name: string };
 };

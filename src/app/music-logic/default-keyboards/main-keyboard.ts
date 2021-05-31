@@ -10,6 +10,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   a: {
     name: 'kick',
@@ -19,6 +21,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   b: {
     name: 'bugara1',
@@ -28,6 +32,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   c: {
     name: 'bugara2',
@@ -37,6 +43,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   d: {
     name: 'ceng',
@@ -46,6 +54,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   e: {
     name: 'demung1',
@@ -55,6 +65,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   f: {
     name: 'demung2',
@@ -64,6 +76,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   g: {
     name: 'demung3',
@@ -73,6 +87,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   h: {
     name: 'djembe1',
@@ -82,6 +98,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   i: {
     name: 'djembe2',
@@ -91,6 +109,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   j: {
     name: 'djembe3',
@@ -100,6 +120,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   k: {
     name: 'jegog',
@@ -109,6 +131,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   l: {
     name: 'hat',
@@ -118,6 +142,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   m: {
     name: 'kantilan',
@@ -127,6 +153,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   n: {
     name: 'kalimba',
@@ -136,6 +164,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   o: {
     name: 'kazoo',
@@ -145,6 +175,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   p: {
     name: 'kempur',
@@ -154,6 +186,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   q: {
     name: 'piano',
@@ -163,6 +197,9 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+
+    attack: 0.8,
+    release: 0.8,
   },
   r: {
     name: 'singing',
@@ -172,6 +209,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   s: {
     name: 'snare',
@@ -181,6 +220,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   t: {
     name: 'spring',
@@ -190,6 +231,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   u: {
     name: 'tambura',
@@ -199,6 +242,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   v: {
     name: 'tom',
@@ -208,6 +253,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   w: {
     name: 'trumpet',
@@ -217,6 +264,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   x: {
     name: 'gamelan1',
@@ -226,6 +275,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   y: {
     name: 'gamelan2',
@@ -235,6 +286,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   z: {
     name: 'gamelan3',
@@ -244,6 +297,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   '0': {
     name: 'ruler',
@@ -253,6 +308,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   '1': {
     name: 'bowl',
@@ -262,6 +319,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   '2': {
     name: 'harmonium',
@@ -271,6 +330,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   '3': {
     name: 'oboe',
@@ -280,6 +341,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   '4': {
     name: 'organ',
@@ -289,6 +352,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   '5': {
     name: 'oud',
@@ -298,6 +363,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   '6': {
     name: 'rebana',
@@ -307,6 +374,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   '7': {
     name: 'ride',
@@ -316,6 +385,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   '8': {
     name: 'hiss',
@@ -325,6 +396,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   '9': {
     name: 'voice',
@@ -334,6 +407,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   ',': {
     name: 'voice',
@@ -343,6 +418,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   '.': {
     name: 'voice',
@@ -352,6 +429,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   '?': {
     name: 'voice',
@@ -361,6 +440,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
   ';': {
     name: 'voice',
@@ -370,6 +451,8 @@ const mainKeyboard: keyboard = {
     randomize: false,
     octave: 1,
     tuning: 'any',
+    attack: 0.8,
+    release: 0.8,
   },
 };
 

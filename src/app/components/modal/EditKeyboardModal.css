@@ -1,0 +1,16 @@
+.EditKeyboardModal {
+  margin: 0px;
+}
+.EditKeyboardModal p {
+  margin: 0px;
+  padding: 8px 0px 8px 0px;
+}
+.keyboard-edit-selector {
+  transition: 0.3s;
+  color: slateblue;
+  cursor: pointer;
+}
+.keyboard-edit-selector:hover {
+  background-color: lightblue;
+  border-radius: 6px;
+}

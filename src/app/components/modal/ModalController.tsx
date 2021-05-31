@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { Context } from '../../../App';
 import Modal from './Modal';
-import { useAppSelector } from '../../hooks';
-import { keyBeingEdited } from '../../../features/startedSlice';
 import EditKeyModal from './EditKeyModal';
+import NewKeyboardModal from './NewKeyboardModal';
+import EditKeyboardModal from './EditKeyboardModal';
 
 const ModalController = ({ currentModal }: { currentModal: string | null }) => {
   const ctx = useContext(Context);
-  const key = useAppSelector(keyBeingEdited);
+  const key = ctx.keyBeingEdited;
   const getModalContent = () => {
     switch (currentModal) {
       case 'edit-key':
@@ -16,6 +16,12 @@ const ModalController = ({ currentModal }: { currentModal: string | null }) => {
         } else {
           return <></>;
         }
+      case 'edit-keyboard': {
+        return <EditKeyboardModal />;
+      }
+      case 'new-keyboard': {
+        return <NewKeyboardModal />;
+      }
       default:
         return <></>;
     }

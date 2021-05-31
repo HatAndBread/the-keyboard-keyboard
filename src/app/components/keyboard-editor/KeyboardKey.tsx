@@ -1,10 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Context } from '../../../App';
 import './KeyboardKey.css';
-import { useAppDispatch } from '../../hooks';
-import {
-  setOpenModal,
-  setKeyBeingEdited,
-} from '../../../features/startedSlice';
 import ValidKeys from '../../../types/ValidKeys';
 
 const KeyboardKey = ({
@@ -14,7 +10,7 @@ const KeyboardKey = ({
   myKey: ValidKeys;
   extraClassName?: string;
 }) => {
-  const dispatch = useAppDispatch();
+  const ctx = useContext(Context);
   const getCorrectLabel = () => {
     switch (myKey) {
       case ' ':
@@ -24,8 +20,8 @@ const KeyboardKey = ({
     }
   };
   const handleClick = () => {
-    dispatch(setKeyBeingEdited(myKey));
-    dispatch(setOpenModal('edit-key'));
+    ctx.setKeyBeingEdited && ctx.setKeyBeingEdited(myKey);
+    ctx.setCurrentModal && ctx.setCurrentModal('edit-key');
   };
   return (
     <div

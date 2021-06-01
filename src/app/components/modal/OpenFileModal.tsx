@@ -18,6 +18,7 @@ const generateKeyboardsFromTemplates = (
   // and when file is opened.
   const newKeyboards: Keyboard[] = [];
   templates.forEach((keyboardLayout) => {
+    const assignments: { [key: string]: Player } = {};
     Object.keys(keyboardLayout).forEach((k) => {
       if (
         k === 'a' ||
@@ -75,9 +76,12 @@ const generateKeyboardsFromTemplates = (
           keyboardLayout[k].release,
           keyboardLayout[k].name
         );
+        assignments[k] = player;
       }
     });
+    newKeyboards.push(new Keyboard(keyboardLayout.name.name, assignments));
   });
+  console.log(newKeyboards);
 };
 
 const OpenFileModal = () => {

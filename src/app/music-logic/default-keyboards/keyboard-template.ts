@@ -513,4 +513,9 @@ const keyboardTemplate: KeyboardTemplate = {
 
 const getKeyboardTemplate = () => _.cloneDeep(keyboardTemplate);
 
+const isValidKey = (key: string) => {
+  if (key === 'a' || key === 'b') {
+    return true;
+  }
+};
 export default getKeyboardTemplate;

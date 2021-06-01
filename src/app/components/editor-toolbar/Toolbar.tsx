@@ -4,10 +4,23 @@ import Icon from '../icon/Icon';
 import saveIcon from '../../../assets/images/disk.png';
 import openIcon from '../../../assets/images/download.png';
 import effectIcon from '../../../assets/images/mixer.png';
+import getKeyboardTemplate from '../../music-logic/default-keyboards/keyboard-template';
 
 const Toolbar = () => {
+  const ctx = useContext(Context);
   const openClick = () => {};
-  const saveClick = () => {};
+  const saveClick = () => {
+    if (ctx.keyboards) {
+      const keyboardLayouts = Object.keys(ctx.keyboards).map((keyboard) => {
+        if (ctx.keyboards) {
+          const template = getKeyboardTemplate();
+          Object.keys(ctx.keyboards[keyboard]).forEach((key) => {
+            console.log(key, template);
+          });
+        }
+      });
+    }
+  };
   const effectsClick = () => {};
   return (
     <div className='Toolbar'>

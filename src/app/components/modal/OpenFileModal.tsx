@@ -1,11 +1,23 @@
 import React, { ChangeEvent, useContext, useState } from 'react';
 import { Context } from '../../../App';
 import { KeyboardTemplate } from '../../music-logic/default-keyboards/keyboard-template';
+import Keyboard from '../../music-logic/Keyboard';
+import Player from '../../music-logic/Player';
+
+const generateKeyboardsFromTemplates = () => {
+  // eventually use this function to generate keyboards when app loaded
+  // and when file is opened.
+};
 
 const OpenFileModal = () => {
   const [data, setData] = useState<null | KeyboardTemplate[]>(null);
   const ctx = useContext(Context);
-  const setKeyboards = () => {};
+  const setKeyboards = () => {
+    const newKeyboards: Keyboard[] = [];
+    data?.forEach((layout) => {
+      console.log(layout);
+    });
+  };
   const getFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const fileToLoad = e.target.files[0];

@@ -1,20 +1,12 @@
 import React from 'react';
 import KeyboardKey from './KeyboardKey';
-import { sampleUrls } from '../../music-logic/sample-buffers';
 import './KeyboardEditor.css';
-import saveIcon from '../../../assets/images/disk.png';
-import Icon from '../../components/icon/Icon';
+import Toolbar from '../editor-toolbar/Toolbar';
 
 const KeyboardEditor = () => {
   return (
     <div className='KeyboardEditor'>
-      <Icon
-        src={saveIcon}
-        alt={saveIcon}
-        pointer={true}
-        className={'save-icon'}
-        onClick={() => console.log('saving...')}
-      />
+      <Toolbar />
       <div className='keyboard-row key-nums'>
         <KeyboardKey key={'1'} myKey={'1'} />
         <KeyboardKey key={'2'} myKey={'2'} />

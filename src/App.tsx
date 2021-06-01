@@ -40,6 +40,9 @@ function App() {
   const [currentKeyboard, setCurrentKeyboard] = useState<null | Keyboard>(null);
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    console.log(keyboards);
+  }, [keyboards]);
   const initialStartUp = async () => {
     setAttemptingToLoad(true);
     await Tone.start();

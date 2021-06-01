@@ -2,7 +2,6 @@ import Keyboard from './Keyboard';
 import Player from './Player';
 import { ToneAudioBuffer } from 'tone';
 import defaultKeyboards from './default-keyboards';
-import { keyboard } from './default-keyboards';
 
 export default function createDefaultKeyboards(
   buffers: { [key: string]: ToneAudioBuffer },

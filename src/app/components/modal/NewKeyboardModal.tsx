@@ -2,51 +2,23 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Context } from '../../../App';
 import './newKeyboardModal.css';
 import scales from '../../music-logic/tuning-systems';
-import getKeyboardTemplate from '../../music-logic/default-keyboards/keyboard-template';
+import generateKeyboardLayout from '../../music-logic/generate-keyboard-layout';
 import { createPlayers } from '../../music-logic/create-default-keyboards';
 import Keyboard from '../../music-logic/Keyboard';
 import { cloneDeep } from 'lodash';
-
-const generateKeyboardLayout = (params: {
-  keyboardName: string;
-  baseNote: number;
-  tuning: string;
-  mainInstrument: string;
-  mainPlayType: string;
-  mainOctave: number;
-}) => {
-  Object.keys(params).map(() => {});
-  const newKeyboard = getKeyboardTemplate();
-  Object.keys(newKeyboard).forEach((key) => {
-    if (key === 'name') {
-      newKeyboard.name = { name: params.keyboardName };
-    } else {
-      //@ts-ignore
-      newKeyboard[key].name = params.mainInstrument;
-      //@ts-ignore
-      newKeyboard[key].playType = params.mainPlayType;
-      //@ts-ignore
-      newKeyboard[key].octave = params.mainOctave;
-      //@ts-ignore
-      newKeyboard[key].tuning = params.tuning;
-    }
-  });
-  return newKeyboard;
-};
 
 const NewKeyboardModal = () => {
   const [baseNote, setBaseNote] = useState(440);
   const [tuning, setTuning] = useState('any');
   const [mainInstrument, setMainInstrument] = useState('random');
   const [mainPlayType, setMainPlayType] = useState('LOOP');
-  const [mainOctave, setMainOctave] = useState(0);
+  const [mainOctave, setMainOctave] = useState(1);
   const [keyboardName, setKeyboardName] = useState('');
   const ctx = useContext(Context);
   const buffers = ctx.buffers;
 
   const removeNonDigitsFromString = (str: string) => {
     return str.replace(/[^\d.-]/g, '');
-    //createPlayers()
   };
 
   const createKeyboard = () => {
@@ -60,18 +32,26 @@ const NewKeyboardModal = () => {
     });
     //@ts-ignore
     const players = createPlayers(newLayout, buffers);
+    console.log(newLayout);
     const newKeyboard = new Keyboard(keyboardName, players);
-    if (ctx.keyboards && ctx.setKeyboards) {
+    if (
+      ctx.keyboards &&
+      ctx.setKeyboards &&
+      ctx.setKeyboardNames &&
+      ctx.keyboardNames &&
+      ctx.setCurrentKeyboardName &&
+      ctx.setEditorOpen
+    ) {
       const newKeyboards = cloneDeep(ctx.keyboards);
       newKeyboards[keyboardName] = newKeyboard;
+      ctx.setKeyboardNames([...ctx.keyboardNames, keyboardName]);
       ctx.setKeyboards(newKeyboards);
+      ctx.setCurrentKeyboardName(keyboardName);
+      ctx.setEditorOpen(true);
     }
-
     ctx.setCurrentModal && ctx.setCurrentModal(null);
   };
-  useEffect(() => {
-    console.log(baseNote);
-  }, [baseNote]);
+
   return (
     <div className='NewKeyboardModal'>
       <div className='name-input'>

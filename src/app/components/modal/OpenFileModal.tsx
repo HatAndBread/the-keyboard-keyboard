@@ -1,6 +1,9 @@
 import React, { ChangeEvent, useContext, useState } from 'react';
 import { Context } from '../../../App';
-import { KeyboardTemplate } from '../../music-logic/default-keyboards/keyboard-template';
+import getKeyboardTemplate, {
+  KeyboardTemplate,
+  isValidKey,
+} from '../../music-logic/default-keyboards/keyboard-template';
 import Keyboard from '../../music-logic/Keyboard';
 import Player from '../../music-logic/Player';
 import { ToneAudioBuffer } from 'tone';
@@ -15,22 +18,64 @@ const generateKeyboardsFromTemplates = (
   // and when file is opened.
   const newKeyboards: Keyboard[] = [];
   templates.forEach((keyboardLayout) => {
-    Object.keys(keyboardLayout).forEach((key) => {
-      //@ts-ignore
-      console.log(template[item]);
-      // const player = new Player(
-      //   key,
-      //   keyboardLayout[key].playType,
-      //   buffers[keyboardLayout[key].name],
-      //   keyboardLayout[key].playbackRate * keyboardLayout[key].octave,
-      //   keyboardLayout[key].volume,
-      //   keyboardLayout[key].randomize,
-      //   keyboardLayout[key].octave,
-      //   keyboardLayout[key].tuning,
-      //   keyboardLayout[key].attack,
-      //   keyboardLayout[key].release,
-      //   keyboardLayout[key].name
-      // );
+    Object.keys(keyboardLayout).forEach((k) => {
+      if (
+        k === 'a' ||
+        k === 'b' ||
+        k === 'c' ||
+        k === 'd' ||
+        k === 'e' ||
+        k === 'f' ||
+        k === 'g' ||
+        k === 'h' ||
+        k === 'i' ||
+        k === 'j' ||
+        k === 'k' ||
+        k === 'l' ||
+        k === 'm' ||
+        k === 'n' ||
+        k === 'o' ||
+        k === 'p' ||
+        k === 'q' ||
+        k === 'r' ||
+        k === 's' ||
+        k === 't' ||
+        k === 'u' ||
+        k === 'v' ||
+        k === 'w' ||
+        k === 'x' ||
+        k === 'y' ||
+        k === 'z' ||
+        k === '1' ||
+        k === '2' ||
+        k === '3' ||
+        k === '4' ||
+        k === '5' ||
+        k === '6' ||
+        k === '7' ||
+        k === '8' ||
+        k === '9' ||
+        k === '0' ||
+        k === ' ' ||
+        k === ',' ||
+        k === '.' ||
+        k === '?' ||
+        k === ';'
+      ) {
+        const player = new Player(
+          k,
+          keyboardLayout[k].playType,
+          buffers[keyboardLayout[k].name],
+          keyboardLayout[k].playbackRate * keyboardLayout[k].octave,
+          keyboardLayout[k].volume,
+          keyboardLayout[k].randomize,
+          keyboardLayout[k].octave,
+          keyboardLayout[k].tuning,
+          keyboardLayout[k].attack,
+          keyboardLayout[k].release,
+          keyboardLayout[k].name
+        );
+      }
     });
   });
 };

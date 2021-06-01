@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 type PlayerData = {
   name: string;
-  playType: string;
+  playType: 'LOOP' | 'SINGLE' | 'RAPID' | undefined;
   playbackRate: number;
   volume: number;
   randomize: boolean;
@@ -60,7 +60,7 @@ const keyboardTemplate: KeyboardTemplate = {
   name: { name: '' },
   ' ': {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -71,7 +71,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   a: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -82,7 +82,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   b: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -93,7 +93,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   c: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -104,7 +104,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   d: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -115,7 +115,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   e: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -126,7 +126,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   f: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -137,7 +137,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   g: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -148,7 +148,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   h: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -159,7 +159,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   i: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -170,7 +170,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   j: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -181,7 +181,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   k: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -192,7 +192,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   l: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -203,7 +203,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   m: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -214,7 +214,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   n: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -225,7 +225,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   o: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -236,7 +236,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   p: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -247,7 +247,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   q: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -258,7 +258,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   r: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -269,7 +269,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   s: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -280,7 +280,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   t: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -291,7 +291,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   u: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -302,7 +302,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   v: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -313,7 +313,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   w: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -324,7 +324,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   x: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -335,7 +335,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   y: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -346,7 +346,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   z: {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -357,7 +357,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   '0': {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -368,7 +368,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   '1': {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -379,7 +379,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   '2': {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -390,7 +390,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   '3': {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -401,7 +401,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   '4': {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -412,7 +412,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   '5': {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -423,7 +423,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   '6': {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -434,7 +434,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   '7': {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -445,7 +445,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   '8': {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -456,7 +456,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   '9': {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -467,7 +467,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   ',': {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -478,7 +478,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   '.': {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -489,7 +489,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   '?': {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -500,7 +500,7 @@ const keyboardTemplate: KeyboardTemplate = {
   },
   ';': {
     name: '',
-    playType: '',
+    playType: 'LOOP',
     playbackRate: 1,
     volume: 0,
     randomize: false,
@@ -559,5 +559,6 @@ export const isValidKey = (k: string) => {
   ) {
     return true;
   }
+  return false;
 };
 export default getKeyboardTemplate;

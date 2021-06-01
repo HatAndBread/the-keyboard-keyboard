@@ -4,13 +4,12 @@ import Icon from '../icon/Icon';
 import saveIcon from '../../../assets/images/disk.png';
 import openIcon from '../../../assets/images/download.png';
 import effectIcon from '../../../assets/images/mixer.png';
-import getKeyboardTemplate from '../../music-logic/default-keyboards/keyboard-template';
-//@ts-ignore
-import { saveAs } from 'file-saver';
 
 const Toolbar = () => {
   const ctx = useContext(Context);
-  const openClick = () => {};
+  const openClick = () => {
+    ctx.setCurrentModal && ctx.setCurrentModal('open-file');
+  };
   const saveClick = () => {
     ctx.setCurrentModal && ctx.setCurrentModal('save-keyboards');
   };

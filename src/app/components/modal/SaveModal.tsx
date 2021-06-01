@@ -1,12 +1,16 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import { Context } from '../../../App';
 import getKeyboardTemplate from '../../music-logic/default-keyboards/keyboard-template';
 //@ts-ignore
 import { saveAs } from 'file-saver';
 
 const SaveModal = () => {
+  const myRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState('');
   const ctx = useContext(Context);
+  useEffect(() => {
+    myRef.current?.focus();
+  }, []);
   const save = () => {
     if (ctx.keyboards) {
       const keyboardLayouts = Object.keys(ctx.keyboards).map((keyboard) => {
@@ -56,6 +60,7 @@ const SaveModal = () => {
           type='text'
           name='file-name'
           id='file-name'
+          ref={myRef}
           onChange={(e) => setFileName(e.target.value)}
         />
         .s2pd

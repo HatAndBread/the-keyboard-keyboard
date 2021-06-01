@@ -24,6 +24,7 @@ export default class Player {
   volume: number;
   attack: number;
   release: number;
+  bufferName: string;
   constructor(
     keyAssignment: string,
     playType: 'LOOP' | 'SINGLE' | 'RAPID' | undefined,
@@ -34,7 +35,8 @@ export default class Player {
     octave: number,
     tuning: string,
     attack: number,
-    release: number
+    release: number,
+    bufferName: string
   ) {
     this.envelope = new Envelope({
       attack: attack,
@@ -46,6 +48,7 @@ export default class Player {
     this.playing = false;
     this.keyAssignment = keyAssignment;
     this.buffer = buffer;
+    this.bufferName = bufferName;
     this.player.buffer = buffer;
     this.playbackRate = playbackRate;
     this.randomize = randomize ? true : false;

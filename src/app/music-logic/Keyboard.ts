@@ -150,7 +150,8 @@ export default class Keyboard {
       this[keyName].octave,
       this[keyName].tuning,
       this[keyName].attack,
-      this[keyName].release
+      this[keyName].release,
+      this[keyName].bufferName
     );
     this[keyName].destroy();
     this[keyName] = newPlayer;

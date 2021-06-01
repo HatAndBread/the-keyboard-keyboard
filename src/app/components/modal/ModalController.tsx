@@ -4,6 +4,7 @@ import Modal from './Modal';
 import EditKeyModal from './EditKeyModal';
 import NewKeyboardModal from './NewKeyboardModal';
 import EditKeyboardModal from './EditKeyboardModal';
+import SaveModal from './SaveModal';
 
 const ModalController = ({ currentModal }: { currentModal: string | null }) => {
   const ctx = useContext(Context);
@@ -21,6 +22,9 @@ const ModalController = ({ currentModal }: { currentModal: string | null }) => {
       }
       case 'new-keyboard': {
         return <NewKeyboardModal />;
+      }
+      case 'save-keyboards': {
+        return <SaveModal />;
       }
       default:
         return <></>;

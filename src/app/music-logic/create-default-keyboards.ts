@@ -53,7 +53,8 @@ export const createPlayers = (
         keyboardLayout[key].octave,
         keyboardLayout[key].tuning,
         keyboardLayout[key].attack,
-        keyboardLayout[key].release
+        keyboardLayout[key].release,
+        keyboardLayout[key].name
       );
     }
   });

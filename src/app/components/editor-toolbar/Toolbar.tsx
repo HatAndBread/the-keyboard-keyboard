@@ -5,21 +5,14 @@ import saveIcon from '../../../assets/images/disk.png';
 import openIcon from '../../../assets/images/download.png';
 import effectIcon from '../../../assets/images/mixer.png';
 import getKeyboardTemplate from '../../music-logic/default-keyboards/keyboard-template';
+//@ts-ignore
+import { saveAs } from 'file-saver';
 
 const Toolbar = () => {
   const ctx = useContext(Context);
   const openClick = () => {};
   const saveClick = () => {
-    if (ctx.keyboards) {
-      const keyboardLayouts = Object.keys(ctx.keyboards).map((keyboard) => {
-        if (ctx.keyboards) {
-          const template = getKeyboardTemplate();
-          Object.keys(ctx.keyboards[keyboard]).forEach((key) => {
-            console.log(key, template);
-          });
-        }
-      });
-    }
+    ctx.setCurrentModal && ctx.setCurrentModal('save-keyboards');
   };
   const effectsClick = () => {};
   return (

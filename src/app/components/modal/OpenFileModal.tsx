@@ -1,7 +1,11 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useContext, useState } from 'react';
+import { Context } from '../../../App';
 
 const OpenFileModal = () => {
-  const open = (e: ChangeEvent<HTMLInputElement>) => {
+  const [data, setData] = useState<any>(null);
+  const ctx = useContext(Context);
+  const setKeyboards = () => {};
+  const getFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const fileToLoad = e.target.files[0];
       const fileReader = new FileReader();
@@ -16,6 +20,7 @@ const OpenFileModal = () => {
               alert('Not a valid file. Please try again. ✨');
             } else {
               console.log(result);
+              setData(result);
             }
           }
         }
@@ -31,11 +36,23 @@ const OpenFileModal = () => {
         name='file-open'
         id='file-open'
         accept='.s2pd'
-        onChange={open}
+        onChange={getFile}
       />
       <div className='open-modal-buttons'>
-        <button>Open</button>
-        <button>Cancel</button>
+        <button
+          onClick={() => {
+            if (!data || !data[0] || !data[0].name || !data[0][' ']) {
+              alert('Not a valid file. Please try again✨');
+            } else {
+              setKeyboards();
+            }
+          }}>
+          Open
+        </button>
+        <button
+          onClick={() => ctx.setCurrentModal && ctx.setCurrentModal(null)}>
+          Cancel
+        </button>
       </div>
     </div>
   );

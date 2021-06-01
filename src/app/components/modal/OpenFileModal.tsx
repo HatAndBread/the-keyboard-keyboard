@@ -1,8 +1,9 @@
 import React, { ChangeEvent, useContext, useState } from 'react';
 import { Context } from '../../../App';
+import { KeyboardTemplate } from '../../music-logic/default-keyboards/keyboard-template';
 
 const OpenFileModal = () => {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<null | KeyboardTemplate[]>(null);
   const ctx = useContext(Context);
   const setKeyboards = () => {};
   const getFile = (e: ChangeEvent<HTMLInputElement>) => {

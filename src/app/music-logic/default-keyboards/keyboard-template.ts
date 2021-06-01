@@ -1,6 +1,62 @@
 import _ from 'lodash';
 
-const keyboardTemplate = {
+type PlayerData = {
+  name: string;
+  playType: string;
+  playbackRate: number;
+  volume: number;
+  randomize: boolean;
+  octave: number;
+  tuning: string;
+  attack: number;
+  release: number;
+};
+export interface KeyboardTemplate {
+  name: { name: string };
+  ' ': PlayerData;
+  a: PlayerData;
+  b: PlayerData;
+  c: PlayerData;
+  d: PlayerData;
+  e: PlayerData;
+  f: PlayerData;
+  g: PlayerData;
+  h: PlayerData;
+  i: PlayerData;
+  j: PlayerData;
+  k: PlayerData;
+  l: PlayerData;
+  m: PlayerData;
+  n: PlayerData;
+  o: PlayerData;
+  p: PlayerData;
+  q: PlayerData;
+  r: PlayerData;
+  s: PlayerData;
+  t: PlayerData;
+  u: PlayerData;
+  v: PlayerData;
+  w: PlayerData;
+  x: PlayerData;
+  y: PlayerData;
+  z: PlayerData;
+  '1': PlayerData;
+  '2': PlayerData;
+  '3': PlayerData;
+  '4': PlayerData;
+  '5': PlayerData;
+  '6': PlayerData;
+  '7': PlayerData;
+  '8': PlayerData;
+  '9': PlayerData;
+  '0': PlayerData;
+  ',': PlayerData;
+  '.': PlayerData;
+  '?': PlayerData;
+  ';': PlayerData;
+}
+
+const keyboardTemplate: KeyboardTemplate = {
   name: { name: '' },
   ' ': {
     name: '',

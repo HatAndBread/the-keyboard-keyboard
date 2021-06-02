@@ -7,7 +7,7 @@
 }
 
 .nav-icon:hover {
-  box-shadow: lightgray 0px 0px 4px 4px;
-  background-color: lightgray;
+  box-shadow: #7189ff 0px 0px 4px 4px;
+  background-color: #7189ff;
   border-radius: 6px;
 }

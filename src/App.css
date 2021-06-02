@@ -1,9 +1,26 @@
 .App {
   text-align: center;
+  background-color: #a0ddff;
+  min-height: 100vh;
 }
 
 .body-content {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+button {
+  background-color: tomato;
+  color: snow;
+  padding: 8px;
+  border-radius: 6px;
+  border-style: none;
+  font-size: large;
+  box-shadow: gray 0px 0px 1px 1px;
+  transition: 0.3s;
+}
+
+button:hover {
+  box-shadow: gray 0px 1px 3px 3px;
 }

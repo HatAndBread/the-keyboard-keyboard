@@ -21,7 +21,7 @@ const Modal = ({ content }: { content: JSX.Element }) => {
             }}
           />
         </div>
-        {content}
+        <div className='modal-content-container'>{content}</div>
       </div>
     </div>
   );

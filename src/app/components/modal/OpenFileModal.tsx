@@ -2,6 +2,7 @@ import React, { ChangeEvent, useContext, useState } from 'react';
 import { Context } from '../../../App';
 import { KeyboardTemplate } from '../../music-logic/default-keyboards/keyboard-template';
 import generateKeyboardsFromTemplates from '../../music-logic/generate-keyboards-from-templates';
+import './OpenFileModal.css';
 
 const OpenFileModal = () => {
   const [data, setData] = useState<null | KeyboardTemplate[]>(null);

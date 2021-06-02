@@ -1,8 +1,9 @@
 .KeyboardEditor {
-  background-color: lightgray;
+  background-color: #c1cefe;
   width: fit-content;
   padding: 16px;
   border-radius: 8px;
+  box-shadow: #624cab 0px 2px 6px 6px;
 }
 
 .keyboard-row {

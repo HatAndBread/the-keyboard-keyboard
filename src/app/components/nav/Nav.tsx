@@ -23,7 +23,7 @@ const Nav = () => {
     <div className='Nav'>
       <Icon
         src={openIcon}
-        alt={'Open Keyboards'}
+        alt={'Open keyboards from your computer'}
         pointer={true}
         className='nav-icon'
         onClick={openClick}
@@ -31,7 +31,7 @@ const Nav = () => {
       />
       <Icon
         src={saveIcon}
-        alt={'Save'}
+        alt={'Save keyboards to your computer'}
         pointer={true}
         className={'nav-icon'}
         onClick={saveClick}

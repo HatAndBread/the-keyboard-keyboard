@@ -3,6 +3,7 @@ import { Context } from '../../../App';
 import getKeyboardTemplate from '../../music-logic/default-keyboards/keyboard-template';
 //@ts-ignore
 import { saveAs } from 'file-saver';
+import './SaveModal.css';
 
 const SaveModal = () => {
   const myRef = useRef<HTMLInputElement>(null);
@@ -51,9 +52,7 @@ const SaveModal = () => {
     }
   };
   return (
-    <div
-      className='save-modal'
-      style={{ display: 'flex', flexDirection: 'column' }}>
+    <div className='SaveModal'>
       <label htmlFor='file-name'>
         File Name:
         <input

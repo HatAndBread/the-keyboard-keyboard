@@ -12,10 +12,18 @@
 .modal-box {
   background-color: snow;
   border-radius: 6px;
-  min-height: 200px;
   min-width: 200px;
+  max-height: 80vh;
+  text-overflow: hidden;
+  overflow-y: scroll;
   box-shadow: rgba(50, 50, 50, 0.5) 0px 0px 3px 3px;
   padding: 8px;
+}
+.modal-content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .closer-container {
   width: 100%;

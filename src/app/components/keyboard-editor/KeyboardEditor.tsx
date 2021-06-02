@@ -1,12 +1,10 @@
 import React from 'react';
 import KeyboardKey from './KeyboardKey';
 import './KeyboardEditor.css';
-import Toolbar from '../editor-toolbar/Toolbar';
 
 const KeyboardEditor = () => {
   return (
     <div className='KeyboardEditor'>
-      <Toolbar />
       <div className='keyboard-row key-nums'>
         <KeyboardKey key={'1'} myKey={'1'} />
         <KeyboardKey key={'2'} myKey={'2'} />

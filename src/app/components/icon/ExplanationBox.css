@@ -1,0 +1,10 @@
+.ExplanationBox {
+  background-color: lightyellow;
+  border-radius: 6px;
+  box-shadow: gray 0px 0px 2px 2px;
+  width: fit-content;
+  padding: 8px;
+  position: fixed;
+  pointer-events: none;
+  transition: 0.3s;
+}

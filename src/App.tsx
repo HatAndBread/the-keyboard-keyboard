@@ -94,11 +94,16 @@ function App() {
       }}>
       <div className='App'>
         <OnBufferLoad />
-        <Nav />
         {attemptingToLoad && <p>Loading...</p>}
-        {!appIsStarted && <button onClick={initialStartUp}>START</button>}
-        <p>Current Keyboard: {currentKeyboardName}</p>
-        {editorOpen && <KeyboardEditor />}
+        {!appIsStarted ? (
+          <button onClick={initialStartUp}>START</button>
+        ) : (
+          <>
+            <Nav />
+            <p>Current Keyboard: {currentKeyboardName}</p>
+            {editorOpen && <KeyboardEditor />}
+          </>
+        )}
         <ModalController currentModal={currentModal} />
       </div>
     </Context.Provider>

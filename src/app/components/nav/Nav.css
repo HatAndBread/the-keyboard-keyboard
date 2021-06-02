@@ -1,0 +1,6 @@
+.Nav {
+  padding: 16px;
+  display: flex;
+  width: 100vw;
+  justify-content: space-around;
+}

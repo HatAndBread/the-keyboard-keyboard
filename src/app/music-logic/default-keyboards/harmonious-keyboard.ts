@@ -1,7 +1,7 @@
-import { keyboard } from '../default-keyboards';
 import { justIntonationRatios } from '../justi-intonation-ratios';
+import { KeyboardTemplate } from './keyboard-template';
 
-const harmoniousKeyboard: keyboard = {
+const harmoniousKeyboard: KeyboardTemplate = {
   name: { name: 'harmonious' },
   ' ': {
     name: 'gamelan1',

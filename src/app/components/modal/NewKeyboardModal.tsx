@@ -3,7 +3,7 @@ import { Context } from '../../../App';
 import './newKeyboardModal.css';
 import scales from '../../music-logic/tuning-systems';
 import generateKeyboardLayout from '../../music-logic/generate-keyboard-layout';
-import { createPlayers } from '../../music-logic/create-default-keyboards';
+import { createPlayers } from '../../music-logic/create-players';
 import Keyboard from '../../music-logic/Keyboard';
 import { cloneDeep } from 'lodash';
 

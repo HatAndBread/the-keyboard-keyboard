@@ -1,6 +1,6 @@
-import { keyboard } from '../default-keyboards';
+import { KeyboardTemplate } from './keyboard-template';
 
-const mainKeyboard: keyboard = {
+const mainKeyboard: KeyboardTemplate = {
   name: { name: 'main' },
   ' ': {
     name: 'kick',

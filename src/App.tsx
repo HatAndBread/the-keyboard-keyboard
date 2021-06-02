@@ -12,11 +12,11 @@ import {
 import { createBuffers } from './app/music-logic/sample-buffers';
 import { useAppDispatch } from './app/hooks';
 import { setEffects } from './app/music-logic/effects';
-import createDefaultKeyboards from './app/music-logic/create-default-keyboards';
 import KeyboardEditor from './app/components/keyboard-editor/KeyboardEditor';
 import ModalController from './app/components/modal/ModalController';
 import createListeners from './app/music-logic/keyboard-listeners';
 import Nav from './app/components/nav/Nav';
+import OnBufferLoad from './OnBufferLoad';
 import ContextProps from './types/ContextProps';
 import ValidKeys from './types/ValidKeys';
 
@@ -56,12 +56,6 @@ function App() {
     musicLoop();
   }, []);
   useEffect(() => {
-    if (Object.keys(buffers).length) {
-      console.log(buffers, 'Here are the buffers ✨');
-      createDefaultKeyboards(buffers, setKeyboards);
-    }
-  }, [buffers]);
-  useEffect(() => {
     console.log(keyboards, 'Here are the keyboards');
     if (keyboards) {
       setKeyboardNames(Object.keys(keyboards));
@@ -99,6 +93,7 @@ function App() {
         setEditorOpen,
       }}>
       <div className='App'>
+        <OnBufferLoad />
         <Nav />
         {attemptingToLoad && <p>Loading...</p>}
         {!appIsStarted && <button onClick={initialStartUp}>START</button>}

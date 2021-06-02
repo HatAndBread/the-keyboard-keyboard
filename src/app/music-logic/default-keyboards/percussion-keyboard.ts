@@ -1,6 +1,6 @@
-import { keyboard } from '../default-keyboards';
+import { KeyboardTemplate } from './keyboard-template';
 
-export const percussionKeyboard: keyboard = {
+export const percussionKeyboard: KeyboardTemplate = {
   name: { name: 'percussion' },
   ' ': {
     name: 'kick',

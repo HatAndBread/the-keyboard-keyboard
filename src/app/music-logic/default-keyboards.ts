@@ -1,24 +1,9 @@
 import mainKeyboard from './default-keyboards/main-keyboard';
 import percussionKeyboard from './default-keyboards/percussion-keyboard';
 import harmoniousKeyboard from './default-keyboards/harmonious-keyboard';
+import { KeyboardTemplate } from './default-keyboards/keyboard-template';
 
-export type keyboard = {
-  [key: string]:
-    | {
-        name: string;
-        playType: 'SINGLE' | 'RAPID' | 'LOOP';
-        playbackRate: number;
-        volume: number;
-        randomize: boolean;
-        octave: number;
-        tuning: string;
-        attack: number;
-        release: number;
-      }
-    | { name: string };
-};
-
-const defaultKeyboards: any[] = [
+const defaultKeyboards: KeyboardTemplate[] = [
   mainKeyboard,
   percussionKeyboard,
   harmoniousKeyboard,

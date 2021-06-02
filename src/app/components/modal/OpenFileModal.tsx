@@ -1,22 +1,17 @@
 import React, { ChangeEvent, useContext, useState } from 'react';
 import { Context } from '../../../App';
-import getKeyboardTemplate, {
-  KeyboardTemplate,
-  isValidKey,
-} from '../../music-logic/default-keyboards/keyboard-template';
+import { KeyboardTemplate } from '../../music-logic/default-keyboards/keyboard-template';
 import Keyboard from '../../music-logic/Keyboard';
 import Player from '../../music-logic/Player';
-import { ToneAudioBuffer } from 'tone';
+import ContextProps from '../../../types/ContextProps';
 
 const generateKeyboardsFromTemplates = (
   templates: KeyboardTemplate[],
-  buffers: {
-    [key: string]: ToneAudioBuffer;
-  }
+  ctx: Partial<ContextProps>
 ) => {
   // eventually use this function to generate keyboards when app loaded
   // and when file is opened.
-  const newKeyboards: Keyboard[] = [];
+  const newKeyboards: { [key: string]: Keyboard } = {};
   templates.forEach((keyboardLayout) => {
     const assignments: { [key: string]: Player } = {};
     Object.keys(keyboardLayout).forEach((k) => {
@@ -63,25 +58,33 @@ const generateKeyboardsFromTemplates = (
         k === '?' ||
         k === ';'
       ) {
-        const player = new Player(
-          k,
-          keyboardLayout[k].playType,
-          buffers[keyboardLayout[k].name],
-          keyboardLayout[k].playbackRate * keyboardLayout[k].octave,
-          keyboardLayout[k].volume,
-          keyboardLayout[k].randomize,
-          keyboardLayout[k].octave,
-          keyboardLayout[k].tuning,
-          keyboardLayout[k].attack,
-          keyboardLayout[k].release,
-          keyboardLayout[k].name
-        );
-        assignments[k] = player;
+        if (ctx.buffers) {
+          const player = new Player(
+            k,
+            keyboardLayout[k].playType,
+            ctx.buffers[keyboardLayout[k].name],
+            keyboardLayout[k].playbackRate * keyboardLayout[k].octave,
+            keyboardLayout[k].volume,
+            keyboardLayout[k].randomize,
+            keyboardLayout[k].octave,
+            keyboardLayout[k].tuning,
+            keyboardLayout[k].attack,
+            keyboardLayout[k].release,
+            keyboardLayout[k].name
+          );
+          assignments[k] = player;
+        }
       }
     });
-    newKeyboards.push(new Keyboard(keyboardLayout.name.name, assignments));
+    newKeyboards[keyboardLayout.name.name] = new Keyboard(
+      keyboardLayout.name.name,
+      assignments
+    );
   });
-  console.log(newKeyboards);
+  const newKeyboardKeys = Object.keys(newKeyboards);
+  ctx.setKeyboardNames && ctx.setKeyboardNames(newKeyboardKeys);
+  ctx.setKeyboards && ctx.setKeyboards(newKeyboards);
+  ctx.setCurrentKeyboardName && ctx.setCurrentKeyboardName(newKeyboardKeys[0]);
 };
 
 const OpenFileModal = () => {
@@ -126,7 +129,8 @@ const OpenFileModal = () => {
             if (!data || !data[0] || !data[0].name || !data[0][' ']) {
               alert('Not a valid file. Please try again✨');
             } else {
-              ctx.buffers && generateKeyboardsFromTemplates(data, ctx.buffers);
+              ctx.buffers && generateKeyboardsFromTemplates(data, ctx);
+              ctx.setCurrentModal && ctx.setCurrentModal(null);
             }
           }}>
           Open

@@ -8,4 +8,5 @@ const defaultKeyboards: KeyboardTemplate[] = [
   percussionKeyboard,
   mainKeyboard,
 ];
+
 export default defaultKeyboards;

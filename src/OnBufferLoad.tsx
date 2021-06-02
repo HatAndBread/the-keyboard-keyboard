@@ -4,12 +4,13 @@ import generateKeyboardsFromTemplates from './app/music-logic/generate-keyboards
 import defaultTemplates from './app/music-logic/default-keyboards';
 const OnBufferLoad = () => {
   const ctx = useContext(Context);
+  const buffers = ctx.buffers;
   useEffect(() => {
-    if (ctx.buffers && Object.keys(ctx.buffers).length) {
-      console.log(ctx.buffers, 'Here are the buffers ✨');
+    if (buffers && Object.keys(buffers).length) {
+      console.log(buffers, 'Here are the buffers ✨');
       generateKeyboardsFromTemplates(defaultTemplates, ctx);
     }
-  }, [ctx.buffers]);
+  }, [buffers]);
   return null;
 };
 

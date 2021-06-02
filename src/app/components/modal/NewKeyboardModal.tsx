@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, { useContext, useState } from 'react';
 import { Context } from '../../../App';
 import './newKeyboardModal.css';
 import scales from '../../music-logic/tuning-systems';

@@ -5,7 +5,6 @@ import {
   ToneAudioBuffer as Buff,
   AmplitudeEnvelope as Envelope,
   now,
-  ToneAudioBuffer,
 } from 'tone';
 
 export default class Player {

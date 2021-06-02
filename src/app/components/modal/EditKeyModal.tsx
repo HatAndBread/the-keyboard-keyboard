@@ -2,7 +2,6 @@ import React, { useContext, useState, useRef } from 'react';
 import Player from '../../music-logic/Player';
 import Keyboard from '../../music-logic/Keyboard';
 import { Context } from '../../../App';
-import _ from 'lodash';
 import ValidKeys from '../../../types/ValidKeys';
 import ToggleSwitch from '../../components/toggle-switch/ToggleSwitch';
 import './EditKeyModal.css';

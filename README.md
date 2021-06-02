@@ -1,4 +1,4 @@
-## The Keyboard Keyboard ⌨🎹
+## The Keyboard Keyboard 🎹 + ⌨️
 
 Turns your computer keyboard into a musical instrument.
 

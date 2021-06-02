@@ -20,7 +20,15 @@ const NewKeyboardModal = () => {
   const removeNonDigitsFromString = (str: string) => {
     return str.replace(/[^\d.-]/g, '');
   };
-
+  const isValid = () => {
+    if (ctx.keyboardNames?.includes(keyboardName)) {
+      alert(
+        `The name ${keyboardName} has already been used. Please choose another name.`
+      );
+      return false;
+    }
+    return true;
+  };
   const createKeyboard = () => {
     const newLayout = generateKeyboardLayout({
       keyboardName,
@@ -40,7 +48,8 @@ const NewKeyboardModal = () => {
       ctx.setKeyboardNames &&
       ctx.keyboardNames &&
       ctx.setCurrentKeyboardName &&
-      ctx.setEditorOpen
+      ctx.setEditorOpen &&
+      isValid()
     ) {
       const newKeyboards = cloneDeep(ctx.keyboards);
       newKeyboards[keyboardName] = newKeyboard;
@@ -49,7 +58,7 @@ const NewKeyboardModal = () => {
       ctx.setCurrentKeyboardName(keyboardName);
       ctx.setEditorOpen(true);
     }
-    ctx.setCurrentModal && ctx.setCurrentModal(null);
+    if (isValid()) ctx.setCurrentModal && ctx.setCurrentModal(null);
   };
 
   return (

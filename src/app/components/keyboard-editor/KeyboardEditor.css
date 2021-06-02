@@ -1,4 +1,16 @@
+.KeyboardEditor {
+  background-color: lightgray;
+  width: fit-content;
+  padding: 16px;
+  border-radius: 8px;
+}
+
 .keyboard-row {
   display: flex;
   justify-content: center;
+}
+
+.closer-container {
+  display: flex;
+  justify-content: flex-end;
 }

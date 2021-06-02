@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Context } from '../../../App';
 import KeyboardKey from './KeyboardKey';
 import './KeyboardEditor.css';
+import Icon from '../icon/Icon';
+import closeIcon from '../../../assets/images/cross.png';
 
 const KeyboardEditor = () => {
+  const ctx = useContext(Context);
   return (
     <div className='KeyboardEditor'>
+      <div className='closer-container'>
+        <Icon
+          src={closeIcon}
+          alt='X'
+          pointer={true}
+          className='editor-closer'
+          onClick={() => ctx.setEditorOpen && ctx.setEditorOpen(false)}
+        />
+      </div>
       <div className='keyboard-row key-nums'>
         <KeyboardKey key={'1'} myKey={'1'} />
         <KeyboardKey key={'2'} myKey={'2'} />

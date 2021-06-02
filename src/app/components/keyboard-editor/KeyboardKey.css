@@ -9,6 +9,7 @@
   font-size: x-large;
   cursor: pointer;
   margin: 2px;
+  box-shadow: darkgray 0px 0px 2px 2px;
 }
 
 .space-button {

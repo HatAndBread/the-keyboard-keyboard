@@ -6,6 +6,7 @@ import NewKeyboardModal from './NewKeyboardModal';
 import EditKeyboardModal from './EditKeyboardModal';
 import SaveModal from './SaveModal';
 import OpenFileModal from './OpenFileModal';
+import EffectsModal from './EffectsModal';
 
 const ModalController = ({ currentModal }: { currentModal: string | null }) => {
   const ctx = useContext(Context);
@@ -29,6 +30,9 @@ const ModalController = ({ currentModal }: { currentModal: string | null }) => {
       }
       case 'open-file': {
         return <OpenFileModal />;
+      }
+      case 'effects': {
+        return <EffectsModal />;
       }
       default:
         return <></>;

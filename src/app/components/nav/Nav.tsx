@@ -22,26 +22,10 @@ const Nav = () => {
   return (
     <div className='Nav'>
       <Icon
-        src={newIcon}
-        alt={'Create and edit a new keyboard✨'}
-        pointer={true}
-        className='new-icon'
-        onClick={() => setModal('new-keyboard')}
-        messageBox={true}
-      />
-      <Icon
-        src={editIcon}
-        alt={'Edit keyboards✨'}
-        pointer={true}
-        className='edit-icon'
-        onClick={() => setModal('edit-keyboard')}
-        messageBox={true}
-      />
-      <Icon
         src={openIcon}
         alt={'Open Keyboards'}
         pointer={true}
-        className='file-open-icon'
+        className='nav-icon'
         onClick={openClick}
         messageBox={true}
       />
@@ -49,16 +33,32 @@ const Nav = () => {
         src={saveIcon}
         alt={'Save'}
         pointer={true}
-        className={'save-icon'}
+        className={'nav-icon'}
         onClick={saveClick}
+        messageBox={true}
+      />
+      <Icon
+        src={newIcon}
+        alt={'Create and edit a new keyboard✨'}
+        pointer={true}
+        className='nav-icon'
+        onClick={() => setModal('new-keyboard')}
+        messageBox={true}
+      />
+      <Icon
+        src={editIcon}
+        alt={'Edit keyboards✨'}
+        pointer={true}
+        className='nav-icon'
+        onClick={() => setModal('edit-keyboard')}
         messageBox={true}
       />
       <Icon
         src={effectsIcon}
         alt={'Effects'}
         pointer={true}
-        className='file-open-icon'
-        onClick={effectsClick}
+        className='nav-icon'
+        onClick={() => setModal('effects')}
         messageBox={true}
       />
     </div>

@@ -100,8 +100,10 @@ function App() {
         ) : (
           <>
             <Nav />
-            <p>Current Keyboard: {currentKeyboardName}</p>
-            {editorOpen && <KeyboardEditor />}
+            <div className='body-content'>
+              <p>Current Keyboard: {currentKeyboardName}</p>
+              {editorOpen && <KeyboardEditor />}
+            </div>
           </>
         )}
         <ModalController currentModal={currentModal} />

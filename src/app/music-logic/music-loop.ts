@@ -18,6 +18,7 @@ let detune = 0;
 let setCurrentDisplayText: React.Dispatch<
   React.SetStateAction<string>
 > | null = null;
+let setLatestLetter: React.Dispatch<React.SetStateAction<string>> | null = null;
 let displayText = '';
 
 export const musicLoop = () => {
@@ -54,11 +55,11 @@ const keyIsDuplicated = (newKey: string) => {
 };
 
 export const handleKeyUp = (e: KeyboardEvent) => {
-  const keyIsValid = (key: string) =>
-    key !== 'Shift' && key !== 'Backspace' && key !== 'Enter';
-  if (keyIsValid(e.key) && setCurrentDisplayText) {
+  const keyIsValid = (key: string) => key.length < 2;
+  if (keyIsValid(e.key) && setCurrentDisplayText && setLatestLetter) {
     displayText += e.key;
     setCurrentDisplayText(displayText);
+    setLatestLetter(e.key);
   } else if (e.key === 'Backspace' && setCurrentDisplayText) {
     displayText = displayText.slice(0, -1);
     setCurrentDisplayText(displayText);
@@ -147,4 +148,9 @@ export const sendSetCurrentText = (
   setFunc: React.Dispatch<React.SetStateAction<string>>
 ) => {
   setCurrentDisplayText = setFunc;
+};
+export const sendSetLatestLetter = (
+  func: React.Dispatch<React.SetStateAction<string>>
+) => {
+  setLatestLetter = func;
 };

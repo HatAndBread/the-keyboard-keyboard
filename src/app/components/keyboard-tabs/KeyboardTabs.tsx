@@ -9,15 +9,16 @@ const KeyboardTabs = () => {
     'springgreen',
     'tomato',
     'yellow',
-    'powederblue',
+    'PowderBlue',
     'orange',
-    'lightpink',
+    'LightPink',
     'tan',
     'red',
-    'palegoldenrod',
+    'PaleGoldenRod',
     'MediumTurquoise',
-    'lightsalmon',
+    'LightSalmon',
     'lime',
+    'green',
   ];
   const setKeyboard = (name: string) => {
     if (ctx.setCurrentKeyboardName) {
@@ -39,9 +40,9 @@ const KeyboardTabs = () => {
                   : colors[index % colors.length],
                 boxShadow:
                   name === currentKeyboard
-                    ? `grey 2px -4px 6px 0px`
+                    ? `#7189ff 0px -4px 8px 2px`
                     : 'grey 2px -2px 2px 0px',
-                right: `${index * 10}px`,
+                right: `${index * 20}px`,
                 zIndex: name === currentKeyboard ? 500 : 499 - index,
                 fontWeight: name === currentKeyboard ? 'bold' : 'initial',
               }}>

@@ -50,7 +50,7 @@ const Nav = () => {
         alt={'Edit keyboards✨'}
         pointer={true}
         className='nav-icon'
-        onClick={() => setModal('edit-keyboard')}
+        onClick={() => ctx.setEditorOpen && ctx.setEditorOpen(true)}
         messageBox={true}
       />
       <Icon

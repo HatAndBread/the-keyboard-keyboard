@@ -20,6 +20,7 @@ import OnBufferLoad from './OnBufferLoad';
 import ContextProps from './types/ContextProps';
 import ValidKeys from './types/ValidKeys';
 import KeyboardTabs from './app/components/keyboard-tabs/KeyboardTabs';
+import Visualization from './app/components/visualization/Visualization';
 
 export const Context = createContext<Partial<ContextProps>>({});
 function App() {
@@ -102,9 +103,8 @@ function App() {
           <>
             <Nav />
             <div className='body-content'>
-              <p>Current Keyboard: {currentKeyboardName}</p>
               <KeyboardTabs />
-              {editorOpen && <KeyboardEditor />}
+              {editorOpen ? <KeyboardEditor /> : <Visualization />}
             </div>
           </>
         )}

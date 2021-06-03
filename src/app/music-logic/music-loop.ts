@@ -15,6 +15,10 @@ let board: null | Keyboard = null;
 let randomize = false;
 let octave = 1;
 let detune = 0;
+let setCurrentDisplayText: React.Dispatch<
+  React.SetStateAction<string>
+> | null = null;
+let displayText = '';
 
 export const musicLoop = () => {
   if (currentKeys && board) {
@@ -50,6 +54,15 @@ const keyIsDuplicated = (newKey: string) => {
 };
 
 export const handleKeyUp = (e: KeyboardEvent) => {
+  const keyIsValid = (key: string) =>
+    key !== 'Shift' && key !== 'Backspace' && key !== 'Enter';
+  if (keyIsValid(e.key) && setCurrentDisplayText) {
+    displayText += e.key;
+    setCurrentDisplayText(displayText);
+  } else if (e.key === 'Backspace' && setCurrentDisplayText) {
+    displayText = displayText.slice(0, -1);
+    setCurrentDisplayText(displayText);
+  }
   const currKey = transformKeys(e.key).toLowerCase();
   currentKeys = currentKeys.filter((key) => key !== currKey);
   if (currKey === 'arrowleft' || currKey === 'arrowright') {
@@ -128,4 +141,10 @@ export const sendCurrentKeyboardName = (ckn: string) =>
 export const sendBoard = (newBoard: Keyboard) => {
   board = newBoard;
   console.log('new board received!', board);
+};
+
+export const sendSetCurrentText = (
+  setFunc: React.Dispatch<React.SetStateAction<string>>
+) => {
+  setCurrentDisplayText = setFunc;
 };

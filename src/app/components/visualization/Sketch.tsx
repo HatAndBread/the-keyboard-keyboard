@@ -1,14 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import p5 from 'p5';
 import { random } from 'lodash';
+import { Player } from 'tone';
 
 interface Props {
   currentText: string;
+  latestLetter: string;
   width: number;
   height: number;
 }
 let vars: any = {};
-const Sketch = ({ currentText, width, height }: Props) => {
+const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const [p, setP] = useState<null | p5>(null);
   useEffect(() => {
@@ -56,7 +58,6 @@ const Sketch = ({ currentText, width, height }: Props) => {
         `rgb(${p.random(255)}, ${p.random(255)}, ${p.random(255)})`;
       const sketches: (() => any)[] = [
         () => {
-          p.clear();
           bez.x1 += p.random([-3, 3]);
           bez.x2 += p.random([-3, 3]);
           bez.x3 += p.random([-3, 3]);
@@ -94,16 +95,21 @@ const Sketch = ({ currentText, width, height }: Props) => {
         () => {
           if (!vars.letters) {
             vars.letters = [];
-            for (let i = 0; i < p.floor(p.random(20)); i++) {
+            vars.clear = p.floor(p.random(2));
+            for (let i = 0; i < p.floor(p.random(20, 30)); i++) {
               vars.letters.push({
                 letter: currentText[currentText.length - 1],
-                x: p.random(width),
-                y: p.random(height),
+                x: p.width / 2,
+                y: p.height / 2,
+                r: p.floor(p.random(255)),
+                g: p.floor(p.random(255)),
+                b: p.floor(p.random(255)),
                 velX: p.random(-10, 10),
                 velY: p.random(-10, 10),
               });
             }
           }
+          if (vars.clear) p.clear();
           vars.letters.forEach((letter: any) => {
             let ranNum = p.floor(p.random(10));
             if (ranNum === 1) {
@@ -111,11 +117,20 @@ const Sketch = ({ currentText, width, height }: Props) => {
               letter.velY = p.random(-10, 10);
             }
             p.strokeWeight(1);
-            p.fill(p.random(255), p.random(255), p.random(255));
+            p.fill(letter.r, letter.g, letter.b);
             p.textSize(width / p.floor(p.random(15, 20)));
             p.text(letter.letter, letter.x, letter.y);
             letter.x += letter.velX;
             letter.y += letter.velY;
+            letter.r > 255
+              ? (letter.r = p.floor(p.random(255)))
+              : (letter.r += 1);
+            letter.g > 255
+              ? (letter.g = p.floor(p.random(255)))
+              : (letter.g += 1);
+            letter.b > 255
+              ? (letter.b = p.floor(p.random(255)))
+              : (letter.b += 1);
           });
         },
         () => {
@@ -190,11 +205,118 @@ const Sketch = ({ currentText, width, height }: Props) => {
           vars.bOff += 0.01;
           vars.qOff += 0.05;
         },
+        () => {
+          if (!vars.noiseX) {
+            vars.noiseX = 0;
+            vars.noiseY = 100000;
+            vars.lineStart = 10000;
+            vars.lineEnd = 20000;
+            vars.ellHeight = 1;
+            vars.ellWidth = 1;
+            vars.clear = p.floor(p.random(2));
+          }
+          if (vars.clear) p.clear();
+          let ellX = p.noise(vars.noiseX) * width;
+          let ellY = p.noise(vars.noiseY) * height;
+          let startNoise = p.noise(vars.lineStart) * width;
+          let endNoise = p.noise(vars.lineEnd) * height;
+          p.strokeWeight(1);
+          p.stroke(255);
+          p.fill(ellX / 2, ellY / 2, random(0, 255));
+
+          p.ellipse(ellX, ellY, ellX / 4, ellY / 4);
+          vars.noiseX += 0.01;
+          vars.noiseY += 0.01;
+          vars.ellHeight += 0.05;
+          vars.ellWidth += 0.05;
+          vars.lineStart += 0.03;
+          vars.lineEnd += 0.03;
+
+          p.beginShape();
+          p.vertex(startNoise, endNoise);
+          p.vertex(ellX, ellY);
+          for (let i = 0; i < 10; i += 0.05) {
+            p.noFill();
+            p.vertex(
+              p.noise(vars.noiseX + i) * width,
+              p.noise(vars.noiseY + i) * height
+            );
+          }
+          p.vertex(startNoise, endNoise);
+          p.endShape();
+        },
+        () => {
+          if (!vars.wanderer) {
+            vars.wanderer = 0.05;
+            vars.changer = 0.05;
+            vars.reverse = false;
+            vars.mouseX = p.floor(p.random(200));
+            vars.mouseY = p.floor(p.random(200));
+          }
+          const spiralMaker = (
+            x: number,
+            y: number,
+            radius: number,
+            deviation: number,
+            changingR: number
+          ) => {
+            let decreasingR = radius;
+            let decreasingCos = 1;
+            let decreasingSin = 1;
+            p.noFill();
+            p.beginShape();
+
+            for (let i = 0; i < Math.PI * 2 * 50; i += 0.01) {
+              let newX = x + decreasingR * Math.cos(i - decreasingCos);
+              let newY = y + decreasingR * Math.sin(i - decreasingSin);
+              p.vertex(newX, newY);
+              decreasingR -= vars.mouseY * 0.001;
+              decreasingCos -= vars.mouseX * 0.0005;
+              decreasingSin -= vars.mouseX * 0.0005;
+            }
+
+            p.endShape();
+          };
+          p.strokeWeight(p.floor(p.random(1, 3)));
+          if (vars.changer <= 0.05) {
+            vars.reverse = false;
+          }
+          let ran = p.floor(p.random(0, 400));
+          if (ran === 4) {
+            vars.reverse = true;
+          }
+          if (ran === 5) {
+            vars.reverse = false;
+          }
+          vars.wanderer += +0.0001;
+          if (vars.reverse) {
+            vars.changer -= 0.001;
+          } else {
+            vars.changer += 0.001;
+          }
+          p.background(0);
+          p.stroke(220);
+          spiralMaker(
+            width / 2,
+            height / 2,
+            width,
+            vars.wanderer,
+            vars.changer
+          );
+          vars.mouseX += p.floor(p.random(-3, 3));
+          vars.mouseY += p.floor(p.random(-3, 3));
+          if (vars.mouseX > p.width) {
+            vars.mouseX = p.floor(200);
+          }
+          if (vars.mouseY > p.height) {
+            vars.mouseY = p.floor(200);
+          }
+        },
       ];
       p.resizeCanvas(width, height);
       p.draw = sketches[Math.floor(Math.random() * sketches.length)];
     }
-  }, [currentText, width, height, p]);
+  }, [latestLetter, width, height, p]);
 
   return <div ref={canvasRef}></div>;
 };

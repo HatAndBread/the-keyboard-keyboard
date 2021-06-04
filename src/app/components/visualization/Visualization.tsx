@@ -44,7 +44,12 @@ const Visualization = () => {
 
   return (
     <div className='Visualization' ref={visRef}>
-      <Sketch currentText={currentText} width={width} height={height} />
+      <Sketch
+        latestLetter={latestLetter}
+        currentText={currentText}
+        width={width}
+        height={height}
+      />
     </div>
   );
 };

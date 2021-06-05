@@ -6,7 +6,6 @@ import {
 } from '../../music-logic/music-loop';
 import Sketch from './Sketch';
 import './Visualization.css';
-import ToggleSwitch from '../../components/toggle-switch/ToggleSwitch';
 
 const Visualization = ({ showAnim }: { showAnim: boolean }) => {
   const ctx = useContext(Context);

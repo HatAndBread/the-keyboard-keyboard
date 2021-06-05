@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import p5 from 'p5';
-import { random } from 'lodash';
-import { Player } from 'tone';
 
 interface Props {
   currentText: string;
@@ -13,6 +11,7 @@ let vars: any = {};
 const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const [p, setP] = useState<null | p5>(null);
+  const [firstTime, setFirstTime] = useState(true);
   useEffect(() => {
     let myDiv: null | HTMLDivElement;
     const canRef = canvasRef.current;
@@ -39,7 +38,6 @@ const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
   useEffect(() => {
     return () => {
       if (p) {
-        console.log('Im being removed!');
         p.noLoop();
         p.draw = () => {};
       }
@@ -69,6 +67,49 @@ const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
           p.random(255)
         )})`;
       const sketches: (() => any)[] = [
+        () => {
+          if (!vars.myLetters) {
+            const startPoint = p.width / 2 - 100;
+            vars.myLetters = [
+              { letter: 'p', x: startPoint, y: p.height / 2 },
+              { letter: 'r', x: startPoint + 20, y: p.height / 2 },
+              { letter: 'e', x: startPoint + 40, y: p.height / 2 },
+              { letter: 's', x: startPoint + 60, y: p.height / 2 },
+              { letter: 's', x: startPoint + 80, y: p.height / 2 },
+              { letter: ' ', x: startPoint + 100, y: p.height / 2 },
+              { letter: 'a', x: startPoint + 120, y: p.height / 2 },
+              { letter: 'n', x: startPoint + 140, y: p.height / 2 },
+              { letter: 'y', x: startPoint + 160, y: p.height / 2 },
+              { letter: ' ', x: startPoint + 180, y: p.height / 2 },
+              { letter: 'k', x: startPoint + 200, y: p.height / 2 },
+              { letter: 'e', x: startPoint + 220, y: p.height / 2 },
+              { letter: 'y', x: startPoint + 240, y: p.height / 2 },
+            ];
+          }
+          p.textFont('monospace');
+          p.strokeWeight(1);
+          p.stroke(
+            p.floor(p.random(255)),
+            p.floor(p.random(255)),
+            p.floor(p.random(255))
+          );
+          p.fill(
+            p.floor(p.random(255)),
+            p.floor(p.random(255)),
+            p.floor(p.random(255))
+          );
+          p.textSize(40);
+          vars.myLetters.forEach(
+            (
+              letter: { letter: string; x: number; y: number },
+              index: number
+            ) => {
+              p.text(letter.letter, letter.x, letter.y);
+              letter.x += p.random(-1, 1);
+              letter.y += p.random(-1, 1);
+            }
+          );
+        },
         () => {
           bez.x1 += p.random([-3, 3]);
           bez.x2 += p.random([-3, 3]);
@@ -108,6 +149,7 @@ const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
           if (!vars.letters) {
             vars.letters = [];
             vars.clear = p.floor(p.random(2));
+            vars.fontSize = p.floor(p.random(50)) + 6;
             for (let i = 0; i < p.floor(p.random(20, 30)); i++) {
               vars.letters.push({
                 letter: currentText[currentText.length - 1],
@@ -130,7 +172,7 @@ const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
             }
             p.strokeWeight(1);
             p.fill(letter.r, letter.g, letter.b);
-            p.textSize(width / p.floor(p.random(15, 20)));
+            p.textSize(vars.fontSize);
             p.text(letter.letter, letter.x, letter.y);
             letter.x += letter.velX;
             letter.y += letter.velY;
@@ -147,13 +189,13 @@ const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
         },
         () => {
           if (!vars.xOff) {
-            vars.xOff = p.random(0, 10000);
-            vars.yOff = p.random(0, 10000);
-            vars.zOff = p.random(0, 10000);
-            vars.rOff = p.random(0, 10000);
-            vars.gOff = p.random(0, 10000);
-            vars.bOff = p.random(0, 10000);
-            vars.qOff = p.random(0, 10000);
+            vars.xOff = p.random(1000, 10000);
+            vars.yOff = p.random(1000, 10000);
+            vars.zOff = p.random(1000, 10000);
+            vars.rOff = p.random(1000, 10000);
+            vars.gOff = p.random(1000, 10000);
+            vars.bOff = p.random(1000, 10000);
+            vars.qOff = p.random(1000, 10000);
             vars.noiser1 = 0;
             vars.noiser2 = 0;
             vars.noiser3 = 0;
@@ -234,7 +276,7 @@ const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
           let endNoise = p.noise(vars.lineEnd) * height;
           p.strokeWeight(1);
           p.stroke(randomColor());
-          p.fill(ellX / 2, ellY / 2, random(0, 255));
+          p.fill(ellX / 2, ellY / 2, p.random(0, 255));
 
           p.ellipse(ellX, ellY, ellX / 4, ellY / 4);
           vars.noiseX += 0.01;
@@ -340,9 +382,19 @@ const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
         },
       ];
       p.resizeCanvas(width, height);
-      p.draw = sketches[Math.floor(Math.random() * sketches.length)];
+      if (firstTime) {
+        p.draw = sketches[0];
+      } else {
+        p.draw =
+          sketches[Math.floor(Math.random() * (sketches.length - 1)) + 1];
+      }
     }
-  }, [latestLetter, width, height, p]);
+  }, [latestLetter, width, height, p, firstTime]);
+  useEffect(() => {
+    if (currentText.length === 1) {
+      setFirstTime(false);
+    }
+  }, [currentText, setFirstTime]);
 
   return <div ref={canvasRef}></div>;
 };

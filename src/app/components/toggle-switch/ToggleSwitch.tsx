@@ -29,8 +29,8 @@ const ToggleSwitch = ({
   };
   console.log(defaultChecked, checked);
   return (
-    <>
-      {label && <label htmlFor={id}>{label}</label>}
+    <div className='ToggleSwitch'>
+      {label && <label htmlFor={id ? id : ''}>{label}</label>}
       <div className={`switch-background ${checked ? 'on-switch' : ''}`}>
         <div
           className={`switch-ball ${checked ? 'on-ball' : ''}`}
@@ -38,11 +38,13 @@ const ToggleSwitch = ({
       </div>
       <input
         type='checkbox'
-        id={id}
-        name={id}
-        defaultChecked={defaultChecked}
+        id={id ? id : ''}
+        name={id ? id : ''}
+        defaultChecked={
+          typeof defaultChecked === 'boolean' ? defaultChecked : true
+        }
         hidden></input>
-    </>
+    </div>
   );
 };
 

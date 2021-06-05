@@ -1,3 +1,7 @@
+.ToggleSwitch {
+  cursor: pointer;
+  display: flex;
+}
 .switch-background {
   background-color: lightgray;
   box-shadow: gray 0px 1px 1px 1px;

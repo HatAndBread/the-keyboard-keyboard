@@ -42,7 +42,7 @@ function App() {
   );
   const [currentKeyboard, setCurrentKeyboard] = useState<null | Keyboard>(null);
   const dispatch = useAppDispatch();
-  const [showAnim, setShowAnim] = useState(false);
+  const [showAnim, setShowAnim] = useState(true);
 
   useEffect(() => {
     console.log(keyboards);
@@ -106,12 +106,20 @@ function App() {
             <Nav />
             <div className='body-content'>
               {!editorOpen && (
-                <div style={{ display: 'flex' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    marginBottom: '16px',
+                    fontSize: '16px',
+                    width: '160px',
+                    justifyContent: 'space-between',
+                  }}>
                   <ToggleSwitch
                     label='Visualizations'
                     id='visualization-switch'
                     onFalseSet={() => setShowAnim(false)}
                     onTrueSet={() => setShowAnim(true)}
+                    defaultChecked={true}
                   />
                 </div>
               )}

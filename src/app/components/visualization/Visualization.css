@@ -5,6 +5,7 @@
   border-radius: 16px;
   color: snow;
   font-size: xx-large;
+  display: flex;
 }
 canvas {
   border-radius: 16px;

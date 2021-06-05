@@ -6,8 +6,9 @@ import {
 } from '../../music-logic/music-loop';
 import Sketch from './Sketch';
 import './Visualization.css';
+import ToggleSwitch from '../../components/toggle-switch/ToggleSwitch';
 
-const Visualization = () => {
+const Visualization = ({ showAnim }: { showAnim: boolean }) => {
   const ctx = useContext(Context);
   const [currentText, setCurrentText] = useState('');
   const [latestLetter, setLatestLetter] = useState('');
@@ -44,12 +45,14 @@ const Visualization = () => {
 
   return (
     <div className='Visualization' ref={visRef}>
-      <Sketch
-        latestLetter={latestLetter}
-        currentText={currentText}
-        width={width}
-        height={height}
-      />
+      {showAnim && (
+        <Sketch
+          latestLetter={latestLetter}
+          currentText={currentText}
+          width={width}
+          height={height}
+        />
+      )}
     </div>
   );
 };

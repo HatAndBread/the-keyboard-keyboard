@@ -21,6 +21,7 @@ import ContextProps from './types/ContextProps';
 import ValidKeys from './types/ValidKeys';
 import KeyboardTabs from './app/components/keyboard-tabs/KeyboardTabs';
 import Visualization from './app/components/visualization/Visualization';
+import ToggleSwitch from './app/components/toggle-switch/ToggleSwitch';
 
 export const Context = createContext<Partial<ContextProps>>({});
 function App() {
@@ -41,6 +42,7 @@ function App() {
   );
   const [currentKeyboard, setCurrentKeyboard] = useState<null | Keyboard>(null);
   const dispatch = useAppDispatch();
+  const [showAnim, setShowAnim] = useState(false);
 
   useEffect(() => {
     console.log(keyboards);
@@ -103,8 +105,22 @@ function App() {
           <>
             <Nav />
             <div className='body-content'>
+              {!editorOpen && (
+                <div style={{ display: 'flex' }}>
+                  <ToggleSwitch
+                    label='Visualizations'
+                    id='visualization-switch'
+                    onFalseSet={() => setShowAnim(false)}
+                    onTrueSet={() => setShowAnim(true)}
+                  />
+                </div>
+              )}
               <KeyboardTabs />
-              {editorOpen ? <KeyboardEditor /> : <Visualization />}
+              {editorOpen ? (
+                <KeyboardEditor />
+              ) : (
+                <Visualization showAnim={showAnim} />
+              )}
             </div>
           </>
         )}

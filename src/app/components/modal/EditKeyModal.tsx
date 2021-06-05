@@ -30,6 +30,8 @@ const EditKeyModal = ({
   const [pitchFaderValue, setPitchFaderValue] = useState(
     getNoOctavePBR(myPlayer)
   );
+  const [attackDisplay, setAttackDisplay] = useState(myPlayer.attack);
+  const [releaseDisplay, setReleaseDisplay] = useState(myPlayer.release);
   const bufferSelectRef = useRef<HTMLSelectElement>(null);
   const playTypeSelectRef = useRef<HTMLSelectElement>(null);
   const scaleSelectRef = useRef<HTMLSelectElement>(null);
@@ -85,7 +87,7 @@ const EditKeyModal = ({
           />
           <select
             onChange={handleBufferChange}
-            value={bufferName}
+            value={bufferName ? bufferName : ''}
             ref={bufferSelectRef}>
             {Object.keys(ctx.buffers).map((name, index) => (
               <option key={index} value={name}>
@@ -95,19 +97,21 @@ const EditKeyModal = ({
           </select>
           <select
             onChange={handlePlayTypeChange}
-            value={myPlayer.playType}
+            value={myPlayer.playType ? myPlayer.playType : 'LOOP'}
             ref={playTypeSelectRef}>
             <option value='LOOP'>Loop</option>
             <option value='SINGLE'>Single</option>
             <option value='RAPID'>Rapid</option>
           </select>
-          <ToggleSwitch
-            label='Randomize Pitch'
-            id={'pitch-randomize'}
-            defaultChecked={randomize}
-            onTrueSet={() => handleRandomizeChange(true)}
-            onFalseSet={() => handleRandomizeChange(false)}
-          />
+          <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+            <div style={{ marginRight: '16px' }}>Randomize pitch: </div>
+            <ToggleSwitch
+              id={'pitch-randomize'}
+              defaultChecked={randomize}
+              onTrueSet={() => handleRandomizeChange(true)}
+              onFalseSet={() => handleRandomizeChange(false)}
+            />
+          </div>
           {!randomize && (
             <>
               <OctaveSelect
@@ -145,11 +149,21 @@ const EditKeyModal = ({
                 </>
               ) : (
                 <>
+                  <label htmlFor='pitch-range'>
+                    Pitch ratio:{' '}
+                    {getRatioFromDecimal(
+                      scales[myPlayer.tuning],
+                      pitchFaderValue,
+                      myPlayer.tuning
+                    )}
+                  </label>
                   <input
                     type='range'
                     min='1'
                     max='2'
                     step='0.001'
+                    id='pitch-range'
+                    name='pitch-range'
                     defaultValue={getNoOctavePBR(myPlayer)}
                     onChange={(e) => {
                       myPlayer.setPlaybackRate(
@@ -160,18 +174,13 @@ const EditKeyModal = ({
                       );
                       setPitchFaderValue(parseFloat(e.target.value));
                     }}></input>
-                  {getRatioFromDecimal(
-                    scales[myPlayer.tuning],
-                    pitchFaderValue,
-                    myPlayer.tuning
-                  )}
                 </>
               )}
             </>
           )}
           {myPlayType === 'LOOP' && (
             <>
-              <label htmlFor='attack-range'>Attack</label>
+              <label htmlFor='attack-range'>Attack: {attackDisplay}</label>
               <input
                 type='range'
                 name='attack-range'
@@ -180,9 +189,13 @@ const EditKeyModal = ({
                 max='1'
                 step='0.01'
                 defaultValue={myPlayer.attack}
-                onChange={(e) => myPlayer.setAttack(parseFloat(e.target.value))}
+                onChange={(e) => {
+                  const num = parseFloat(e.target.value);
+                  myPlayer.setAttack(num);
+                  setAttackDisplay(num);
+                }}
               />
-              <label htmlFor='release-range'>Release</label>
+              <label htmlFor='release-range'>Release: {releaseDisplay}</label>
               <input
                 type='range'
                 name='release-range'
@@ -192,7 +205,9 @@ const EditKeyModal = ({
                 step='0.01'
                 defaultValue={myPlayer.release}
                 onChange={(e) => {
-                  myPlayer.setRelease(parseFloat(e.target.value));
+                  const num = parseFloat(e.target.value);
+                  myPlayer.setRelease(num);
+                  setReleaseDisplay(num);
                 }}
               />
             </>

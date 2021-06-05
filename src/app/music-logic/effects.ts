@@ -1,7 +1,9 @@
 import * as Tone from 'tone';
 
 interface Effects {
-  [key: string]: any;
+  delay: Tone.PingPongDelay | null;
+  reverb: Tone.JCReverb | null;
+  distortion: Tone.Distortion | null;
 }
 
 export const baseLoopPlayer = new Tone.Player().toDestination();
@@ -15,6 +17,8 @@ const effects: Effects = {
   reverb: null,
   distortion: null,
 };
+
+export const getEffects = () => effects;
 
 const gain = new Tone.Gain(0.4);
 let distortionDefaultWet = 1;
@@ -41,7 +45,7 @@ export const stopRecord = async () => {
 
 export const setEffects = () => {
   effects.delay = new Tone.PingPongDelay(0.1, 0.6).toDestination();
-  effects.reverb = new Tone.JCReverb(0.7).connect(effects.delay);
+  effects.reverb = new Tone.JCReverb(0.5).connect(effects.delay);
   effects.distortion = new Tone.Distortion(1).connect(effects.reverb);
   if (recorder) {
     gain.connect(recorder);
@@ -54,18 +58,26 @@ export const setEffects = () => {
 };
 
 export const effectOnOff = (whichEffect: 'distortion' | 'delay' | 'reverb') => {
-  if (effects[whichEffect].wet.value) {
-    effects[whichEffect].wet.value = 0;
+  if (
+    (whichEffect === 'distortion' && effects.distortion?.wet.value) ||
+    (whichEffect === 'delay' && effects.delay?.wet.value) ||
+    (whichEffect === 'reverb' && effects.reverb?.wet.value)
+  ) {
+    setEffectWet(whichEffect, 0);
   } else {
     switch (whichEffect) {
       case 'distortion':
-        effects.distortion.wet.value = distortionDefaultWet;
+        if (effects.distortion) {
+          effects.distortion.wet.value = distortionDefaultWet;
+        }
         break;
       case 'delay':
-        effects.delay.wet.value = delayDefaultWet;
+        if (effects.delay) effects.delay.wet.value = delayDefaultWet;
         break;
       case 'reverb':
-        effects.reverb.wet.value = reverbDefaultWet;
+        if (effects.reverb) {
+          effects.reverb.wet.value = reverbDefaultWet;
+        }
         break;
     }
   }
@@ -75,20 +87,47 @@ export const setEffectWet = (
   whichEffect: 'distortion' | 'delay' | 'reverb',
   value: number
 ) => {
-  effects[whichEffect].wet.value = value;
+  switch (whichEffect) {
+    case 'distortion': {
+      if (effects.distortion) {
+        effects.distortion.wet.value = value;
+      }
+      break;
+    }
+    case 'delay': {
+      if (effects.delay) {
+        effects.delay.wet.value = value;
+      }
+      break;
+    }
+    case 'reverb': {
+      if (effects.reverb) {
+        effects.reverb.wet.value = value;
+      }
+      break;
+    }
+    default:
+      break;
+  }
 };
 
 export const setDistortion = (value: number) => {
-  effects.distortion.distortion = value;
+  if (effects.distortion) {
+    effects.distortion.distortion = value;
+  }
 };
 
 export const setReverb = (value: number) => {
-  effects.reverb.roomSize = value;
+  if (effects.reverb) {
+    effects.reverb.roomSize.value = value;
+  }
 };
 
 export const setDelay = (delayTime: number, feedback: number) => {
-  effects.delay.delayTime = delayTime;
-  effects.delay.feedback = feedback;
+  if (effects.delay) {
+    effects.delay.delayTime.value = delayTime;
+    effects.delay.feedback.value = feedback;
+  }
 };
 
 export const setDefaultWet = (

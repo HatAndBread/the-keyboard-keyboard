@@ -33,8 +33,18 @@ const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
     }
     return () => {
       myDiv && canRef?.removeChild(myDiv);
+      setP(null);
     };
   }, []);
+  useEffect(() => {
+    return () => {
+      if (p) {
+        console.log('Im being removed!');
+        p.noLoop();
+        p.draw = () => {};
+      }
+    };
+  }, [p]);
   useEffect(() => {
     vars = {};
     const ran = (num: number) => Math.floor(Math.random() * num);

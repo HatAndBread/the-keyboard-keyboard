@@ -55,7 +55,9 @@ const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
     if (p) {
       p.clear();
       const randomColor = () =>
-        `rgb(${p.random(255)}, ${p.random(255)}, ${p.random(255)})`;
+        `rgb(${p.floor(p.random(255))}, ${p.floor(p.random(255))}, ${p.floor(
+          p.random(255)
+        )})`;
       const sketches: (() => any)[] = [
         () => {
           bez.x1 += p.random([-3, 3]);
@@ -221,7 +223,7 @@ const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
           let startNoise = p.noise(vars.lineStart) * width;
           let endNoise = p.noise(vars.lineEnd) * height;
           p.strokeWeight(1);
-          p.stroke(255);
+          p.stroke(randomColor());
           p.fill(ellX / 2, ellY / 2, random(0, 255));
 
           p.ellipse(ellX, ellY, ellX / 4, ellY / 4);
@@ -252,6 +254,9 @@ const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
             vars.reverse = false;
             vars.mouseX = p.floor(p.random(200));
             vars.mouseY = p.floor(p.random(200));
+            vars.clear = p.floor(p.random(2));
+            vars.background = randomColor();
+            vars.noFill = p.floor(p.random(2));
           }
           const spiralMaker = (
             x: number,
@@ -263,7 +268,18 @@ const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
             let decreasingR = radius;
             let decreasingCos = 1;
             let decreasingSin = 1;
-            p.noFill();
+            vars.noFill
+              ? p.noFill()
+              : p.fill(
+                  p.floor(p.random(255)),
+                  p.floor(p.random(255)),
+                  p.floor(p.random(255))
+                );
+            p.stroke(
+              p.floor(p.random(255)),
+              p.floor(p.random(255)),
+              p.floor(p.random(255))
+            );
             p.beginShape();
 
             for (let i = 0; i < Math.PI * 2 * 50; i += 0.01) {
@@ -294,7 +310,7 @@ const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
           } else {
             vars.changer += 0.001;
           }
-          p.background(0);
+          if (vars.clear) p.background(vars.background);
           p.stroke(220);
           spiralMaker(
             width / 2,

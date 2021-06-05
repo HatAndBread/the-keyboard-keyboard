@@ -119,7 +119,7 @@ function App() {
                     id='visualization-switch'
                     onFalseSet={() => setShowAnim(false)}
                     onTrueSet={() => setShowAnim(true)}
-                    defaultChecked={true}
+                    defaultChecked={showAnim}
                   />
                 </div>
               )}

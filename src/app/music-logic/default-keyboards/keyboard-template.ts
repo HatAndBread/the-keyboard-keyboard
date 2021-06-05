@@ -66,7 +66,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   a: {
@@ -77,7 +77,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   b: {
@@ -88,7 +88,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   c: {
@@ -99,7 +99,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   d: {
@@ -110,7 +110,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   e: {
@@ -121,7 +121,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   f: {
@@ -132,7 +132,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   g: {
@@ -143,7 +143,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   h: {
@@ -154,7 +154,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   i: {
@@ -165,7 +165,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   j: {
@@ -176,7 +176,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   k: {
@@ -187,7 +187,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   l: {
@@ -198,7 +198,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   m: {
@@ -209,7 +209,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   n: {
@@ -220,7 +220,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   o: {
@@ -231,7 +231,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   p: {
@@ -242,7 +242,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   q: {
@@ -253,7 +253,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   r: {
@@ -264,7 +264,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   s: {
@@ -275,7 +275,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   t: {
@@ -286,7 +286,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   u: {
@@ -297,7 +297,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   v: {
@@ -308,7 +308,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   w: {
@@ -319,7 +319,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   x: {
@@ -330,7 +330,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   y: {
@@ -341,7 +341,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   z: {
@@ -352,7 +352,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   '0': {
@@ -363,7 +363,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   '1': {
@@ -374,7 +374,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   '2': {
@@ -385,7 +385,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   '3': {
@@ -396,7 +396,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   '4': {
@@ -407,7 +407,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   '5': {
@@ -418,7 +418,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   '6': {
@@ -429,7 +429,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   '7': {
@@ -440,7 +440,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   '8': {
@@ -451,7 +451,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   '9': {
@@ -462,7 +462,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   ',': {
@@ -473,7 +473,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   '.': {
@@ -484,7 +484,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   '?': {
@@ -495,7 +495,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
   ';': {
@@ -506,7 +506,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.3,
+    attack: 0.1,
     release: 0.3,
   },
 };

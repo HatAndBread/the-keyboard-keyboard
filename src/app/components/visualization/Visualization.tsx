@@ -38,10 +38,6 @@ const Visualization = ({ showAnim }: { showAnim: boolean }) => {
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  useEffect(() => {
-    console.log(width, height);
-  }, [width, height]);
-
   return (
     <div className='Visualization' ref={visRef}>
       {showAnim && (
@@ -50,6 +46,7 @@ const Visualization = ({ showAnim }: { showAnim: boolean }) => {
           currentText={currentText}
           width={width}
           height={height}
+          setCurrentText={setCurrentText}
         />
       )}
     </div>

@@ -1,17 +1,30 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
+import { Context } from '../../../App';
 import p5 from 'p5';
 
+let dontShowAnyKey = false;
 interface Props {
   currentText: string;
   latestLetter: string;
   width: number;
   height: number;
+  setCurrentText: React.Dispatch<React.SetStateAction<string>>;
 }
 let vars: any = {};
-const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
+const Sketch = ({
+  currentText,
+  latestLetter,
+  width,
+  height,
+  setCurrentText,
+}: Props) => {
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const [p, setP] = useState<null | p5>(null);
   const [firstTime, setFirstTime] = useState(true);
+  useEffect(() => {
+    setCurrentText('');
+  }, [setCurrentText]);
+
   useEffect(() => {
     let myDiv: null | HTMLDivElement;
     const canRef = canvasRef.current;
@@ -152,7 +165,7 @@ const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
             vars.fontSize = p.floor(p.random(50)) + 6;
             for (let i = 0; i < p.floor(p.random(20, 30)); i++) {
               vars.letters.push({
-                letter: currentText[currentText.length - 1],
+                letter: latestLetter,
                 x: p.width / 2,
                 y: p.height / 2,
                 r: p.floor(p.random(255)),
@@ -382,8 +395,9 @@ const Sketch = ({ currentText, latestLetter, width, height }: Props) => {
         },
       ];
       p.resizeCanvas(width, height);
-      if (firstTime) {
+      if (firstTime && !dontShowAnyKey) {
         p.draw = sketches[0];
+        dontShowAnyKey = true;
       } else {
         p.draw =
           sketches[Math.floor(Math.random() * (sketches.length - 1)) + 1];

@@ -26,6 +26,9 @@ const NewKeyboardModal = () => {
         `The name ${keyboardName} has already been used. Please choose another name.`
       );
       return false;
+    } else if (keyboardName === '') {
+      alert(`Please select a name.`);
+      return false;
     }
     return true;
   };

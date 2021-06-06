@@ -74,6 +74,7 @@ export const handleKeyUp = (e: KeyboardEvent) => {
   const currKey = transformKeys(e.key).toLowerCase();
   currentKeys = currentKeys.filter((key) => key !== currKey);
   if (currKey === 'arrowleft' || currKey === 'arrowright') {
+    e.preventDefault();
     if (board) {
       board.getAsArray().forEach((player) => {
         if (player.playbackRate) {

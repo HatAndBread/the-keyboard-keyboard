@@ -3,6 +3,7 @@ import { Context } from '../../../App';
 import {
   sendSetCurrentText,
   sendSetLatestLetter,
+  resetDisplayText,
 } from '../../music-logic/music-loop';
 import Sketch from './Sketch';
 import './Visualization.css';
@@ -14,11 +15,28 @@ const Visualization = ({ showAnim }: { showAnim: boolean }) => {
   const [width, setWidth] = useState(100);
   const [height, setHeight] = useState(100);
   const visRef = useRef<null | HTMLDivElement>(null);
+  useEffect(() => {
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key === `)` || e.key === `(`) {
+        resetDisplayText();
+        setCurrentText('');
+      }
+    };
+    document.addEventListener('keyup', handleKeyUp);
+
+    return () => {
+      document.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
 
   useEffect(() => {
     sendSetCurrentText(setCurrentText);
     sendSetLatestLetter(setLatestLetter);
   }, [setCurrentText, setLatestLetter]);
+  useEffect(() => {
+    resetDisplayText();
+    setCurrentText('');
+  }, []);
 
   useEffect(() => {
     const rect = visRef.current?.getBoundingClientRect();
@@ -40,7 +58,7 @@ const Visualization = ({ showAnim }: { showAnim: boolean }) => {
 
   return (
     <div className='Visualization' ref={visRef}>
-      {showAnim && (
+      {showAnim ? (
         <Sketch
           latestLetter={latestLetter}
           currentText={currentText}
@@ -48,6 +66,8 @@ const Visualization = ({ showAnim }: { showAnim: boolean }) => {
           height={height}
           setCurrentText={setCurrentText}
         />
+      ) : (
+        <div className='text-container'>{currentText}</div>
       )}
     </div>
   );

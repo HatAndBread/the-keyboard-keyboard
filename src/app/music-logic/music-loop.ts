@@ -6,6 +6,13 @@ import switchToNewKeyboard from './music-loop-helpers/switch-to-new-keyboard';
 import detuner from './music-loop-helpers/detuner';
 import { record, stopRecord, baseLoopPlayer, effectOnOff } from './effects';
 
+const voiceSynth = window.speechSynthesis;
+let voices = voiceSynth.getVoices();
+if (voiceSynth.addEventListener) {
+  voiceSynth.addEventListener('voiceschanged', () => {
+    voices = voiceSynth.getVoices();
+  });
+}
 let currentlyRecording = false;
 let currentKeys: string[] = [];
 let keyboardNames: string[] = [];
@@ -127,6 +134,16 @@ export const handleKeyDown = (e: KeyboardEvent) => {
     effectOnOff('delay');
   } else if (currKey === '@') {
     effectOnOff('reverb');
+  } else if (e.key === `*`) {
+    const utterance = new SpeechSynthesisUtterance(displayText);
+    utterance.voice = voices[Math.floor(Math.random() * voices.length)];
+    utterance.pitch = Math.random() * 2;
+    utterance.rate = Math.random() * 2;
+    voiceSynth.speak(utterance);
+    utterance.onend = () => {
+      setCurrentDisplayText && setCurrentDisplayText('');
+      displayText = '';
+    };
   }
   if (!keyIsDuplicated(currKey)) {
     currentKeys?.push(currKey);
@@ -154,3 +171,5 @@ export const sendSetLatestLetter = (
 ) => {
   setLatestLetter = func;
 };
+
+export const resetDisplayText = () => (displayText = '');

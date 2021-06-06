@@ -4,8 +4,6 @@ const transformWeirdKeys = (key: string): string => {
       return '?';
     case ':':
       return ';';
-    case '*':
-      return ';';
     default:
       return key;
   }

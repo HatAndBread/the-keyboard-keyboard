@@ -7,27 +7,27 @@ import {
   setDistortion,
   setReverb,
   setDelay,
+  getDefaultWet,
 } from '../../music-logic/effects';
 
 const EffectsModal = () => {
   const effects = getEffects();
+  const defaultWet = getDefaultWet();
   const [distortionValue, setDistortionValue] = useState(
     effects.distortion?.distortion
   );
-  const [distortionWet, setDistortionWet] = useState(
-    effects.distortion?.wet.value
-  );
+  const [distortionWet, setDistortionWet] = useState(defaultWet.distortion);
   const [reverbValue, setReverbValue] = useState(
     effects.reverb?.roomSize.value
   );
-  const [reverbWet, setReverbWet] = useState(effects.reverb?.wet.value);
+  const [reverbWet, setReverbWet] = useState(defaultWet.reverb);
   const [delayFeedbackValue, setDelayFeedbackValue] = useState(
     effects.delay?.feedback.value
   );
   const [delayTimeValue, setDelayTimeValue] = useState(
     effects.delay?.delayTime.value
   );
-  const [delayWet, setDelayWet] = useState(effects.delay?.wet.value);
+  const [delayWet, setDelayWet] = useState(defaultWet.delay);
 
   return (
     <div className='EffectsModal'>

@@ -23,7 +23,15 @@ export const getEffects = () => effects;
 const gain = new Tone.Gain(0.4);
 let distortionDefaultWet = 1;
 let delayDefaultWet = 1;
-let reverbDefaultWet = 0.3;
+let reverbDefaultWet = 0.1;
+
+export const getDefaultWet = () => {
+  return {
+    distortion: distortionDefaultWet,
+    delay: delayDefaultWet,
+    reverb: reverbDefaultWet,
+  };
+};
 
 export const record = () => {
   if (recorder) {

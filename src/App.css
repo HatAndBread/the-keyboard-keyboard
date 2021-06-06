@@ -19,6 +19,7 @@ button {
   font-size: large;
   box-shadow: gray 0px 0px 1px 1px;
   transition: 0.3s;
+  cursor: pointer;
 }
 
 button:hover {

@@ -506,7 +506,7 @@ const keyboardTemplate: KeyboardTemplate = {
     randomize: false,
     octave: 1,
     tuning: 'any',
-    attack: 0.1,
+    attack: 0,
     release: 0.3,
   },
 };

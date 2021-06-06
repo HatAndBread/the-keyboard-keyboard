@@ -5,7 +5,9 @@ import {
   sendSetLatestLetter,
   resetDisplayText,
 } from '../../music-logic/music-loop';
+import fullScreenPath from '../../../assets/images/full-screen.png';
 import Sketch from './Sketch';
+import Icon from '../icon/Icon';
 import './Visualization.css';
 
 const Visualization = ({ showAnim }: { showAnim: boolean }) => {

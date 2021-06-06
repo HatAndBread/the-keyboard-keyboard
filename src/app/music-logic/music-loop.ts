@@ -62,92 +62,96 @@ const keyIsDuplicated = (newKey: string) => {
 };
 
 export const handleKeyUp = (e: KeyboardEvent) => {
-  const keyIsValid = (key: string) => key.length < 2;
-  if (keyIsValid(e.key) && setCurrentDisplayText && setLatestLetter) {
-    displayText += e.key;
-    setCurrentDisplayText(displayText);
-    setLatestLetter(e.key);
-  } else if (e.key === 'Backspace' && setCurrentDisplayText) {
-    displayText = displayText.slice(0, -1);
-    setCurrentDisplayText(displayText);
-  }
-  const currKey = transformKeys(e.key).toLowerCase();
-  currentKeys = currentKeys.filter((key) => key !== currKey);
-  if (currKey === 'arrowleft' || currKey === 'arrowright') {
-    e.preventDefault();
-    if (board) {
-      board.getAsArray().forEach((player) => {
-        if (player.playbackRate) {
-          player.player.playbackRate = player.playbackRate * octave;
-        }
-      });
+  if (e.key) {
+    const keyIsValid = (key: string) => key.length < 2;
+    if (keyIsValid(e.key) && setCurrentDisplayText && setLatestLetter) {
+      displayText += e.key;
+      setCurrentDisplayText(displayText);
+      setLatestLetter(e.key);
+    } else if (e.key === 'Backspace' && setCurrentDisplayText) {
+      displayText = displayText.slice(0, -1);
+      setCurrentDisplayText(displayText);
+    }
+    const currKey = transformKeys(e.key).toLowerCase();
+    currentKeys = currentKeys.filter((key) => key !== currKey);
+    if (currKey === 'arrowleft' || currKey === 'arrowright') {
+      e.preventDefault();
+      if (board) {
+        board.getAsArray().forEach((player) => {
+          if (player.playbackRate) {
+            player.player.playbackRate = player.playbackRate * octave;
+          }
+        });
+      }
     }
   }
 };
 
 export const handleKeyDown = (e: KeyboardEvent) => {
-  const currKey = transformKeys(e.key).toLowerCase();
-  if (currKey === 'arrowdown') {
-    if (octave > 1) {
-      octave -= 1;
-    } else if (octave > 0.1) {
-      octave *= 0.5;
+  if (e.key) {
+    const currKey = transformKeys(e.key).toLowerCase();
+    if (currKey === 'arrowdown') {
+      if (octave > 1) {
+        octave -= 1;
+      } else if (octave > 0.1) {
+        octave *= 0.5;
+      }
+    } else if (currKey === 'arrowup') {
+      if (octave >= 1 && octave <= 19) {
+        octave += 1;
+      } else if (octave < 1) {
+        octave *= 2;
+      }
+    } else if (currKey === 'backspace') {
+      octave = 1;
+    } else if (currKey === '+') {
+      if (currentKeyboardName && board && setKeyboard) {
+        switchToNewKeyboard(
+          true,
+          currentKeyboardName,
+          keyboardNames,
+          setKeyboard
+        );
+      }
+    } else if (currKey === '-') {
+      if (currentKeyboardName && board && setKeyboard) {
+        switchToNewKeyboard(
+          false,
+          currentKeyboardName,
+          keyboardNames,
+          setKeyboard
+        );
+      }
+    } else if (currKey === 'enter') {
+      if (currentlyRecording) {
+        currentlyRecording = false;
+        stopRecord();
+      } else {
+        currentlyRecording = true;
+        record();
+      }
+    } else if (currKey === '#') {
+      baseLoopPlayer.stop();
+    } else if (currKey === '!') {
+      effectOnOff('distortion');
+    } else if (currKey === '&') {
+      effectOnOff('delay');
+    } else if (currKey === '@') {
+      effectOnOff('reverb');
+    } else if (e.key === `*`) {
+      const utterance = new SpeechSynthesisUtterance(displayText);
+      utterance.voice = voices[Math.floor(Math.random() * voices.length)];
+      utterance.pitch = Math.random() * 2;
+      utterance.rate = Math.random() * 2;
+      voiceSynth.speak(utterance);
+      utterance.onend = () => {
+        setCurrentDisplayText && setCurrentDisplayText('');
+        displayText = '';
+      };
     }
-  } else if (currKey === 'arrowup') {
-    if (octave >= 1 && octave <= 19) {
-      octave += 1;
-    } else if (octave < 1) {
-      octave *= 2;
+    if (!keyIsDuplicated(currKey)) {
+      currentKeys?.push(currKey);
     }
-  } else if (currKey === 'backspace') {
-    octave = 1;
-  } else if (currKey === '+') {
-    if (currentKeyboardName && board && setKeyboard) {
-      switchToNewKeyboard(
-        true,
-        currentKeyboardName,
-        keyboardNames,
-        setKeyboard
-      );
-    }
-  } else if (currKey === '-') {
-    if (currentKeyboardName && board && setKeyboard) {
-      switchToNewKeyboard(
-        false,
-        currentKeyboardName,
-        keyboardNames,
-        setKeyboard
-      );
-    }
-  } else if (currKey === 'enter') {
-    if (currentlyRecording) {
-      currentlyRecording = false;
-      stopRecord();
-    } else {
-      currentlyRecording = true;
-      record();
-    }
-  } else if (currKey === '#') {
-    baseLoopPlayer.stop();
-  } else if (currKey === '!') {
-    effectOnOff('distortion');
-  } else if (currKey === '&') {
-    effectOnOff('delay');
-  } else if (currKey === '@') {
-    effectOnOff('reverb');
-  } else if (e.key === `*`) {
-    const utterance = new SpeechSynthesisUtterance(displayText);
-    utterance.voice = voices[Math.floor(Math.random() * voices.length)];
-    utterance.pitch = Math.random() * 2;
-    utterance.rate = Math.random() * 2;
-    voiceSynth.speak(utterance);
-    utterance.onend = () => {
-      setCurrentDisplayText && setCurrentDisplayText('');
-      displayText = '';
-    };
-  }
-  if (!keyIsDuplicated(currKey)) {
-    currentKeys?.push(currKey);
   }
 };
 

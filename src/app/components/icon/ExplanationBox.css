@@ -8,4 +8,6 @@
   pointer-events: none;
   transition: 0.3s;
   z-index: 100000;
+  color: black;
+  font-size: medium;
 }

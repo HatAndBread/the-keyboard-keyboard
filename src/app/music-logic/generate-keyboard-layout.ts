@@ -16,7 +16,6 @@ const generateKeyboardLayout = (params: {
       const possiblePlayers = Object.keys(sampleUrls);
       const randomInst =
         possiblePlayers[Math.floor(Math.random() * possiblePlayers.length)];
-      console.log(randomInst);
       //@ts-ignore
       newKeyboard[key].name =
         params.mainInstrument === 'random' ? randomInst : params.mainInstrument;

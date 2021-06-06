@@ -58,7 +58,7 @@ export const createPlayers = (
         k,
         keyboardLayout[k].playType,
         buffers[keyboardLayout[k].name],
-        keyboardLayout[k].playbackRate * keyboardLayout[k].octave,
+        keyboardLayout[k].playbackRate,
         keyboardLayout[k].volume,
         keyboardLayout[k].randomize,
         keyboardLayout[k].octave,

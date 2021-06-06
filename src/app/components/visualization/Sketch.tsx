@@ -419,7 +419,7 @@ const Sketch = ({
     }
   }, [currentText, setFirstTime]);
 
-  return <div ref={canvasRef}></div>;
+  return <div ref={canvasRef} className='Sketch'></div>;
 };
 
 export default Sketch;

@@ -119,7 +119,8 @@ export default class Player {
     this.envelope.dispose();
     this.player.dispose();
   }
-  setBuffer(buffer: Buff) {
+  setBuffer(buffer: Buff, bufferName: string) {
+    this.bufferName = bufferName;
     this.buffer = buffer;
     this.player.buffer = buffer;
   }

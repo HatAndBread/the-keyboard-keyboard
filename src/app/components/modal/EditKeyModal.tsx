@@ -57,7 +57,7 @@ const EditKeyModal = ({
   const handleBufferChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (ctx.buffers && myPlayer) {
       bufferSelectRef.current?.blur();
-      myPlayer.setBuffer(ctx.buffers[e.target.value]);
+      myPlayer.setBuffer(ctx.buffers[e.target.value], e.target.value);
       setBufferName(e.target.value);
       console.log(e.target.value, ctx.buffers[e.target.value], '✨');
     }

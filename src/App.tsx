@@ -26,6 +26,7 @@ import Hints from './app/components/hints/Hints';
 import Icon from './app/components/icon/Icon';
 import gitHub from './assets/images/github.png';
 import linkedIn from './assets/images/linkedin.png';
+import Recorder from './app/components/recorder/Recorder';
 
 //@ts-ignore
 let isBadBrowser = window.MediaRecorder ? false : true;
@@ -125,6 +126,7 @@ function App() {
               <>
                 <Nav />
                 <div className='body-content'>
+                  {!isBadBrowser && <Recorder />}
                   {!editorOpen && (
                     <div
                       style={{

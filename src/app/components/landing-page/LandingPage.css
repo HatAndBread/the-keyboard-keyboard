@@ -5,14 +5,16 @@
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  width: 100vw;
 }
 .hero {
   padding: 32px;
-  min-width: 100vw;
+  min-width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .hero h1 {
@@ -49,6 +51,7 @@
   height: 200px;
   margin: 16px;
   border-radius: 6px;
+  float: right;
 }
 .app-explanation h2 {
   font-family: 'Amatic SC', monospace;

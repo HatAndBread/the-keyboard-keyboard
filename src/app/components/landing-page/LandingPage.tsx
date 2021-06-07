@@ -48,13 +48,13 @@ const LandingPage = ({
           <h2>How it works</h2>
           <div className='app-explanation-content'>
             <p>
+              <img src={dogSrc} alt='a dog' />
               The Keyboard Keyboard turns your computer keyboard into a musical
               instrument. Assign audio samples to any key on your keyboard.
               Adjust pitch, envelope, and effects. Export recordings as mp3s.
               Save your keyboard settings to your computer. Experiment with
               different tuning systems.
             </p>
-            <img src={dogSrc} alt='a dog' />
           </div>
         </div>
         {isBadBrowser && (

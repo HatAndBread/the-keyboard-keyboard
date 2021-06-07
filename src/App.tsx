@@ -23,6 +23,9 @@ import ToggleSwitch from './app/components/toggle-switch/ToggleSwitch';
 import LandingPage from './app/components/landing-page/LandingPage';
 import Loader from './app/components/Loader/Loader';
 import Hints from './app/components/hints/Hints';
+import Icon from './app/components/icon/Icon';
+import gitHub from './assets/images/github.png';
+import linkedIn from './assets/images/linkedin.png';
 
 //@ts-ignore
 let isBadBrowser = window.MediaRecorder ? false : true;
@@ -156,6 +159,56 @@ function App() {
           </>
         )}
         <ModalController currentModal={currentModal} />
+        <footer>
+          <p>Made with ♥️ by Joshua Hume</p>
+          <div
+            style={{
+              display: 'flex',
+              width: '100px',
+              justifyContent: 'space-between',
+            }}>
+            <Icon
+              className='footer-icon'
+              src={gitHub}
+              alt='GitHub'
+              pointer={true}
+              onClick={() =>
+                window.open('https://github.com/HatAndBread', '_blank')
+              }
+            />
+            <Icon
+              className='footer-icon'
+              src={linkedIn}
+              alt='LinkedIn'
+              pointer={true}
+              onClick={() =>
+                window.open(
+                  'https://www.linkedin.com/in/joshua-hume-0259691ab/',
+                  '_blank'
+                )
+              }
+            />
+          </div>
+          <div>
+            Enjoy The Keyboard Keyboard?{' '}
+            <a
+              href='https://www.paypal.com/paypalme/hatandbread'
+              target='_blank'>
+              Buy me a beer 🍺
+            </a>
+          </div>
+
+          <div>
+            Icons made by{' '}
+            <a href='from www.flaticon.com' target='_blank'>
+              Freepik
+            </a>{' '}
+            from{' '}
+            <a href='from www.flaticon.com' target='_blank'>
+              www.flaticon.com
+            </a>
+          </div>
+        </footer>
       </div>
     </Context.Provider>
   );

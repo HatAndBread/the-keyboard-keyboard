@@ -28,10 +28,16 @@ export default function Hints({
           <strong>Backspace</strong>: Set octave to original
         </div>
         <div className='hint'>
-          <strong>←</strong>: Gradually decrease pitch
+          <strong>←</strong>: Decrease pitch and return on release
         </div>
         <div className='hint'>
-          <strong>→</strong>: Gradually increase pitch
+          <strong>→</strong>: Increase pitch and return on release
+        </div>
+        <div className='hint'>
+          <strong>{'<'}</strong>: Lower pitch of all keys
+        </div>
+        <div className='hint'>
+          <strong>{'>'}</strong>: Increase pitch of all keys
         </div>
         <div className='hint'>
           <strong>Caps-lock on</strong>: Randomize all pitches

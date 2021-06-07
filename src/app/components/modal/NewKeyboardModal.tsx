@@ -136,7 +136,7 @@ const NewKeyboardModal = () => {
           <option value='4'>3</option>
         </select>
       </div>
-      <div className='base-note-selector margin-top-sixteen'>
+      {/* <div className='base-note-selector margin-top-sixteen'>
         <label htmlFor='base-note'>Base Note</label>
         <div>
           <input
@@ -155,7 +155,7 @@ const NewKeyboardModal = () => {
           />
           HZ
         </div>
-      </div>
+      </div> */}
       <div className='button-container margin-top-sixteen'>
         <button onClick={createKeyboard} className='create-new-btn'>
           OK

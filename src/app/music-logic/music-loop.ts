@@ -27,10 +27,20 @@ let setCurrentDisplayText: React.Dispatch<
 > | null = null;
 let setLatestLetter: React.Dispatch<React.SetStateAction<string>> | null = null;
 let displayText = '';
-
+const adjustAllPlayerPlaybackRates = (adjustment: number) => {
+  const players = board?.getAsArray();
+  players?.forEach((player) => {
+    player.setPlaybackRate(player.playbackRate * adjustment);
+  });
+};
 export const musicLoop = () => {
   if (currentKeys && board) {
     detune = detuner(currentKeys, detune);
+    if (currentKeys.includes('<')) {
+      adjustAllPlayerPlaybackRates(0.999);
+    } else if (currentKeys.includes('>')) {
+      adjustAllPlayerPlaybackRates(1.001);
+    }
     const players = board.getAsArray();
     resetPlayersNotCurrentlyPlaying(players, currentKeys);
     randomize = currentKeys.includes('capslock');
@@ -71,6 +81,10 @@ export const handleKeyUp = (e: KeyboardEvent) => {
     } else if (e.key === 'Backspace' && setCurrentDisplayText) {
       displayText = '';
       setCurrentDisplayText(displayText);
+    }
+    if (e.key === '<' || e.key === '>' || e.key === ',' || e.key === '.') {
+      currentKeys = currentKeys.filter((key) => key !== '<' && key !== '>');
+      console.log(currentKeys);
     }
     const currKey = transformKeys(e.key).toLowerCase();
     currentKeys = currentKeys.filter((key) => key !== currKey);

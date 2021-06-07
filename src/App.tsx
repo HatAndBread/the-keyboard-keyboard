@@ -30,6 +30,12 @@ import linkedIn from './assets/images/linkedin.png';
 //@ts-ignore
 let isBadBrowser = window.MediaRecorder ? false : true;
 
+function unloadHandler(e: BeforeUnloadEvent) {
+  e.preventDefault();
+  e.returnValue = '';
+}
+window.addEventListener('beforeunload', unloadHandler);
+
 export const Context = createContext<Partial<ContextProps>>({});
 function App() {
   const [attemptingToLoad, setAttemptingToLoad] = useState(false);

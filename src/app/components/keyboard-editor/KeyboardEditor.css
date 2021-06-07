@@ -3,7 +3,7 @@
   width: fit-content;
   padding: 16px;
   border-radius: 8px;
-  box-shadow: #7189ff 0px 2px 6px 6px;
+  box-shadow: lightgray 0px 2px 3px 3px;
 }
 
 .keyboard-row {

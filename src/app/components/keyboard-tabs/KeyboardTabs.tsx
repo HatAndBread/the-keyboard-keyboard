@@ -40,8 +40,8 @@ const KeyboardTabs = () => {
                   : colors[index % colors.length],
                 boxShadow:
                   name === currentKeyboard
-                    ? `#7189ff 0px -4px 8px 2px`
-                    : 'grey 2px -2px 2px 0px',
+                    ? `#7189ff 0px 4px 8px 2px`
+                    : 'grey 2px 2px 2px 0px',
                 right: `${index * 20}px`,
                 zIndex: name === currentKeyboard ? 500 : 499 - index,
                 fontWeight: name === currentKeyboard ? 'bold' : 'initial',

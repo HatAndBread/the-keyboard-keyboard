@@ -4,6 +4,9 @@ import KeyboardKey from './KeyboardKey';
 import './KeyboardEditor.css';
 import Icon from '../icon/Icon';
 import closeIcon from '../../../assets/images/cross.png';
+import trashCan from '../../../assets/images/recycle-bin.png';
+import { cloneDeep } from 'lodash';
+import Keyboard from '../../music-logic/Keyboard';
 
 const KeyboardEditor = () => {
   const ctx = useContext(Context);
@@ -68,6 +71,19 @@ const KeyboardEditor = () => {
       </div>
       <div className='keyboard-row space-row'>
         <KeyboardKey key={' '} myKey={' '} extraClassName={'space-button'} />
+      </div>
+      <div className='closer-container'>
+        <Icon
+          src={trashCan}
+          alt='Delete Keyboard'
+          messageBox={true}
+          pointer={true}
+          onClick={() => {
+            if (ctx.keyboards) {
+              ctx.setCurrentModal && ctx.setCurrentModal('warn-delete');
+            }
+          }}
+        />
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import EditKeyboardModal from './EditKeyboardModal';
 import SaveModal from './SaveModal';
 import OpenFileModal from './OpenFileModal';
 import EffectsModal from './EffectsModal';
+import WarnDeleteModal from './WarnDeleteModal';
 
 const ModalController = ({ currentModal }: { currentModal: string | null }) => {
   const ctx = useContext(Context);
@@ -33,6 +34,9 @@ const ModalController = ({ currentModal }: { currentModal: string | null }) => {
       }
       case 'effects': {
         return <EffectsModal />;
+      }
+      case 'warn-delete': {
+        return <WarnDeleteModal />;
       }
       default:
         return <></>;

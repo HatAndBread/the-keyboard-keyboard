@@ -69,7 +69,7 @@ export const handleKeyUp = (e: KeyboardEvent) => {
       setCurrentDisplayText(displayText);
       setLatestLetter(e.key);
     } else if (e.key === 'Backspace' && setCurrentDisplayText) {
-      displayText = displayText.slice(0, -1);
+      displayText = '';
       setCurrentDisplayText(displayText);
     }
     const currKey = transformKeys(e.key).toLowerCase();
@@ -149,6 +149,7 @@ export const handleKeyDown = (e: KeyboardEvent) => {
         displayText = '';
       };
     }
+
     if (!keyIsDuplicated(currKey)) {
       currentKeys?.push(currKey);
     }
@@ -178,3 +179,4 @@ export const sendSetLatestLetter = (
 };
 
 export const resetDisplayText = () => (displayText = '');
+export const setDisplayText = (text: string) => (displayText = text);

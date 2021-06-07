@@ -1,0 +1,64 @@
+.LandingPage {
+  margin: 0;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+.hero {
+  padding: 32px;
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero h1 {
+  font-family: 'Amatic SC', monospace;
+  font-size: 100px;
+  color: snow;
+}
+
+.bad-browser-warning {
+  font-size: large;
+  max-width: 600px;
+  margin: 16px;
+  background-color: #7189ff;
+  padding: 16px;
+  box-shadow: #aaaaaa8f 0px 0px 2px 2px;
+  border-radius: 6px;
+}
+
+.start-button {
+  font-family: 'Amatic SC', monospace;
+  min-width: 160px;
+  margin: 32px;
+  font-size: 40px;
+}
+
+.app-explanation {
+  padding: 16px;
+  border-radius: 6px;
+  box-shadow: #aaaaaa8f 0px 0px 2px 2px;
+  margin: 16px;
+  background-color: rgba(243, 243, 242, 0.7);
+}
+.app-explanation img {
+  height: 200px;
+  margin: 16px;
+}
+.app-explanation h2 {
+  font-family: 'Amatic SC', monospace;
+}
+.app-explanation-content {
+  display: flex;
+}
+
+.app-explanation-content p {
+  max-width: 400px;
+  margin: 16px;
+  font-size: large;
+  text-align: left;
+}

@@ -1,22 +1,37 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
-import { Context } from '../../../App';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   sendSetCurrentText,
   sendSetLatestLetter,
   resetDisplayText,
+  setDisplayText,
 } from '../../music-logic/music-loop';
-import fullScreenPath from '../../../assets/images/full-screen.png';
 import Sketch from './Sketch';
-import Icon from '../icon/Icon';
 import './Visualization.css';
 
-const Visualization = ({ showAnim }: { showAnim: boolean }) => {
-  const ctx = useContext(Context);
+let beenStarted = false;
+const Visualization = ({
+  showAnim,
+  isBadBrowser,
+}: {
+  showAnim: boolean;
+  isBadBrowser: boolean | undefined;
+}) => {
   const [currentText, setCurrentText] = useState('');
   const [latestLetter, setLatestLetter] = useState('');
   const [width, setWidth] = useState(100);
   const [height, setHeight] = useState(100);
   const visRef = useRef<null | HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (currentText.length) {
+      beenStarted = true;
+    }
+    if (currentText.length > 50) {
+      const newString = currentText.slice(2, currentText.length);
+      setDisplayText(newString);
+      setCurrentText(newString);
+    }
+  }, [currentText, setCurrentText]);
   useEffect(() => {
     const handleKeyUp = (e: KeyboardEvent) => {
       if (e.key === `)` || e.key === `(`) {
@@ -67,9 +82,15 @@ const Visualization = ({ showAnim }: { showAnim: boolean }) => {
           width={width}
           height={height}
           setCurrentText={setCurrentText}
+          isBadBrowser={isBadBrowser}
         />
       ) : (
-        <div className='text-container'>{currentText}</div>
+        <>
+          <div className='text-container'>
+            {!beenStarted ? 'Press any key' : ''}
+            {currentText}
+          </div>
+        </>
       )}
     </div>
   );

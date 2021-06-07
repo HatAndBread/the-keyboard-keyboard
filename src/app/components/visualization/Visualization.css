@@ -3,19 +3,20 @@
   height: 60vh;
   background-color: black;
   border-radius: 16px;
-  color: snow;
-  font-size: xx-large;
   display: flex;
   justify-content: center;
   overflow: hidden;
 }
 
 .text-container {
+  margin-top: 20%;
+  color: snow;
+  font-size: xx-large;
   padding: 32px;
   word-wrap: break-word;
   width: 100%;
   height: 100%;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 canvas {
   border-radius: 16px;

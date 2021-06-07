@@ -10,6 +10,7 @@ interface Props {
   width: number;
   height: number;
   setCurrentText: React.Dispatch<React.SetStateAction<string>>;
+  isBadBrowser: boolean | undefined;
 }
 let vars: any = {};
 const Sketch = ({
@@ -18,6 +19,7 @@ const Sketch = ({
   width,
   height,
   setCurrentText,
+  isBadBrowser,
 }: Props) => {
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const [p, setP] = useState<null | p5>(null);
@@ -374,7 +376,8 @@ const Sketch = ({
               p.noFill();
             }
             vars.circles = [];
-            for (let i = 0; i < 200; i++) {
+            let numTimes = isBadBrowser ? 20 : 200;
+            for (let i = 0; i < numTimes; i++) {
               vars.circles.push({
                 x: p.floor(p.random() * width),
                 y: p.floor(p.random() * height),
@@ -393,7 +396,7 @@ const Sketch = ({
               color: string;
               radius: number;
             }) => {
-              if (!vars.noFill) {
+              if (!vars.noFill && !isBadBrowser) {
                 p.fill(randomColor());
               }
               p.stroke(circle.color);

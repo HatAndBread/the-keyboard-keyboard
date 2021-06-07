@@ -9,9 +9,7 @@ import {
   sendSetKeyboard,
   sendCurrentKeyboardName,
 } from './app/music-logic/music-loop';
-import { createBuffers } from './app/music-logic/sample-buffers';
 import { useAppDispatch } from './app/hooks';
-import { setEffects } from './app/music-logic/effects';
 import KeyboardEditor from './app/components/keyboard-editor/KeyboardEditor';
 import ModalController from './app/components/modal/ModalController';
 import createListeners from './app/music-logic/keyboard-listeners';
@@ -22,6 +20,10 @@ import ValidKeys from './types/ValidKeys';
 import KeyboardTabs from './app/components/keyboard-tabs/KeyboardTabs';
 import Visualization from './app/components/visualization/Visualization';
 import ToggleSwitch from './app/components/toggle-switch/ToggleSwitch';
+import LandingPage from './app/components/landing-page/LandingPage';
+
+//@ts-ignore
+let isBadBrowser = window.MediaRecorder ? false : true;
 
 export const Context = createContext<Partial<ContextProps>>({});
 function App() {
@@ -42,18 +44,11 @@ function App() {
   );
   const [currentKeyboard, setCurrentKeyboard] = useState<null | Keyboard>(null);
   const dispatch = useAppDispatch();
-  const [showAnim, setShowAnim] = useState(true);
+  const [showAnim, setShowAnim] = useState(isBadBrowser ? false : true);
 
   useEffect(() => {
     console.log(keyboards);
   }, [keyboards]);
-  const initialStartUp = async () => {
-    setAttemptingToLoad(true);
-    await Tone.start();
-    createBuffers(setBuffers);
-    setAppIsStarted(true);
-    setEffects();
-  };
 
   useEffect(() => {
     createListeners();
@@ -100,7 +95,14 @@ function App() {
         <OnBufferLoad />
         {attemptingToLoad && <p>Loading...</p>}
         {!appIsStarted ? (
-          <button onClick={initialStartUp}>START</button>
+          <div>
+            <LandingPage
+              isBadBrowser={isBadBrowser}
+              setAttemptingToLoad={setAttemptingToLoad}
+              setAppIsStarted={setAppIsStarted}
+              setBuffers={setBuffers}
+            />
+          </div>
         ) : (
           <>
             <Nav />
@@ -127,7 +129,10 @@ function App() {
               {editorOpen ? (
                 <KeyboardEditor />
               ) : (
-                <Visualization showAnim={showAnim} />
+                <Visualization
+                  showAnim={showAnim}
+                  isBadBrowser={isBadBrowser}
+                />
               )}
             </div>
           </>

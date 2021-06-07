@@ -122,13 +122,15 @@ function App() {
                         width: '160px',
                         justifyContent: 'space-between',
                       }}>
-                      <ToggleSwitch
-                        label='Visualizations'
-                        id='visualization-switch'
-                        onFalseSet={() => setShowAnim(false)}
-                        onTrueSet={() => setShowAnim(true)}
-                        defaultChecked={showAnim}
-                      />
+                      <div className={'toggle-container'}>
+                        Visualization
+                        <ToggleSwitch
+                          id='visualization-switch'
+                          onFalseSet={() => setShowAnim(false)}
+                          onTrueSet={() => setShowAnim(true)}
+                          defaultChecked={showAnim}
+                        />
+                      </div>
                     </div>
                   )}
                   <KeyboardTabs />

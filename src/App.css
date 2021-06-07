@@ -26,3 +26,8 @@ button {
 button:hover {
   box-shadow: gray 0px 1px 3px 3px;
 }
+.toggle-container {
+  display: flex;
+  width: 200px;
+  justify-content: space-between;
+}

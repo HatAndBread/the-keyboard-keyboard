@@ -1,0 +1,25 @@
+.Hints {
+  padding: 16px;
+  width: 86vw;
+  border-radius: 6px;
+  box-shadow: rgba(50, 50, 50, 0.5) 0px 0px 2px 2px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.Hints h1 {
+  font-family: 'Amatic SC', monospace;
+}
+.hint {
+  margin: 0px 16px 0px 16px;
+}
+.hint-container {
+  text-align: left;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.closer-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}

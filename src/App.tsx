@@ -21,6 +21,8 @@ import KeyboardTabs from './app/components/keyboard-tabs/KeyboardTabs';
 import Visualization from './app/components/visualization/Visualization';
 import ToggleSwitch from './app/components/toggle-switch/ToggleSwitch';
 import LandingPage from './app/components/landing-page/LandingPage';
+import Loader from './app/components/Loader/Loader';
+import Hints from './app/components/hints/Hints';
 
 //@ts-ignore
 let isBadBrowser = window.MediaRecorder ? false : true;
@@ -45,6 +47,7 @@ function App() {
   const [currentKeyboard, setCurrentKeyboard] = useState<null | Keyboard>(null);
   const dispatch = useAppDispatch();
   const [showAnim, setShowAnim] = useState(isBadBrowser ? false : true);
+  const [showHints, setShowHints] = useState(true);
 
   useEffect(() => {
     console.log(keyboards);
@@ -93,48 +96,61 @@ function App() {
       }}>
       <div className='App'>
         <OnBufferLoad />
-        {attemptingToLoad && <p>Loading...</p>}
-        {!appIsStarted ? (
-          <div>
-            <LandingPage
-              isBadBrowser={isBadBrowser}
-              setAttemptingToLoad={setAttemptingToLoad}
-              setAppIsStarted={setAppIsStarted}
-              setBuffers={setBuffers}
-            />
-          </div>
+        {attemptingToLoad ? (
+          <Loader />
         ) : (
           <>
-            <Nav />
-            <div className='body-content'>
-              {!editorOpen && (
-                <div
-                  style={{
-                    display: 'flex',
-                    marginBottom: '16px',
-                    fontSize: '16px',
-                    width: '160px',
-                    justifyContent: 'space-between',
-                  }}>
-                  <ToggleSwitch
-                    label='Visualizations'
-                    id='visualization-switch'
-                    onFalseSet={() => setShowAnim(false)}
-                    onTrueSet={() => setShowAnim(true)}
-                    defaultChecked={showAnim}
-                  />
-                </div>
-              )}
-              <KeyboardTabs />
-              {editorOpen ? (
-                <KeyboardEditor />
-              ) : (
-                <Visualization
-                  showAnim={showAnim}
+            {!appIsStarted ? (
+              <div>
+                <LandingPage
                   isBadBrowser={isBadBrowser}
+                  setAttemptingToLoad={setAttemptingToLoad}
+                  setAppIsStarted={setAppIsStarted}
+                  setBuffers={setBuffers}
                 />
-              )}
-            </div>
+              </div>
+            ) : (
+              <>
+                <Nav />
+                <div className='body-content'>
+                  {!editorOpen && (
+                    <div
+                      style={{
+                        display: 'flex',
+                        marginBottom: '16px',
+                        fontSize: '16px',
+                        width: '160px',
+                        justifyContent: 'space-between',
+                      }}>
+                      <ToggleSwitch
+                        label='Visualizations'
+                        id='visualization-switch'
+                        onFalseSet={() => setShowAnim(false)}
+                        onTrueSet={() => setShowAnim(true)}
+                        defaultChecked={showAnim}
+                      />
+                    </div>
+                  )}
+                  <KeyboardTabs />
+                  {editorOpen ? (
+                    <KeyboardEditor />
+                  ) : (
+                    <>
+                      <Visualization
+                        showAnim={showAnim}
+                        isBadBrowser={isBadBrowser}
+                      />
+                      {showHints && (
+                        <Hints
+                          isBadBrowser={isBadBrowser}
+                          setShowHints={setShowHints}
+                        />
+                      )}
+                    </>
+                  )}
+                </div>
+              </>
+            )}
           </>
         )}
         <ModalController currentModal={currentModal} />

@@ -48,6 +48,7 @@
 .app-explanation img {
   height: 200px;
   margin: 16px;
+  border-radius: 6px;
 }
 .app-explanation h2 {
   font-family: 'Amatic SC', monospace;

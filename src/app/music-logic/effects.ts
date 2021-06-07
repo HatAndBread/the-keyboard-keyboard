@@ -7,10 +7,14 @@ interface Effects {
 }
 
 export const baseLoopPlayer = new Tone.Player().toDestination();
-let recorder: undefined | Tone.Recorder;
+let loopRecorder: undefined | Tone.Recorder;
+let mainRecorder: undefined | Tone.Recorder;
 
 //@ts-ignore
-if (window.MediaRecorder) recorder = new Tone.Recorder();
+if (window.MediaRecorder) {
+  loopRecorder = new Tone.Recorder();
+  mainRecorder = new Tone.Recorder();
+}
 
 const effects: Effects = {
   delay: null,
@@ -34,14 +38,14 @@ export const getDefaultWet = () => {
 };
 
 export const record = () => {
-  if (recorder) {
-    recorder.start();
+  if (loopRecorder) {
+    loopRecorder.start();
   }
 };
 
 export const stopRecord = async () => {
-  if (recorder) {
-    const recording = await recorder.stop();
+  if (loopRecorder) {
+    const recording = await loopRecorder.stop();
     const url = URL.createObjectURL(recording);
     const buff = new Tone.ToneAudioBuffer(url, () => {
       baseLoopPlayer.buffer = buff;
@@ -55,8 +59,8 @@ export const setEffects = () => {
   effects.delay = new Tone.PingPongDelay(0.1, 0.6).toDestination();
   effects.reverb = new Tone.JCReverb(0.5).connect(effects.delay);
   effects.distortion = new Tone.Distortion(1).connect(effects.reverb);
-  if (recorder) {
-    gain.connect(recorder);
+  if (loopRecorder) {
+    gain.connect(loopRecorder);
   }
   baseLoopPlayer.connect(gain);
   gain.connect(effects.distortion);

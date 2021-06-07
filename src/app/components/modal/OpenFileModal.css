@@ -1,3 +1,11 @@
 .OpenFileModal button {
   margin: 16px;
 }
+.open-modal-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.open-modal-buttons button {
+  min-width: 100px;
+}

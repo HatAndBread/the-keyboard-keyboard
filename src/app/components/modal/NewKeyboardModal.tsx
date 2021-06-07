@@ -65,7 +65,7 @@ const NewKeyboardModal = () => {
   };
 
   return (
-    <div className='NewKeyboardModal'>
+    <div className='NewKeyboardModal margin-top-sixteen'>
       <div className='name-input'>
         <label htmlFor='name-input'>Keyboard Name:</label>
         <input
@@ -77,7 +77,7 @@ const NewKeyboardModal = () => {
           }}
         />
       </div>
-      <div className='instrument-selector'>
+      <div className='instrument-selector margin-top-sixteen'>
         <label htmlFor='instrument'>Main Instrument</label>
         <select
           id='instrument'
@@ -93,7 +93,7 @@ const NewKeyboardModal = () => {
             ))}
         </select>
       </div>
-      <div className='play-type-selector'>
+      <div className='play-type-selector margin-top-sixteen'>
         <label htmlFor='play-type'>Main play type</label>
         <select
           name='play-type'
@@ -105,7 +105,7 @@ const NewKeyboardModal = () => {
           <option value='RAPID'>RAPID</option>
         </select>
       </div>
-      <div className='tuning-selector'>
+      <div className='tuning-selector margin-top-sixteen'>
         <label htmlFor='tuning'>Main Tuning</label>
         <select
           onChange={(e) => setTuning(e.target.value)}
@@ -120,7 +120,7 @@ const NewKeyboardModal = () => {
           ))}
         </select>
       </div>
-      <div className='octave-selector'>
+      <div className='octave-selector margin-top-sixteen'>
         <label htmlFor='main-octave'>Main Octave</label>
         <select
           onChange={(e) => setMainOctave(parseFloat(e.target.value))}
@@ -136,7 +136,7 @@ const NewKeyboardModal = () => {
           <option value='4'>3</option>
         </select>
       </div>
-      <div className='base-note-selector'>
+      <div className='base-note-selector margin-top-sixteen'>
         <label htmlFor='base-note'>Base Note</label>
         <div>
           <input
@@ -156,7 +156,11 @@ const NewKeyboardModal = () => {
           HZ
         </div>
       </div>
-      <button onClick={createKeyboard}>OK</button>
+      <div className='button-container margin-top-sixteen'>
+        <button onClick={createKeyboard} className='create-new-btn'>
+          OK
+        </button>
+      </div>
     </div>
   );
 };

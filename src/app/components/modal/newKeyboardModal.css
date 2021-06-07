@@ -1,0 +1,8 @@
+.create-new-btn {
+  min-width: 100px;
+}
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

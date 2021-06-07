@@ -63,6 +63,9 @@ function App() {
   }, [keyboards]);
 
   useEffect(() => {
+    const deleteMe = document.getElementById('first-loader-container');
+    deleteMe?.remove();
+    console.log(deleteMe);
     createListeners();
     musicLoop();
   }, []);

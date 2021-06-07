@@ -5,7 +5,10 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Web site created using create-react-app" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -25,6 +28,121 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div
+      id="first-loader-container"
+      style="
+        width: 100vw;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <h2 id="first-loader-text">Loading... 🌈</h2>
+      <div
+        style="
+          color: #ff0000;
+          font-size: 90px;
+          text-indent: -9999em;
+          overflow: hidden;
+          width: 1em;
+          height: 1em;
+          border-radius: 50%;
+          margin: 72px auto;
+          position: relative;
+          -webkit-transform: translateZ(0);
+          -ms-transform: translateZ(0);
+          transform: translateZ(0);
+          -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+          animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+        "
+      ></div>
+      <style>
+        @-webkit-keyframes load6 {
+          0% {
+            box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em,
+              0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+          }
+          5%,
+          95% {
+            box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em,
+              0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+          }
+          10%,
+          59% {
+            box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+              -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+              -0.297em -0.775em 0 -0.477em;
+          }
+          20% {
+            box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+              -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+              -0.749em -0.34em 0 -0.477em;
+          }
+          38% {
+            box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+              -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+              -0.82em -0.09em 0 -0.477em;
+          }
+          100% {
+            box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em,
+              0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+          }
+        }
+        @keyframes load6 {
+          0% {
+            box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em,
+              0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+          }
+          5%,
+          95% {
+            box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em,
+              0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+          }
+          10%,
+          59% {
+            box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+              -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+              -0.297em -0.775em 0 -0.477em;
+          }
+          20% {
+            box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+              -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+              -0.749em -0.34em 0 -0.477em;
+          }
+          38% {
+            box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+              -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+              -0.82em -0.09em 0 -0.477em;
+          }
+          100% {
+            box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em,
+              0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+          }
+        }
+        @-webkit-keyframes round {
+          0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+          }
+          100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+          }
+        }
+        @keyframes round {
+          0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+          }
+          100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+          }
+        }
+      </style>
+    </div>
     <div id="root"></div>
     <!--
       This HTML file is a template.

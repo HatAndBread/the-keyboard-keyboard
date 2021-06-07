@@ -10,6 +10,7 @@ import {
   getDefaultWet,
 } from '../../music-logic/effects';
 
+setEffectWet('distortion', 0);
 const EffectsModal = () => {
   const effects = getEffects();
   const defaultWet = getDefaultWet();

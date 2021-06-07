@@ -38,6 +38,11 @@
   min-width: 160px;
   margin: 32px;
   font-size: 40px;
+  transition: 0.6s;
+}
+.start-button:hover {
+  box-shadow: tomato 0px 0px 4px 4px;
+  background-color: red;
 }
 
 .app-explanation {

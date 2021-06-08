@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { ToneAudioBuffer } from 'tone';
 import './Recorder.css';
 import Icon from '../icon/Icon';
 import recordSrc from '../../../assets/images/record.png';
 import stopSrc from '../../../assets/images/stop.png';
 import { record, stopRecord } from '../../music-logic/effects';
-//@ts-ignore
-import { saveAs } from 'file-saver';
 
 const Recorder = () => {
   const [recording, setRecording] = useState(false);

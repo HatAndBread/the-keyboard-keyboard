@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Context } from '../../../App';
 import './KeyboardTabs.css';
 
 const KeyboardTabs = () => {
   const ctx = useContext(Context);
   const currentKeyboard = ctx.currentKeyboardName;
+  const [elementDragging, setElementDragging] = useState<undefined | string>();
   const colors = [
     'springgreen',
     'tomato',
@@ -26,8 +27,22 @@ const KeyboardTabs = () => {
     }
   };
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-    console.log(e.currentTarget);
+    setElementDragging(e.currentTarget.dataset.name);
   };
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    console.log('dropped!');
+    console.log(e.currentTarget.dataset.index);
+    const index = parseInt(
+      e.currentTarget.dataset.index ? e.currentTarget.dataset.index : '0'
+    );
+    const newKeyboardNames = ctx.keyboardNames?.map((kName) => kName);
+    if (newKeyboardNames && elementDragging) {
+      newKeyboardNames.splice(index, 0, elementDragging);
+    }
+    console.log(newKeyboardNames, elementDragging);
+    setElementDragging(undefined);
+  };
+
   return (
     <div className='KeyboardTabs'>
       {ctx.keyboardNames &&
@@ -36,8 +51,14 @@ const KeyboardTabs = () => {
             <div
               draggable
               onDragStart={handleDragStart}
+              onDragOver={(e) => {
+                e.preventDefault();
+              }}
+              data-index={index}
+              data-name={name}
               key={name}
               className='keyboard-tab'
+              onDrop={handleDrop}
               onClick={() => setKeyboard(name)}
               style={{
                 backgroundColor: colors[index]

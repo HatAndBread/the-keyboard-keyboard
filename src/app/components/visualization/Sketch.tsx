@@ -1,5 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
-import { Context } from '../../../App';
+import React, { useState, useRef, useEffect } from 'react';
 import { resetDisplayText } from '../../music-logic/music-loop';
 import p5 from 'p5';
 
@@ -415,7 +414,7 @@ const Sketch = ({
           sketches[Math.floor(Math.random() * (sketches.length - 1)) + 1];
       }
     }
-  }, [latestLetter, width, height, p, firstTime]);
+  }, [latestLetter, width, height, p, firstTime, isBadBrowser]);
   useEffect(() => {
     if (currentText.length === 1) {
       setFirstTime(false);

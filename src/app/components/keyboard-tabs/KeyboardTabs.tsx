@@ -47,6 +47,7 @@ const KeyboardTabs = () => {
       newKeyboardNames.splice(index, 0, elementDragging.name);
       ctx.setKeyboardNames && ctx.setKeyboardNames(newKeyboardNames);
       ctx.setCurrentKeyboardName(elementDragging.name);
+      // todo: not setting sometimes?
     }
     console.log(newKeyboardNames, elementDragging);
     setElementDragging(undefined);

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './LandingPage.css';
 import { start, ToneAudioBuffer } from 'tone';
 import { createBuffers } from '../../music-logic/sample-buffers';
@@ -24,7 +24,6 @@ const LandingPage = ({
   setAppIsStarted: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [backgroundPosition, setBackgroundPosition] = useState('center');
-  const heroRef = useRef<HTMLDivElement | null>(null);
   const initialStartUp = async () => {
     setAttemptingToLoad(true);
     await start();
@@ -33,16 +32,14 @@ const LandingPage = ({
     setEffects();
   };
   useEffect(() => {
-    const isSmallScreen =
-      heroRef.current && heroRef.current.getBoundingClientRect().width < 700;
-
+    const isSmallScreen = window.innerWidth < 700;
     if (isSmallScreen) {
       setBackgroundPosition('left');
     }
     const onResize = () => {
       if (isSmallScreen) {
         setBackgroundPosition('left');
-      } else if (heroRef.current) {
+      } else {
         setBackgroundPosition('center');
       }
     };
@@ -53,7 +50,6 @@ const LandingPage = ({
   return (
     <div className='LandingPage'>
       <div
-        ref={heroRef}
         className='hero'
         style={{
           background: `linear-gradient(rgba(50,50,50,.5), rgba(60,60,60,.5)), url(${heroSrc})`,

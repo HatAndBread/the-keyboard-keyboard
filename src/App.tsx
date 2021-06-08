@@ -60,18 +60,12 @@ function App() {
   const [showHints, setShowHints] = useState(true);
 
   useEffect(() => {
-    console.log(keyboards);
-  }, [keyboards]);
-
-  useEffect(() => {
     const deleteMe = document.getElementById('first-loader-container');
     deleteMe?.remove();
-    console.log(deleteMe);
     createListeners();
     musicLoop();
   }, []);
   useEffect(() => {
-    console.log(keyboards, 'Here are the keyboards');
     if (keyboards) {
       setKeyboardNames(Object.keys(keyboards));
       sendBoard(keyboards[currentKeyboardName]);

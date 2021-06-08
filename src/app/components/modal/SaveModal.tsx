@@ -49,6 +49,7 @@ const SaveModal = () => {
         type: 'text/plain',
       });
       saveAs(file, `${fileName}.s2pd`);
+      ctx.setCurrentModal && ctx.setCurrentModal(null);
     }
   };
   return (

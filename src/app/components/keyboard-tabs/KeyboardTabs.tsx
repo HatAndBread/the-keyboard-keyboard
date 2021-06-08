@@ -5,7 +5,9 @@ import './KeyboardTabs.css';
 const KeyboardTabs = () => {
   const ctx = useContext(Context);
   const currentKeyboard = ctx.currentKeyboardName;
-  const [elementDragging, setElementDragging] = useState<undefined | string>();
+  const [elementDragging, setElementDragging] = useState<
+    undefined | { name: string; index: number }
+  >();
   const colors = [
     'springgreen',
     'tomato',
@@ -27,17 +29,24 @@ const KeyboardTabs = () => {
     }
   };
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-    setElementDragging(e.currentTarget.dataset.name);
+    const dataset = e.currentTarget.dataset;
+    if (dataset.name && dataset.index) {
+      setElementDragging({
+        name: dataset.name,
+        index: parseInt(dataset.index),
+      });
+    }
   };
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    console.log('dropped!');
-    console.log(e.currentTarget.dataset.index);
     const index = parseInt(
       e.currentTarget.dataset.index ? e.currentTarget.dataset.index : '0'
     );
     const newKeyboardNames = ctx.keyboardNames?.map((kName) => kName);
-    if (newKeyboardNames && elementDragging) {
-      newKeyboardNames.splice(index, 0, elementDragging);
+    if (newKeyboardNames && elementDragging && ctx.setCurrentKeyboardName) {
+      newKeyboardNames.splice(elementDragging.index, 1);
+      newKeyboardNames.splice(index, 0, elementDragging.name);
+      ctx.setKeyboardNames && ctx.setKeyboardNames(newKeyboardNames);
+      ctx.setCurrentKeyboardName(elementDragging.name);
     }
     console.log(newKeyboardNames, elementDragging);
     setElementDragging(undefined);

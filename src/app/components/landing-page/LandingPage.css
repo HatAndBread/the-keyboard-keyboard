@@ -39,10 +39,13 @@
   margin: 32px;
   font-size: 40px;
   transition: 0.6s;
+  opacity: 0.7;
+  box-shadow: rgba(200, 200, 200, 0.6) 2px 2px 3px 3px;
 }
 .start-button:hover {
   box-shadow: tomato 0px 0px 4px 4px;
   background-color: red;
+  opacity: 1;
 }
 
 .app-explanation {

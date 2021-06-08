@@ -17,9 +17,6 @@ const NewKeyboardModal = () => {
   const ctx = useContext(Context);
   const buffers = ctx.buffers;
 
-  const removeNonDigitsFromString = (str: string) => {
-    return str.replace(/[^\d.-]/g, '');
-  };
   const isValid = () => {
     if (ctx.keyboardNames?.includes(keyboardName)) {
       alert(
@@ -136,26 +133,6 @@ const NewKeyboardModal = () => {
           <option value='4'>3</option>
         </select>
       </div>
-      {/* <div className='base-note-selector margin-top-sixteen'>
-        <label htmlFor='base-note'>Base Note</label>
-        <div>
-          <input
-            type='text'
-            id='base-note'
-            placeholder='Pitch in hertz'
-            defaultValue={`${baseNote}.0`}
-            onChange={(e) => {
-              const num = parseFloat(removeNonDigitsFromString(e.target.value));
-              if (typeof num === 'number' && !isNaN(num)) {
-                setBaseNote(num);
-              } else if (isNaN(num)) {
-                setBaseNote(440);
-              }
-            }}
-          />
-          HZ
-        </div>
-      </div> */}
       <div className='button-container margin-top-sixteen'>
         <button onClick={createKeyboard} className='create-new-btn'>
           OK

@@ -70,7 +70,14 @@ const EditKeyModal = ({
     <>
       {myPlayer && ctx.buffers && (
         <div className='EditKeyModal'>
-          {myKey}
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+            }}>
+            <div className='my-key'>{myKey?.toUpperCase()}</div>
+          </div>
           <label htmlFor='volume-range'>Volume</label>
           <input
             type='range'

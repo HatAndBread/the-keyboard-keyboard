@@ -3,3 +3,7 @@
   flex-direction: column;
   align-items: flex-start;
 }
+.my-key {
+  font-family: 'Amatic SC', monospace;
+  font-size: 40px;
+}

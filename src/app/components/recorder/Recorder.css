@@ -1,0 +1,15 @@
+.recording-text {
+  color: red;
+  animation: blinker 1s ease-in-out infinite;
+  margin-left: 16px;
+}
+
+.Recorder {
+  display: flex;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}

@@ -38,12 +38,24 @@ export const getDefaultWet = () => {
 };
 
 export const record = () => {
+  if (mainRecorder) {
+    mainRecorder.start();
+  }
+};
+export const stopRecord = async () => {
+  if (mainRecorder) {
+    const blob = await mainRecorder.stop();
+    return { blob, mimeType: mainRecorder.mimeType };
+  }
+};
+
+export const recordLoop = () => {
   if (loopRecorder) {
     loopRecorder.start();
   }
 };
 
-export const stopRecord = async () => {
+export const stopRecordLoop = async () => {
   if (loopRecorder) {
     const recording = await loopRecorder.stop();
     const url = URL.createObjectURL(recording);
@@ -60,9 +72,12 @@ export const setEffects = () => {
   effects.reverb = new Tone.JCReverb(0.5).connect(effects.delay);
   effects.distortion = new Tone.Distortion(1).connect(effects.reverb);
   if (loopRecorder) {
-    gain.connect(loopRecorder);
+    effects.delay.connect(loopRecorder);
   }
-  baseLoopPlayer.connect(gain);
+  if (mainRecorder) {
+    effects.delay.connect(mainRecorder);
+  }
+  baseLoopPlayer.toDestination();
   gain.connect(effects.distortion);
   effects.delay.wet.value = 0;
   effects.distortion.wet.value = 0;

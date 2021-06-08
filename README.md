@@ -1,7 +1,7 @@
 ## The Keyboard Keyboard 🎹 + ⌨️
 
 Turns your computer keyboard into a musical instrument. Assign audio samples to any key! Adjust pitch,
-envelope, and effects! Export recordings as mp3s! Save your
+envelope, and effects! Export recordings as audio files! Save your
 keyboard settings to your computer! Experiment with different
 tuning systems!
 

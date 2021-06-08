@@ -4,7 +4,12 @@ import resetPlayersNotCurrentlyPlaying from './music-loop-helpers/reset-players-
 import transformKeys from './music-loop-helpers/transform-keys';
 import switchToNewKeyboard from './music-loop-helpers/switch-to-new-keyboard';
 import detuner from './music-loop-helpers/detuner';
-import { record, stopRecord, baseLoopPlayer, effectOnOff } from './effects';
+import {
+  recordLoop,
+  stopRecordLoop,
+  baseLoopPlayer,
+  effectOnOff,
+} from './effects';
 
 const voiceSynth = window.speechSynthesis;
 let voices = voiceSynth.getVoices();
@@ -139,10 +144,10 @@ export const handleKeyDown = (e: KeyboardEvent) => {
     } else if (currKey === 'enter') {
       if (currentlyRecording) {
         currentlyRecording = false;
-        stopRecord();
+        stopRecordLoop();
       } else {
         currentlyRecording = true;
-        record();
+        recordLoop();
       }
     } else if (currKey === '#') {
       baseLoopPlayer.stop();

@@ -257,7 +257,6 @@ const findClosestNumber = (arr: number[], num: number) => {
 const getRatioFromDecimal = (arr: number[], num: number, scale: string) => {
   let closestNum: number = 2;
   let ind = 0;
-  console.log(arr, num, scale);
   if (arr) {
     arr.forEach((element, index) => {
       if (num - element >= 0 && num - element < closestNum) {

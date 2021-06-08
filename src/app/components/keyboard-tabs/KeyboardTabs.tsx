@@ -25,12 +25,17 @@ const KeyboardTabs = () => {
       ctx.setCurrentKeyboardName(name);
     }
   };
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+    console.log(e.currentTarget);
+  };
   return (
     <div className='KeyboardTabs'>
       {ctx.keyboardNames &&
         ctx.keyboardNames.map((name, index) => {
           return (
             <div
+              draggable
+              onDragStart={handleDragStart}
               key={name}
               className='keyboard-tab'
               onClick={() => setKeyboard(name)}

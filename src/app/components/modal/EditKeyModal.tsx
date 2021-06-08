@@ -89,11 +89,13 @@ const EditKeyModal = ({
             onChange={handleBufferChange}
             value={bufferName ? bufferName : ''}
             ref={bufferSelectRef}>
-            {Object.keys(ctx.buffers).map((name, index) => (
-              <option key={index} value={name}>
-                {name}
-              </option>
-            ))}
+            {Object.keys(ctx.buffers)
+              .sort()
+              .map((name, index) => (
+                <option key={index} value={name}>
+                  {name}
+                </option>
+              ))}
           </select>
           <select
             onChange={handlePlayTypeChange}

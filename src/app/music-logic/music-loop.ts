@@ -89,7 +89,6 @@ export const handleKeyUp = (e: KeyboardEvent) => {
     }
     if (e.key === '<' || e.key === '>' || e.key === ',' || e.key === '.') {
       currentKeys = currentKeys.filter((key) => key !== '<' && key !== '>');
-      console.log(currentKeys);
     }
     const currKey = transformKeys(e.key).toLowerCase();
     currentKeys = currentKeys.filter((key) => key !== currKey);

@@ -125,8 +125,9 @@ function App() {
             ) : (
               <>
                 <Nav />
+
                 <div className='body-content'>
-                  {!isBadBrowser && <Recorder />}
+                  <div> {!isBadBrowser && <Recorder />}</div>
                   {!editorOpen && (
                     <div
                       style={{

@@ -76,6 +76,7 @@ export const setEffects = () => {
   }
   if (mainRecorder) {
     effects.delay.connect(mainRecorder);
+    baseLoopPlayer.connect(mainRecorder);
   }
   baseLoopPlayer.toDestination();
   gain.connect(effects.distortion);

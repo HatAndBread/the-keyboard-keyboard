@@ -2,10 +2,13 @@
   color: red;
   animation: blinker 1s ease-in-out infinite;
   margin-left: 16px;
+  font-family: 'Amatic SC', monospace;
+  font-size: 40px;
 }
 
 .Recorder {
   display: flex;
+  margin-left: 16px;
 }
 
 @keyframes blinker {

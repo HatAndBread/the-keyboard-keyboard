@@ -18,7 +18,6 @@ const Nav = () => {
   const saveClick = () => {
     ctx.setCurrentModal && ctx.setCurrentModal('save-keyboards');
   };
-  const effectsClick = () => {};
   return (
     <div className='Nav'>
       <Icon

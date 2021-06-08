@@ -8,7 +8,6 @@ import Keyboard from '../../music-logic/Keyboard';
 import { cloneDeep } from 'lodash';
 
 const NewKeyboardModal = () => {
-  const [baseNote, setBaseNote] = useState(440);
   const [tuning, setTuning] = useState('any');
   const [mainInstrument, setMainInstrument] = useState('random');
   const [mainPlayType, setMainPlayType] = useState('LOOP');
@@ -32,7 +31,6 @@ const NewKeyboardModal = () => {
   const createKeyboard = () => {
     const newLayout = generateKeyboardLayout({
       keyboardName,
-      baseNote,
       tuning,
       mainInstrument,
       mainPlayType,

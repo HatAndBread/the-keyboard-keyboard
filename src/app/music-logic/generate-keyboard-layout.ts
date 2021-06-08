@@ -2,7 +2,6 @@ import getKeyboardTemplate from './default-keyboards/keyboard-template';
 import { sampleUrls } from './sample-buffers';
 const generateKeyboardLayout = (params: {
   keyboardName: string;
-  baseNote: number;
   tuning: string;
   mainInstrument: string;
   mainPlayType: string;

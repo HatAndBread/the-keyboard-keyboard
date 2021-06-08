@@ -5,8 +5,6 @@ import './KeyboardEditor.css';
 import Icon from '../icon/Icon';
 import closeIcon from '../../../assets/images/cross.png';
 import trashCan from '../../../assets/images/recycle-bin.png';
-import { cloneDeep } from 'lodash';
-import Keyboard from '../../music-logic/Keyboard';
 
 const KeyboardEditor = () => {
   const ctx = useContext(Context);

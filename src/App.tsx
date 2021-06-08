@@ -206,6 +206,7 @@ function App() {
               Enjoy The Keyboard Keyboard?{' '}
               <a
                 href='https://www.paypal.com/paypalme/hatandbread'
+                rel='noreferrer'
                 target='_blank'>
                 Buy me a beer 🍺
               </a>
@@ -213,11 +214,11 @@ function App() {
 
             <div>
               Icons made by{' '}
-              <a href='from www.flaticon.com' target='_blank'>
+              <a href='from www.flaticon.com' rel='noreferrer' target='_blank'>
                 Freepik
               </a>{' '}
               from{' '}
-              <a href='from www.flaticon.com' target='_blank'>
+              <a href='from www.flaticon.com' rel='noreferrer' target='_blank'>
                 www.flaticon.com
               </a>
             </div>

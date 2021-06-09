@@ -29,6 +29,8 @@ const WarnDeleteModal = () => {
                 }
               });
               ctx.setKeyboards && ctx.setKeyboards(newKeyboards);
+              ctx.setKeyboardNames &&
+                ctx.setKeyboardNames(Object.keys(newKeyboards));
               ctx.setCurrentKeyboardName &&
                 ctx.setCurrentKeyboardName(nextNewKeyboard);
             }

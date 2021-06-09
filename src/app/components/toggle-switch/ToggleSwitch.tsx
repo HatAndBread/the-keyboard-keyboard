@@ -27,7 +27,6 @@ const ToggleSwitch = ({
       if (onTrueSet) onTrueSet();
     }
   };
-  console.log(defaultChecked, checked);
   return (
     <div className='ToggleSwitch'>
       {label && <label htmlFor={id ? id : ''}>{label}</label>}

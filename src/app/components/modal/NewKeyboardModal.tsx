@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import { Context } from '../../../App';
 import './newKeyboardModal.css';
 import scales from '../../music-logic/tuning-systems';
@@ -15,6 +15,7 @@ const NewKeyboardModal = () => {
   const [keyboardName, setKeyboardName] = useState('');
   const ctx = useContext(Context);
   const buffers = ctx.buffers;
+  const nameInputRef = useRef<HTMLInputElement>(null);
 
   const isValid = () => {
     if (ctx.keyboardNames?.includes(keyboardName)) {
@@ -59,6 +60,10 @@ const NewKeyboardModal = () => {
     if (isValid()) ctx.setCurrentModal && ctx.setCurrentModal(null);
   };
 
+  useEffect(() => {
+    nameInputRef.current?.focus();
+  }, []);
+
   return (
     <div className='NewKeyboardModal margin-top-sixteen'>
       <div className='name-input'>
@@ -67,6 +72,7 @@ const NewKeyboardModal = () => {
           type='text'
           id='name-input'
           name='name-input'
+          ref={nameInputRef}
           onChange={(e) => {
             setKeyboardName(e.target.value);
           }}

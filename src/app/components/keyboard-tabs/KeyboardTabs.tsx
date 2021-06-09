@@ -1,13 +1,24 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../../../App';
 import './KeyboardTabs.css';
 
 const KeyboardTabs = () => {
   const ctx = useContext(Context);
   const currentKeyboard = ctx.currentKeyboardName;
+  const numberOfTabs = ctx.keyboardNames ? ctx.keyboardNames.length : 0;
   const [elementDragging, setElementDragging] = useState<
     undefined | { name: string; index: number }
   >();
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleChange = () => {
+      setScreenWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleChange);
+    return () => window.removeEventListener('resize', handleChange);
+  }, [setScreenWidth]);
+
   const colors = [
     'springgreen',
     'tomato',
@@ -84,6 +95,11 @@ const KeyboardTabs = () => {
                 right: `${index * 20}px`,
                 zIndex: name === currentKeyboard ? 500 : 499 - index,
                 fontWeight: name === currentKeyboard ? 'bold' : 'initial',
+                width: `${
+                  screenWidth / 15 - numberOfTabs * 2 > 40
+                    ? screenWidth / 15 - numberOfTabs * 2
+                    : 40
+                }px`,
               }}>
               {name}
             </div>

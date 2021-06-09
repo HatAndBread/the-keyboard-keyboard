@@ -1,6 +1,7 @@
 .EffectsModal {
   display: flex;
   flex-direction: column;
+  padding: 8px;
 }
 
 .EffectsModal > .column {

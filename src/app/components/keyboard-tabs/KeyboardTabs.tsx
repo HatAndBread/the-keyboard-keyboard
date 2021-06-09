@@ -49,6 +49,12 @@ const KeyboardTabs = () => {
     setElementDragging(undefined);
   };
 
+  const handleDoubleClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    if (ctx.setCurrentModal) ctx.setCurrentModal('edit-keyboard-name');
+  };
+
   return (
     <div className='KeyboardTabs'>
       {ctx.keyboardNames &&
@@ -60,6 +66,7 @@ const KeyboardTabs = () => {
               onDragOver={(e) => {
                 e.preventDefault();
               }}
+              onDoubleClick={handleDoubleClick}
               data-index={index}
               data-name={name}
               key={name}

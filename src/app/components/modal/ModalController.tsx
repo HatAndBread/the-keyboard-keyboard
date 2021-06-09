@@ -8,6 +8,7 @@ import SaveModal from './SaveModal';
 import OpenFileModal from './OpenFileModal';
 import EffectsModal from './EffectsModal';
 import WarnDeleteModal from './WarnDeleteModal';
+import EditKeyboardNameModal from './EditKeyboardNameModal';
 
 const ModalController = ({ currentModal }: { currentModal: string | null }) => {
   const ctx = useContext(Context);
@@ -22,6 +23,9 @@ const ModalController = ({ currentModal }: { currentModal: string | null }) => {
         }
       case 'edit-keyboard': {
         return <EditKeyboardModal />;
+      }
+      case 'edit-keyboard-name': {
+        return <EditKeyboardNameModal />;
       }
       case 'new-keyboard': {
         return <NewKeyboardModal />;

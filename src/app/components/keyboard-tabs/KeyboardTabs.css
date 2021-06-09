@@ -13,6 +13,7 @@
   cursor: pointer;
   width: 70px;
   position: relative;
+  overflow: hidden;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
 }

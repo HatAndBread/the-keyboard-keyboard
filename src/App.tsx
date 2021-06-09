@@ -80,15 +80,15 @@ function App() {
     sendCurrentKeyboardName(currentKeyboardName);
   }, [currentKeyboardName]);
 
-  //testing
   useEffect(() => {
-    console.log(
-      currentKeyboard,
-      currentKeyboardName,
-      keyboardNames,
-      '♥️♥️♥️♥️♥️♥️♥️'
-    );
-  }, [currentKeyboard, currentKeyboardName, keyboardNames]);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === ' ' && showHints) {
+        setShowHints(false);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [setShowHints, showHints]);
 
   return (
     <Context.Provider

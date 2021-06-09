@@ -9,7 +9,6 @@ import {
   sendSetKeyboard,
   sendCurrentKeyboardName,
 } from './app/music-logic/music-loop';
-import { useAppDispatch } from './app/hooks';
 import KeyboardEditor from './app/components/keyboard-editor/KeyboardEditor';
 import ModalController from './app/components/modal/ModalController';
 import createListeners from './app/music-logic/keyboard-listeners';
@@ -29,7 +28,7 @@ import linkedIn from './assets/images/linkedin.png';
 import Recorder from './app/components/recorder/Recorder';
 
 //@ts-ignore
-let isBadBrowser = window.MediaRecorder ? false : true;
+const isBadBrowser = !window.MediaRecorder;
 
 function unloadHandler(e: BeforeUnloadEvent) {
   e.preventDefault();
@@ -55,7 +54,6 @@ function App() {
     'harmonious'
   );
   const [currentKeyboard, setCurrentKeyboard] = useState<null | Keyboard>(null);
-  const dispatch = useAppDispatch();
   const [showAnim, setShowAnim] = useState(isBadBrowser ? false : true);
   const [showHints, setShowHints] = useState(true);
 
@@ -67,12 +65,11 @@ function App() {
   }, []);
   useEffect(() => {
     if (keyboards) {
-      setKeyboardNames(Object.keys(keyboards));
       sendBoard(keyboards[currentKeyboardName]);
       setCurrentKeyboard(keyboards[currentKeyboardName]);
     }
     setAttemptingToLoad(false);
-  }, [keyboards, currentKeyboardName, dispatch]);
+  }, [keyboards, currentKeyboardName]);
   useEffect(() => {
     sendSetKeyboard(setCurrentKeyboardName);
   }, [setCurrentKeyboardName]);
@@ -82,6 +79,16 @@ function App() {
   useEffect(() => {
     sendCurrentKeyboardName(currentKeyboardName);
   }, [currentKeyboardName]);
+
+  //testing
+  useEffect(() => {
+    console.log(
+      currentKeyboard,
+      currentKeyboardName,
+      keyboardNames,
+      '♥️♥️♥️♥️♥️♥️♥️'
+    );
+  }, [currentKeyboard, currentKeyboardName, keyboardNames]);
 
   return (
     <Context.Provider

@@ -24,9 +24,7 @@ const KeyboardTabs = () => {
     'green',
   ];
   const setKeyboard = (name: string) => {
-    if (ctx.setCurrentKeyboardName) {
-      ctx.setCurrentKeyboardName(name);
-    }
+    if (ctx.setCurrentKeyboardName) ctx.setCurrentKeyboardName(name);
   };
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     const dataset = e.currentTarget.dataset;
@@ -42,14 +40,12 @@ const KeyboardTabs = () => {
       e.currentTarget.dataset.index ? e.currentTarget.dataset.index : '0'
     );
     const newKeyboardNames = ctx.keyboardNames?.map((kName) => kName);
-    if (newKeyboardNames && elementDragging && ctx.setCurrentKeyboardName) {
+    if (newKeyboardNames && elementDragging && ctx.setKeyboardNames) {
       newKeyboardNames.splice(elementDragging.index, 1);
       newKeyboardNames.splice(index, 0, elementDragging.name);
-      ctx.setKeyboardNames && ctx.setKeyboardNames(newKeyboardNames);
-      ctx.setCurrentKeyboardName(elementDragging.name);
-      // todo: not setting sometimes?
+      ctx.setKeyboardNames(newKeyboardNames);
+      setKeyboard(elementDragging.name);
     }
-    console.log(newKeyboardNames, elementDragging);
     setElementDragging(undefined);
   };
 

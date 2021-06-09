@@ -1,13 +1,24 @@
 .Nav {
   display: flex;
-  width: 100vw;
-  justify-content: space-around;
+  width: 100%;
+  justify-content: space-evenly;
   transition: 0.3s;
-  padding: 8px;
+  padding: 8px 0px 8px 0px;
+  overflow: scroll;
 }
 
 .nav-icon:hover {
   box-shadow: #7189ff 0px 0px 4px 4px;
   background-color: #7189ff;
   border-radius: 6px;
+}
+
+.nav-icon {
+  margin: 8px;
+}
+
+@media only screen and (max-width: 600px) {
+  .Nav {
+    justify-content: flex-start;
+  }
 }

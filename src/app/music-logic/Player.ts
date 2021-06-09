@@ -1,5 +1,5 @@
 import getRandoNum from './music-loop-helpers/getRandoNum';
-import gain from './effects';
+import { gain } from './effects';
 import {
   Player as TonePlayer,
   ToneAudioBuffer as Buff,

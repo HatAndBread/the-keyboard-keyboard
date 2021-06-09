@@ -9,6 +9,8 @@ import OpenFileModal from './OpenFileModal';
 import EffectsModal from './EffectsModal';
 import WarnDeleteModal from './WarnDeleteModal';
 import EditKeyboardNameModal from './EditKeyboardNameModal';
+import MasterVolumeModal from '../../components/master-volume/MasterVolume';
+import SettingsModal from './SettingsModal';
 
 const ModalController = ({ currentModal }: { currentModal: string | null }) => {
   const ctx = useContext(Context);
@@ -41,6 +43,12 @@ const ModalController = ({ currentModal }: { currentModal: string | null }) => {
       }
       case 'warn-delete': {
         return <WarnDeleteModal />;
+      }
+      case 'volume': {
+        return <MasterVolumeModal />;
+      }
+      case 'settings': {
+        return <SettingsModal />;
       }
       default:
         return <></>;

@@ -6,8 +6,11 @@ import openIcon from '../../../assets/images/download.png';
 import newIcon from '../../../assets/images/new.png';
 import editIcon from '../../../assets/images/audio-editing.png';
 import effectsIcon from '../../../assets/images/effects-pedal.png';
+import volumeIcon from '../../../assets/images/sound.png';
+import settingIcon from '../../../assets/images/setting.png';
+import Recorder from '../recorder/Recorder';
 import './Nav.css';
-const Nav = () => {
+const Nav = ({ isBadBrowser }: { isBadBrowser: boolean }) => {
   const ctx = useContext(Context);
   const setModal = (modalName: string) => {
     if (ctx.setCurrentModal) ctx.setCurrentModal(modalName);
@@ -60,6 +63,27 @@ const Nav = () => {
         onClick={() => setModal('effects')}
         messageBox={true}
       />
+      <Icon
+        src={volumeIcon}
+        alt='Volume'
+        pointer={true}
+        className='nav-icon'
+        onClick={() => {
+          setModal('volume');
+        }}
+        messageBox={true}
+      />
+      <Icon
+        src={settingIcon}
+        alt='Settings'
+        pointer={true}
+        className='nav-icon'
+        onClick={() => {
+          setModal('settings');
+        }}
+        messageBox={true}
+      />
+      {!isBadBrowser && <Recorder />}
     </div>
   );
 };

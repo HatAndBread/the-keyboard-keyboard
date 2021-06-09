@@ -25,7 +25,6 @@ import Hints from './app/components/hints/Hints';
 import Icon from './app/components/icon/Icon';
 import gitHub from './assets/images/github.png';
 import linkedIn from './assets/images/linkedin.png';
-import Recorder from './app/components/recorder/Recorder';
 
 //@ts-ignore
 const isBadBrowser = !window.MediaRecorder;
@@ -107,6 +106,8 @@ function App() {
         keyBeingEdited,
         setKeyBeingEdited,
         setEditorOpen,
+        showAnim,
+        setShowAnim,
       }}>
       <div className='App'>
         <OnBufferLoad />
@@ -125,10 +126,9 @@ function App() {
               </div>
             ) : (
               <>
-                <Nav />
+                <Nav isBadBrowser={isBadBrowser} />
 
                 <div className='body-content'>
-                  <div> {!isBadBrowser && <Recorder />}</div>
                   {!editorOpen && (
                     <div
                       style={{
@@ -137,17 +137,7 @@ function App() {
                         fontSize: '16px',
                         width: '160px',
                         justifyContent: 'space-between',
-                      }}>
-                      <div className={'toggle-container'}>
-                        Visualization
-                        <ToggleSwitch
-                          id='visualization-switch'
-                          onFalseSet={() => setShowAnim(false)}
-                          onTrueSet={() => setShowAnim(true)}
-                          defaultChecked={showAnim}
-                        />
-                      </div>
-                    </div>
+                      }}></div>
                   )}
                   <KeyboardTabs />
                   {editorOpen ? (

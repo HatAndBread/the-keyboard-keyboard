@@ -24,7 +24,7 @@ const effects: Effects = {
 
 export const getEffects = () => effects;
 
-const gain = new Tone.Gain(0.4);
+export const gain = new Tone.Gain(0.4);
 let distortionDefaultWet = 1;
 let delayDefaultWet = 1;
 let reverbDefaultWet = 0.1;
@@ -174,5 +174,3 @@ export const setDefaultWet = (
       break;
   }
 };
-
-export default gain;

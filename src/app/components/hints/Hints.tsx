@@ -43,12 +43,12 @@ export default function Hints({
           <strong>Caps-lock on</strong>: Randomize all pitches
         </div>
         <div className='hint'>
-          <strong>Enter</strong>: Start and stop loop{' '}
+          <strong>Enter</strong>: Start and stop recording loop{' '}
           {isBadBrowser &&
             '(Not available in your browser. Try latest version of Chrome or FireFox)'}
         </div>
         <div className='hint'>
-          <strong>#</strong>: Stop loop{' '}
+          <strong>#</strong>: Delete loop{' '}
         </div>
         <div className='hint'>
           <strong>!</strong>: Distortion on and off

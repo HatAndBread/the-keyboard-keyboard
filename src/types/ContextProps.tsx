@@ -22,6 +22,8 @@ type ContextProps = {
   keyBeingEdited: ValidKeys | null;
   setKeyBeingEdited: React.Dispatch<React.SetStateAction<ValidKeys | null>>;
   setEditorOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  showAnim: boolean;
+  setShowAnim: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default ContextProps;

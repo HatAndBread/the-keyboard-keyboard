@@ -9,6 +9,9 @@ interface Effects {
 export const baseLoopPlayer = new Tone.Player().toDestination();
 let loopRecorder: undefined | Tone.Recorder;
 let mainRecorder: undefined | Tone.Recorder;
+export const setLoopPlayerVolume = (newValue: number) => {
+  baseLoopPlayer.volume.value = newValue;
+};
 
 //@ts-ignore
 if (window.MediaRecorder) {

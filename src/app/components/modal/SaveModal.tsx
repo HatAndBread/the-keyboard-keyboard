@@ -13,8 +13,8 @@ const SaveModal = () => {
     myRef.current?.focus();
   }, []);
   const save = () => {
-    if (ctx.keyboards) {
-      const keyboardLayouts = Object.keys(ctx.keyboards).map((keyboard) => {
+    if (ctx.keyboardNames) {
+      const keyboardLayouts = ctx.keyboardNames.map((keyboard) => {
         const template = getKeyboardTemplate();
         if (ctx.keyboards) {
           template.name.name = ctx.keyboards[keyboard].name;

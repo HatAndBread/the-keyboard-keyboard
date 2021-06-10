@@ -49,7 +49,7 @@ function App() {
   const [keyBeingEdited, setKeyBeingEdited] = useState<ValidKeys | null>(null);
   const [editorOpen, setEditorOpen] = useState<boolean>(false);
   const [currentKeyboardName, setCurrentKeyboardName] = useState<string>(
-    'harmonious'
+    keyboardNames[0]
   );
   const [currentKeyboard, setCurrentKeyboard] = useState<null | Keyboard>(null);
   const [showAnim, setShowAnim] = useState(isBadBrowser ? false : true);

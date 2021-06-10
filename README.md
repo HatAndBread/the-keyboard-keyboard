@@ -1,5 +1,7 @@
 ## The Keyboard Keyboard 🎹 + ⌨️
 
+![Screenshot](https://github.com/HatAndBread/the-keyboard-keyboard/blob/master/src/assets/images/Screenshot%202021-06-10%20at%2016.04.07.png)
+
 Turns your computer keyboard into a musical instrument. Assign audio samples to any key! Adjust pitch,
 envelope, and effects! Export recordings as audio files! Save your
 keyboard settings to your computer! Experiment with different

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../../../App';
 import Icon from '../icon/Icon';
 import saveIcon from '../../../assets/images/disk.png';
@@ -8,9 +8,13 @@ import editIcon from '../../../assets/images/audio-editing.png';
 import effectsIcon from '../../../assets/images/effects-pedal.png';
 import volumeIcon from '../../../assets/images/sound.png';
 import settingIcon from '../../../assets/images/setting.png';
+import mouseIcon from '../../../assets/images/mouse.png';
 import Recorder from '../recorder/Recorder';
+import { sendMouseOn } from '../../music-logic/music-loop';
+
 import './Nav.css';
 const Nav = ({ isBadBrowser }: { isBadBrowser: boolean }) => {
+  const [mouseOn, setMouseOn] = useState(false);
   const ctx = useContext(Context);
   const setModal = (modalName: string) => {
     if (ctx.setCurrentModal) ctx.setCurrentModal(modalName);
@@ -21,6 +25,9 @@ const Nav = ({ isBadBrowser }: { isBadBrowser: boolean }) => {
   const saveClick = () => {
     ctx.setCurrentModal && ctx.setCurrentModal('save-keyboards');
   };
+  useEffect(() => {
+    sendMouseOn(mouseOn);
+  }, [mouseOn]);
   return (
     <div className='Nav'>
       <Icon
@@ -70,6 +77,16 @@ const Nav = ({ isBadBrowser }: { isBadBrowser: boolean }) => {
         className='nav-icon'
         onClick={() => {
           setModal('volume');
+        }}
+        messageBox={true}
+      />
+      <Icon
+        src={mouseIcon}
+        alt='Mouse pitch control'
+        pointer={true}
+        className={`nav-icon ${mouseOn ? 'highlight' : ''}`}
+        onClick={() => {
+          mouseOn ? setMouseOn(false) : setMouseOn(true);
         }}
         messageBox={true}
       />

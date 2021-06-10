@@ -18,6 +18,21 @@ if (voiceSynth.addEventListener) {
     voices = voiceSynth.getVoices();
   });
 }
+
+let windowSize = window.innerWidth;
+let mouseOn = false;
+let mouseOffSet = 1;
+document.addEventListener('pointermove', (e) => {
+  const baseNum = 2 / (windowSize / e.clientX);
+  if (baseNum < 1 && baseNum > 0.001) {
+    mouseOffSet = baseNum;
+  } else {
+    mouseOffSet = baseNum * baseNum;
+  }
+});
+window.addEventListener('resize', () => {
+  windowSize = window.innerWidth;
+});
 let currentlyRecording = false;
 let currentKeys: string[] = [];
 let keyboardNames: string[] = [];
@@ -32,12 +47,37 @@ let setCurrentDisplayText: React.Dispatch<
 > | null = null;
 let setLatestLetter: React.Dispatch<React.SetStateAction<string>> | null = null;
 let displayText = '';
+
 const adjustAllPlayerPlaybackRates = (adjustment: number) => {
   const players = board?.getAsArray();
   players?.forEach((player) => {
     player.setPlaybackRate(player.playbackRate * adjustment);
   });
 };
+const resetAllPlaybackRates = () => {
+  const players = board?.getAsArray();
+  players?.forEach((player) => {
+    player.setPlaybackRate(player.originalPlaybackRate);
+  });
+};
+
+const mouseAdjust = () => {
+  const players = board?.getAsArray();
+  players?.forEach((player) => {
+    if (mouseOn && !player.randomize) {
+      player.setPlaybackRate(
+        player.originalPlaybackRate *
+          mouseOffSet *
+          (randomize ? Math.random() + Math.random() : 1)
+      );
+    } else if (mouseOn && player.randomize) {
+      player.setPlaybackRate(player.randomizedPBR * mouseOffSet);
+    } else {
+      player.setPlaybackRate(player.originalPlaybackRate);
+    }
+  });
+};
+
 export const musicLoop = () => {
   if (currentKeys && board) {
     detune = detuner(currentKeys, detune);
@@ -46,6 +86,7 @@ export const musicLoop = () => {
     } else if (currentKeys.includes('>')) {
       adjustAllPlayerPlaybackRates(1.001);
     }
+    if (mouseOn) mouseAdjust();
     const players = board.getAsArray();
     resetPlayersNotCurrentlyPlaying(players, currentKeys);
     randomize = currentKeys.includes('capslock');
@@ -182,7 +223,12 @@ export const sendCurrentKeyboardName = (ckn: string) =>
   (currentKeyboardName = ckn);
 export const sendBoard = (newBoard: Keyboard) => {
   board = newBoard;
+  resetAllPlaybackRates();
   console.log('new board received!', board);
+};
+export const sendMouseOn = (b: boolean) => {
+  mouseOn = b;
+  if (!b) mouseAdjust();
 };
 
 export const sendSetCurrentText = (

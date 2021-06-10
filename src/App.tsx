@@ -18,7 +18,6 @@ import ContextProps from './types/ContextProps';
 import ValidKeys from './types/ValidKeys';
 import KeyboardTabs from './app/components/keyboard-tabs/KeyboardTabs';
 import Visualization from './app/components/visualization/Visualization';
-import ToggleSwitch from './app/components/toggle-switch/ToggleSwitch';
 import LandingPage from './app/components/landing-page/LandingPage';
 import Loader from './app/components/Loader/Loader';
 import Hints from './app/components/hints/Hints';

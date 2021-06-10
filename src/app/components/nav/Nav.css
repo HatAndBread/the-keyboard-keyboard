@@ -17,6 +17,12 @@
   margin: 8px;
 }
 
+.highlight {
+  box-shadow: tomato 0px 0px 6px 6px;
+  background-color: tomato;
+  border-radius: 8px;
+}
+
 @media only screen and (max-width: 600px) {
   .Nav {
     justify-content: flex-start;

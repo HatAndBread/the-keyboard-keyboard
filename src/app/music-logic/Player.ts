@@ -16,6 +16,7 @@ export default class Player {
   buffer: Buff;
   randomize: boolean;
   playbackRate: number;
+  originalPlaybackRate: number;
   timeout: undefined | NodeJS.Timeout;
   releaseTimeout: undefined | NodeJS.Timeout;
   octave: number;
@@ -24,6 +25,8 @@ export default class Player {
   attack: number;
   release: number;
   bufferName: string;
+  mouseOffSet: boolean;
+  randomizedPBR: number;
   constructor(
     keyAssignment: string,
     playType: 'LOOP' | 'SINGLE' | 'RAPID' | undefined,
@@ -50,11 +53,13 @@ export default class Player {
     this.bufferName = bufferName;
     this.player.buffer = buffer;
     this.playbackRate = playbackRate;
+    this.originalPlaybackRate = playbackRate;
     this.randomize = randomize ? true : false;
     this.octave = octave;
     this.tuning = tuning;
     this.attack = attack;
     this.release = release;
+    this.randomizedPBR = 1;
     if (playbackRate) {
       this.player.playbackRate = playbackRate;
     }
@@ -65,6 +70,7 @@ export default class Player {
     this._setPlayType(playType);
     this.timeout = undefined;
     this.releaseTimeout = undefined;
+    this.mouseOffSet = false;
   }
 
   stopForPlayTypeLoop = () => {
@@ -86,7 +92,9 @@ export default class Player {
   };
   handlePBR = (pbr: number, isRandomized?: boolean): void => {
     if (isRandomized || this.randomize) {
-      this.player.playbackRate = getRandoNum();
+      const randoNum = getRandoNum();
+      this.randomizedPBR = randoNum;
+      this.player.playbackRate = randoNum;
     } else if (this.playbackRate) {
       this.player.playbackRate = this.playbackRate * pbr;
     }

@@ -52,7 +52,7 @@ function App() {
     keyboardNames[0]
   );
   const [currentKeyboard, setCurrentKeyboard] = useState<null | Keyboard>(null);
-  const [showAnim, setShowAnim] = useState(isBadBrowser ? false : true);
+  const [showAnim, setShowAnim] = useState(false);
   const [showHints, setShowHints] = useState(true);
 
   useEffect(() => {
